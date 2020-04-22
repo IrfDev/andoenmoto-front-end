@@ -1,0 +1,46 @@
+{
+
+    "posts": [{
+
+        ".key": "p1",
+        "user": "u1",
+        "title": "Buen Casco",
+        "content": "Es un buen casco, hubiera preferido algo mejor",
+        "media": {
+            "images": [{
+                "url": "http://localhost:8080/img/logo.82b9c7a5.png"
+            }],
+            "video": "http://localhost:8080/img/logo.82b9c7a5.png"
+        },
+        "review": {
+            "comodidad": "5",
+            "cosas": "4",
+            "ajuste": "4",
+            "proteccion": "5"
+        }
+    }],
+    "users": [{
+        "name": "Irving",
+        ".key": "u1",
+        "profile": "http://localhost:8080/img/logo.82b9c7a5.png",
+        "description": "Soy el biker",
+        "posts": [
+            "p1"
+        ]
+    }],
+    "categories": [{
+        ".key": "c1",
+        "name": "Cascos",
+        "brands": ["b1"]
+    }],
+    "brands": [{
+        ".key": "b1",
+        "name": "Shaft",
+        "categories": ["c1"]
+    }],
+    "models": [{
+        ".key": "m1",
+        "name": "SH-520",
+        "brand": "b1"
+    }]
+}
