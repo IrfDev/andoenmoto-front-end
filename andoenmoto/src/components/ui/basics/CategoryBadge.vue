@@ -1,5 +1,7 @@
 <template>
-  <div :class="`col-${colWidth} flex-nowrap align-content-stretch`">
+  <div
+    :class="`col-${colWidth} flex-nowrap align-content-stretch`"
+  >
       <img :src="image" :alt="name" class="img-fluid">
       <h4 class="mt-2">{{name}}</h4>
   </div>

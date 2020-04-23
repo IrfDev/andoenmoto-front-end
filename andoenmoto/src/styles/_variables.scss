@@ -11,3 +11,9 @@ $wide:500;
 $light:300;
 $bold:600;
 $bolder:800;
+.Chopper-background{
+    background: $main-gradient!important;
+}
+.Enduro-background{
+    background: $complementary-gradient!important;
+}
