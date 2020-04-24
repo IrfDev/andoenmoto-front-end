@@ -15,6 +15,18 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/Categories.vue'),
     },
+    {
+        path: '/categories/models',
+        name: 'categories-style-models',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/Models.vue'),
+    },
+    {
+        path: '/categories/models/model',
+        name: 'categories-style-models-model',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/Model.vue'),
+    },
 ];
 
 const router = new VueRouter({

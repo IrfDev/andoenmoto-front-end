@@ -1,8 +1,8 @@
 <template>
-  <div>
-      <brands v-if="selected"/>
-      <styles v-else/>
-  </div>
+<div>
+    <brands v-if="selected"/>
+    <styles v-else/>
+</div>
 </template>
 
 <script>

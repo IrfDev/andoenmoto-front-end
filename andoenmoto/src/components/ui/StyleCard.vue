@@ -3,12 +3,23 @@
       <h2>{{title}}</h2>
       <h4>{{description}}</h4>
       <img :src="`/images/styles/${title}.png`" width="130%" alt="">
+      <div class="card-content">
+        <buttonn
+          :main="true"
+          :content="'Ver más'"
+        />
+      </div>
   </div>
 </template>
 
 <script>
+import Buttonn from '@/components/utilities/button.vue';
+
 export default {
   name: 'StyleCard',
+  components: {
+    Buttonn,
+  },
   props: {
     title: {
       type: String,
