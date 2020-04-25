@@ -29,13 +29,8 @@
 </template>
 
 <script>
-import Avatar from '@/components/utilities/Avatar.vue';
-
 export default {
   name: 'PostCard',
-  components: {
-    Avatar,
-  },
   data: () => ({
     user: 'Holo',
   }),

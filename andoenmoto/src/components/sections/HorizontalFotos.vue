@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex flex-row flex-nowrap overflow-auto">
-    <div class="mr-3">
-        <foto-card/>
-    </div>
-    <div>
-        <foto-card/>
-    </div>
-    <div>
-        <foto-card/>
+    <div
+      v-for="(foto, fotoIndex) in fotos"
+      :key="fotoIndex"
+      class="mr-3"
+    >
+        <foto-card
+          v-bind="foto"
+        />
     </div>
   </div>
 </template>

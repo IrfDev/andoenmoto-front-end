@@ -1,18 +1,11 @@
 <template>
-  <div class="horizontal-posts mt-3 d-flex flex-row flex-nowrap overflow-auto">
-    <div>
-        <post-card/>
-    </div>
-    <div>
-        <post-card/>
-    </div>
-    <div>
-        <post-card/>
-    </div>
-    <div>
-        <post-card/>
-    </div>
+<div class="horizontal-posts mt-3 d-flex flex-row flex-nowrap overflow-auto">
+  <div v-for="(post, postIndex) in posts" :key="postIndex">
+    <post-card
+      v-bind="post"
+    />
   </div>
+</div>
 </template>
 
 <script>
@@ -27,7 +20,5 @@ export default {
 </script>
 
 <style lang="scss">
-.horizontal-posts  {
 
-}
 </style>

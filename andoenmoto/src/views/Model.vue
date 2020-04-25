@@ -13,7 +13,7 @@
           <div
             v-for="(review, reviewIndex) in reviews"
             :key="reviewIndex"
-            class="col-12 justify-content-center align-center"
+            class="col-12"
             >
             <reviews-stats-card
                 :color="review.color"

@@ -1,18 +1,18 @@
 <template>
   <div
-        class="
-          row align-content-center
-          align-center
-          justify-content-center
-          justify-content-md-around
-          "
-      >
-        <div class="col-10 col-md-5" v-for="(style, styleIndex) in styles" :key="styleIndex">
-          <style-card
-            v-bind="style"
-          />
-        </div>
-      </div>
+    class="
+      row align-content-center
+      align-center
+      justify-content-center
+      justify-content-md-around
+      "
+  >
+    <div class="col-10 col-md-5" v-for="(style, styleIndex) in styles" :key="styleIndex">
+      <style-card
+        v-bind="style"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -32,6 +32,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss' scoped>
 
 </style>

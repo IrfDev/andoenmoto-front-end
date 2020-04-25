@@ -4,10 +4,10 @@
     <div class="row m-0 justify-content-center">
       <h1>Ando en moto</h1>
       <h2>Reseñas y fotos de productos para moto</h2>
-      <buttonn
+      <basic-button
        :content="'Subir Reseña'" :main="true"
       />
-      <buttonn
+      <basic-button
        :content="'Ver reseñas'" :secondary="true"
       />
     </div>
@@ -17,13 +17,11 @@
 <script>
 import dataSource from '@/lib/data.json';
 import logo from '@/components/ui/basics/logo.vue';
-import buttonn from '@/components/utilities/button.vue';
 
 export default {
   name: 'HelloWorld',
   components: {
     logo,
-    buttonn,
   },
   data() {
     return {
