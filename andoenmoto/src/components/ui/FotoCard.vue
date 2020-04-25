@@ -1,5 +1,8 @@
 <template>
 <div class="card" style="width: 18rem;">
+    <avatar
+        :user="user"
+    />
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -15,16 +18,6 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-    <div class="card-body d-flex flex-column align-content-start">
-        <i class="fa fa-life-ring" aria-hidden="true"></i>
-        <i class="fa fa-usd" aria-hidden="true"></i>
-        <i class="fa fa-pie-chart" aria-hidden="true"></i>
-        <i class="fa fa-pied-piper" aria-hidden="true"></i>
-        <i class="fa fa-plug" aria-hidden="true"></i>
-    </div>
-    <div class="card-footer">
-        <avatar/>
-    </div>
 </div>
 </template>
 
@@ -32,20 +25,13 @@
 import Avatar from '@/components/utilities/Avatar.vue';
 
 export default {
-  name: 'PostCard',
+  name: 'FotoCard',
   components: {
     Avatar,
   },
-  data: () => ({
-    user: 'Holo',
-  }),
 };
 </script>
 
-<style lang="scss">
-.post-card {
-    i{
-        font-size:.5em
-    }
-}
+<style lang='scss' scoped>
+
 </style>
