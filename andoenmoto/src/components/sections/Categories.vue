@@ -1,34 +1,12 @@
 <template>
-<div class="row mt-3 ">
+<div class="row mt-3 justify-content-center">
     <category-badge
-        :colWidth="12"
-        :name="'Motocicletas'"
-        :image="'/categories/motocicletas.png'"
-    />
-    <category-badge
-        :colWidth="4"
-        :name="'Guantes'"
-        :image="'/categories/guantes.png'"
-    />
-    <category-badge
-        :colWidth="4"
-        :name="'Cascos'"
-        :image="'/categories/cascos.png'"
-    />
-    <category-badge
-        :colWidth="4"
-        :name="'Botas'"
-        :image="'/categories/botas.png'"
-    />
-    <category-badge
-        :colWidth="6"
-        :name="'Accesorios'"
-        :image="'/categories/accesorios.png'"
-    />
-    <category-badge
-        :colWidth="6"
-        :name="'Refacciones'"
-        :image="'/categories/refacciones.png'"
+        @click="console.log(category)"
+        v-for="(category, categoryIndex) in categories"
+        :key="categoryIndex"
+        :colWidth="category.colWidth"
+        :name="category.name"
+        :image="category.image"
     />
 </div>
 </template>
@@ -40,6 +18,17 @@ export default {
   name: 'Categories',
   components: {
     CategoryBadge,
+  },
+  methods: {
+    activateCategory(category) {
+      console.log(category);
+      this.$store.dispatch('activateCategoryy', category);
+    },
+  },
+  computed: {
+    categories() {
+      return this.$store.state.sourceData.categories;
+    },
   },
 };
 </script>

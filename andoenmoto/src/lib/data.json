@@ -19,25 +19,92 @@
             "proteccion": "5"
         }
     }],
-    "users": [{
-        "name": "Irving",
-        ".key": "u1",
-        "profile": "http://localhost:8080/img/logo.82b9c7a5.png",
-        "description": "Soy el biker",
-        "posts": [
-            "p1"
-        ]
-    }],
-    "categories": [{
-        ".key": "c1",
-        "name": "Cascos",
+    "users": [
+        {
+            "u1asdasda4322r": {
+                "name": "Irving",
+                "key": "u1asdasda4322r",
+                "profile": "/images/users/profile.png",
+                "description": "Soy el biker más grande de toda la historia de los bikers en el mundo, princpalmente México",
+                "posts": [
+                    "p1"
+                ]
+                }
+    }
+],
+    "categories": [
+        {
+        "key": "c1",
+        "colWidth": 12,
+        "name": "Motocicletas",
+        "image":"/categories/motocicletas.png",
         "brands": ["b1"]
-    }],
-    "brands": [{
+    },
+    {
+        "key": "c2",
+        "name": "Guantes",
+        "colWidth": 4,
+        "image":"/categories/guantes.png",
+        "brands": ["b1"]
+    },
+    {
+        "key": "c2",
+        "name": "Cascos",
+        "colWidth": 4,
+        "image":"/categories/cascos.png",
+        "brands": ["b1"]
+    },
+    {
+        "key": "c3",
+        "colWidth": 4,
+        "image":"/categories/botas.png",
+        "name": "Botas",
+        "brands": ["b1"]
+    },
+    {
+        "key": "c4",
+        "image":"/categories/accesorios.png",
+        "colWidth": 4,
+        "name": "Accesorios",
+        "brands": ["b1"]
+    },
+    {
+        "key": "c5",
+        "image":"/categories/refacciones.png",
+        "name": "Refacciones",
+        "colWidth": 4,
+        "brands": ["b1"]
+        }
+],
+    "styles": [
+        {
+        "key": "s1",
+        "title": "Chopper",
+        "description": "El verdadero poder de las motocicletas está en la libertad"
+    },
+        {
+        "key": "s2",
+        "title": "Enduro",
+        "description": "CARVE THE CANYONS OF THE URBAN GRID"
+    }
+],
+    "brands": [
+        {
         ".key": "b1",
         "name": "Shaft",
         "categories": ["c1"]
-    }],
+    },
+        {
+        ".key": "b2",
+        "name": "hebotech",
+        "categories": ["c1"]
+    },
+        {
+        ".key": "31",
+        "name": "hebotechno",
+        "categories": ["c1"]
+    }
+],
     "models": [{
         ".key": "m1",
         "name": "SH-520",

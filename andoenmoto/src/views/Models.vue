@@ -5,9 +5,13 @@
         <h2>{{activeBrand}}</h2>
       </div>
       <div class="row m-0 justify-content-center">
-          <div v-for="(model, modelIndex) in models" :key="modelIndex" class="col-10 mt-3">
+          <div
+            v-for="(model, modelIndex) in models"
+            :key="modelIndex"
+            class="col-10 mt-3"
+          >
             <model-card
-                :name="model.name"
+              :name="model.name"
             />
           </div>
       </div>

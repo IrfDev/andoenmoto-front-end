@@ -2,7 +2,7 @@
 <div class="row justify-content-center">
   <div class="col-md-6 col-12" v-for="(brand, brandIndex) in brands" :key="brandIndex">
       <brand-card
-        :brand="brand"
+        :brand="brand.name"
         class="mt-3"
       />
   </div>

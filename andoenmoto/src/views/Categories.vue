@@ -19,7 +19,6 @@
             :margin="5"
             :height="25"
             :width="150"
-            :true="'sss'"
             :value="false"
             :color="{ checked:'#303030' , unchecked:'#353E28'}"
             :sync="false"
@@ -43,20 +42,17 @@ export default {
     Brands,
     Styles,
   },
+  computed: {
+    brands() {
+      return this.$store.state.sourceData.brands;
+    },
+    styles() {
+      return this.$store.state.sourceData.styles;
+    },
+  },
   data: () => ({
     categoryName: 'Motocicletas',
     categoryStyle: '',
-    brands: ['shaft', 'hebotech', 'hebotechno'],
-    styles: [
-      {
-        title: 'Chopper',
-        description: 'El verdadero poder de las motocicletas está en la libertad',
-      },
-      {
-        title: 'Enduro',
-        description: 'CARVE THE CANYONS OF THE URBAN GRID',
-      },
-    ],
   }),
 };
 </script>

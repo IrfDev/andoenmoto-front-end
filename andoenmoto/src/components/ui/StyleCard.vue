@@ -4,7 +4,7 @@
       <h4>{{description}}</h4>
       <img :src="`/images/styles/${title}.png`" width="130%" alt="">
       <div class="card-content">
-        <buttonn
+        <basic-button
           :main="true"
           :content="'Ver más'"
         />
@@ -13,13 +13,9 @@
 </template>
 
 <script>
-import Buttonn from '@/components/utilities/button.vue';
 
 export default {
   name: 'StyleCard',
-  components: {
-    Buttonn,
-  },
   props: {
     title: {
       type: String,

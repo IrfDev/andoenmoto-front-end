@@ -13,7 +13,7 @@ export default {
   name: 'Select',
   computed: {
     selected() {
-      return this.$router.params.selected 
+      return this.$router.params.selected;
     },
   },
 };

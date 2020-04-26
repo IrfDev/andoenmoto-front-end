@@ -1,8 +1,19 @@
 <template>
   <div id="app">
+    <the-nav-bar/>
     <router-view/>
   </div>
 </template>
+
+<script>
+import TheNavBar from '@/components/sections/TheNavbar.vue';
+
+export default {
+  components: {
+    TheNavBar,
+  },
+};
+</script>
 
 <style lang="scss">
 @font-face {
