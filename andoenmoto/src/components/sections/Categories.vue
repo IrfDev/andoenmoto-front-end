@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     categories() {
-      return this.$store.state.sourceData.categories;
+      return this.$store.state.categories;
     },
   },
 };

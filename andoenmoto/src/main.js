@@ -1,8 +1,10 @@
 import Vue from 'vue';
-import firebase from 'firebase';
 import Buttonn from '@/components/utilities/button.vue';
 import Avatar from '@/components/utilities/Avatar.vue';
 import ToggleButton from 'vue-js-toggle-button';
+
+import firebase from 'firebase';
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -17,7 +19,7 @@ const firebaseConfig = {
   storageBucket: 'andoenmoto-mexico.appspot.com',
   messagingSenderId: '713017173595',
   appId: '1:713017173595:web:d01761cc39263bf984417e',
-  measurementId: 'G-W4E23LENB0'
+  measurementId: 'G-W4E23LENB0',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

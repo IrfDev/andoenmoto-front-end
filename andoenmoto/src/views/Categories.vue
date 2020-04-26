@@ -35,6 +35,8 @@ import CategoryBadge from '@/components/ui/basics/CategoryBadge.vue';
 import Styles from '@/components/sections/selection/Styles.vue';
 import Brands from '@/components/sections/selection/Brands.vue';
 
+import firebase from 'firebase';
+
 export default {
   name: 'Categoriess',
   components: {
@@ -43,6 +45,18 @@ export default {
     Styles,
   },
   beforeCreate() {
+    firebase.database().ref('styles').once('value', (snapshot) => {
+      const styles = snapshot.val();
+
+      this.$store.commit('SET_STYLES', styles);
+    });
+
+    firebase.database().ref('brands').once('value', (snapshot) => {
+      const brands = snapshot.val();
+
+      this.$store.commit('SET_BRANDS', brands);
+    });
+
     this.$store.dispatch('findCategory', this.$route.params.category);
   },
   computed: {

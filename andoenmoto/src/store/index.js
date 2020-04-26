@@ -9,6 +9,11 @@ export default new Vuex.Store({
   state: {
     sourceData,
     activeCategory: {},
+    categories: {},
+    posts: {},
+    users: {},
+    brands: {},
+    styles: {},
     authId: 'u1asdasda4322r',
     profileUser: {},
   },
@@ -44,6 +49,18 @@ export default new Vuex.Store({
     },
     SET_PROFILE_USER(state, activeUser) {
       state.profileUser = activeUser;
+    },
+    SET_CATEGORIES(state, cateogories) {
+      state.categories = cateogories;
+    },
+    SET_BRANDS(state, brands) {
+      state.brands = brands;
+    },
+    SET_STYLES(state, styles) {
+      state.styles = styles;
+    },
+    SET_BRAND(state, brand) {
+      Vue.set(state.users, brand);
     },
   },
 });
