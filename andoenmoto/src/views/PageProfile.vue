@@ -6,6 +6,7 @@
         class="auth-name"
       />
       <h5
+        class="text-center m-0"
         v-else
       >
         {{auth.name}}
@@ -15,23 +16,30 @@
           <img src="/images/util/left-wing.png" alt="">
         </div>
         <div class="col-6">
-          <img :src="auth.profile" alt="" class="img-fluid">
+          <img
+          v-if="!itsMe"
+          :src="auth.profile" alt="" class="img-fluid"
+          >
+          <img
+            v-else
+            :src="me.profile" alt="" class="img-fluid"
+          >
         </div>
         <div class="col-3">
           <img src="/images/util/right-wing.png" alt="">
         </div>
       </div>
       <textarea
-        v-if="!itsMe"
+        v-if="itsMe"
         class="auth-description"
-        v-model="auth.description"
+        v-model="me.description"
         @keyup.enter="editUser"
       >
       </textarea>
       <p
         v-else
       >
-        {{me.description}}
+        {{auth.description}}
       </p>
       <div class="row flex-nowrap overflow-auto">
         <div class="col">
@@ -77,6 +85,9 @@ export default {
       default: true,
     },
   },
+  beforeCreate() {
+    this.$store.dispatch('findUser', this.$route.params.profileId);
+  },
   computed: {
     // itsMe() {
     //   return this.$route.params.itsMe;
@@ -85,18 +96,20 @@ export default {
       return this.$store.getters.authUser;
     },
     auth() {
-      return this.$store.getters.profileUser(this.$route.params.name);
+      return this.$store.state.profileUser;
     },
   },
 };
 </script>
 
-<style lang="scss">
-.Profile {
+<style lang="scss" scoped>
+.container-fluid{
 background:$main-gradient;
 }
 .auth-name{
   max-width:80vw;
+}
+.auth-name, h5{
   color:$alpha-white;
   font-size:25vw;
   font-family:$typo;
@@ -108,7 +121,7 @@ p{
   font-family: $paragraph;
   color:$alpha-white;
 }
-.auth-description{
+.auth-description, p{
   background-color: transparent;
   border: none;
   color:$alpha-white;

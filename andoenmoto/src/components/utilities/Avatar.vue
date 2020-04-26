@@ -1,6 +1,6 @@
 <template>
-  <div class="rounded-circle overflow-hidden w-50 img-fluid">
-      <img :src="user.profile" :alt="user.profile" class="img-fluid">
+  <div class="rounded-circle overflow-hidden img-fluid">
+      <img :src="user.profile" :alt="user.profile" class="img-fluid w-25">
       <h4
         class='d-none'
       >

@@ -6,10 +6,10 @@
           </div>
           <div class="col-12">
             <category-badge
-                :colWidth="12"
-                :image="'/categories/motocicletas.png'"
-                :name="'Motocicletas'"
-                class="category-badge"
+              :colWidth="category.colWidth"
+              :image="category.image"
+              :name="category.name"
+              class="category-badge"
             />
           </div>
           <!-- <toggle-button @change="..."/> -->
@@ -42,7 +42,13 @@ export default {
     Brands,
     Styles,
   },
+  beforeCreate() {
+    this.$store.dispatch('findCategory', this.$route.params.category);
+  },
   computed: {
+    category() {
+      return this.$store.state.activeCategory;
+    },
     brands() {
       return this.$store.state.sourceData.brands;
     },

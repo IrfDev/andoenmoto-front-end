@@ -1,13 +1,17 @@
 <template>
 <nav class="navbar d-flex justify-content-between">
-  <a class="navbar-brand" href="#">
-    <img src="/identity/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+  <a class="navbar-brand">
+    <router-link to="/">
+      <img src="/identity/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    </router-link>
   </a>
-  <span class="navbar-text d-flex justify-content-end">
+  <span class="navbar-text">
+    <router-link to="/profile/me" class="d-flex justify-content-end">
       <avatar
         :displayName="false"
-        style="max-width:100px;"
       />
+        <!-- style="max-width:50px;" -->
+    </router-link>
     </span>
 </nav>
 </template>

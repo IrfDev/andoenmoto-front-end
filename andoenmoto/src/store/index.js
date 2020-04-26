@@ -17,18 +17,24 @@ export default new Vuex.Store({
     authUser(state) {
       return state.sourceData.users.find((user) => user[state.authId])[state.authId];
     },
-    profileUser(state, idd) {
-      return state.sourceData.users.find((user) => user[idd])[idd];
-    },
+    profileUser: (state) => (id) => state.sourceData.users
+      .find((user) => user[id])[id],
+
+    activeCategory: (state) => (categoryName) => state.sourceData.categories
+      .find((category) => category.name === categoryName),
   },
 
   actions: {
-    activateCategoryy({ commit }, category) {
+    activateCategory({ commit }, category) {
       commit('SET_ACTIVE_CATEGORY', category);
     },
     findUser({ commit, getters }, userId) {
-      const activeUser = getters('profileUser', userId);
+      const activeUser = getters.profileUser(userId);
       commit('SET_PROFILE_USER', activeUser);
+    },
+    findCategory({ commit, getters }, categoryName) {
+      const activeUser = getters.activeCategory(categoryName);
+      commit('SET_ACTIVE_CATEGORY', activeUser);
     },
   },
 

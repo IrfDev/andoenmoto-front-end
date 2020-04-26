@@ -1,19 +1,32 @@
 <template>
 <div>
-    <brands v-if="selected"/>
-    <styles v-else/>
+    <brands
+      :brands="brands"
+      v-if="!selected"
+    />
+    <styles
+      v-else
+      :styles="styles"
+    />
 </div>
 </template>
 
 <script>
-import Styles from '@/components/sections/selection/Styles.vue';
-import Brands from '@/components/sections/selection/Brands.vue';
-
 export default {
   name: 'Select',
+  components: {
+    Styles: () => import('@/components/sections/selection/Styles.vue'),
+    Brands: () => import('@/components/sections/selection/Brands.vue'),
+  },
   computed: {
     selected() {
-      return this.$router.params.selected;
+      return this.$route.params.brand;
+    },
+    brands() {
+      return this.$store.state.sourceData.brands;
+    },
+    styles() {
+      return this.$store.state.sourceData.styles;
     },
   },
 };

@@ -43,6 +43,9 @@ export default {
     HorizontalPosts,
     HorizontalFotos,
   },
+  // beforeCreate() {
+  //   this.$store.dispatch('displayModel', this.route.params.model);
+  // },
   data() {
     return {
       activeModel: 'SH-520',
