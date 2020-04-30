@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     styleSelected(style) {
+      this.$store.commit('SET_ACTIVE_STYLE', style);
       if (this.$route.name === 'categories-style') {
         this.$router.push({
           name: 'category-brands',

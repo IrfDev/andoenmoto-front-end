@@ -8,7 +8,7 @@
     `"
     >
       <h1>{{activeModel}}</h1>
-      <h2>{{activeModel}} by {{activeBrand}}</h2>
+      <h2>by {{activeBrand}}</h2>
       <div class="row m-0 justify-content-center">
           <div
             v-for="(review, reviewIndex) in reviews"

@@ -3,8 +3,8 @@
   class="row mt-3 justify-content-center"
 >
     <category-badge
-        :key="categoryIndex"
-        v-for="(category, categoryIndex) in categories"
+        :key="category['.key']"
+        v-for="category in categories"
         :colWidth="category.colWidth"
         :name="category.name"
         :image="category.image"

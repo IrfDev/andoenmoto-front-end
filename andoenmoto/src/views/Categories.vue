@@ -35,8 +35,6 @@ import CategoryBadge from '@/components/ui/basics/CategoryBadge.vue';
 import Styles from '@/components/sections/selection/Styles.vue';
 import Brands from '@/components/sections/selection/Brands.vue';
 
-import firebase from 'firebase';
-
 export default {
   name: 'Categoriess',
   components: {
@@ -44,35 +42,26 @@ export default {
     Brands,
     Styles,
   },
-  beforeCreate() {
-    firebase.database().ref('styles').once('value', (snapshot) => {
-      const styles = snapshot.val();
-
-      this.$store.commit('SET_STYLES', styles);
-    });
-
-    firebase.database().ref('brands').once('value', (snapshot) => {
-      const brands = snapshot.val();
-
-      this.$store.commit('SET_BRANDS', brands);
-    });
-
-    this.$store.dispatch('findCategory', this.$route.params.category);
+  async beforeCreate() {
+    await this.$store.dispatch('fetchAllCategories');
+    await this.$store.dispatch('findCategory', this.$route.params.category);
+    this.$store.dispatch('fetchBrands', Object.keys(this.$store.state.activeCategory.brands));
+    this.$store.dispatch('fetchStyles', Object.keys(this.$store.state.activeCategory.styles));
   },
   computed: {
     category() {
       return this.$store.state.activeCategory;
     },
     brands() {
-      return this.$store.state.sourceData.brands;
+      return this.$store.state.brands;
     },
     styles() {
-      return this.$store.state.sourceData.styles;
+      return this.$store.state.styles;
     },
   },
   data: () => ({
     categoryName: 'Motocicletas',
-    categoryStyle: '',
+    categoryStyle: false,
   }),
 };
 </script>

@@ -8,11 +8,11 @@
     fixed-ctas
     "
 >
-    <buttonn
+    <basic-button
         :main="true"
         :content="'Ver fotos'"
     />
-    <buttonn
+    <basic-button
         :secondary="true"
         :content="'Ver posts'"
     />
@@ -20,13 +20,8 @@
 </template>
 
 <script>
-import Buttonn from '@/components/utilities/button.vue';
-
 export default {
   name: 'FixedCtas',
-  components: {
-    Buttonn,
-  },
 };
 </script>
 

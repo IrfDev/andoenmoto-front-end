@@ -9,8 +9,6 @@
 import Header from '@/components/sections/Header.vue';
 import Categories from '@/components/sections/Categories.vue';
 
-import firebase from 'firebase';
-
 export default {
   name: 'Home',
   components: {
@@ -18,11 +16,7 @@ export default {
     Categories,
   },
   beforeCreate() {
-    firebase.database().ref('categories').once('value', (snapshot) => {
-      const categories = snapshot.val();
-
-      this.$store.commit('SET_CATEGORIES', categories);
-    });
+    this.$store.dispatch('fetchAllCategories');
   },
 };
 </script>

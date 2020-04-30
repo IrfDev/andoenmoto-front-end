@@ -1,14 +1,15 @@
 <template>
   <div class="models">
       <div class="row m-0 justify-content-center text-center flex-column">
-        <h1>{{activeStyle}}</h1>
-        <h2>{{activeBrand}}</h2>
+        <h1>{{activeStyle.title}}</h1>
+        <h2>{{activeBrand.name}}</h2>
       </div>
       <div class="row m-0 justify-content-center">
           <div
             v-for="(model, modelIndex) in models"
             :key="modelIndex"
             class="col-10 mt-3"
+            @click="goToModel(model)"
           >
             <model-card
               :name="model.name"
@@ -26,30 +27,25 @@ export default {
   components: {
     ModelCard,
   },
+  methods: {
+    goToModel() {
+      this.$router.push({
+        name: 'categories-style-models-model',
+      });
+    },
+  },
+  beforeCreate() {
+    this.$store.dispatch('fetchAllModels');
+  },
+  computed: {
+    models() {
+      return this.$store.getters.modelsFromBrandAndCategory;
+    },
+  },
   data() {
     return {
-      activeBrand: 'Shaft',
-      activeStyle: 'Enduro',
-      models: [
-        {
-          name: 'Sh-520',
-        },
-        {
-          name: 'Sh-520',
-        },
-        {
-          name: 'Sh-520',
-        },
-        {
-          name: 'Sh-520',
-        },
-        {
-          name: 'Sh-520',
-        },
-        {
-          name: 'Sh-520',
-        },
-      ],
+      activeBrand: this.$store.state.activeBrand,
+      activeStyle: this.$store.state.activeStyle,
     };
   },
 };

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Buttonn from '@/components/utilities/button.vue';
+import Buttonn from '@/components/utilities/buttonn.vue';
 import Avatar from '@/components/utilities/Avatar.vue';
 import ToggleButton from 'vue-js-toggle-button';
 

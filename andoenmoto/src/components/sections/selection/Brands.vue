@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     brandSelected(brand) {
+      this.$store.commit('SET_ACTIVE_BRAND', brand);
       if (this.$route.name === 'categories-style') {
         this.$router.push({
           name: 'category-styles',
