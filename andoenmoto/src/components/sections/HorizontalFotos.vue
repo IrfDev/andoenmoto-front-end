@@ -6,7 +6,7 @@
       class="mr-3"
     >
         <foto-card
-          v-bind="foto"
+          :urls="foto"
         />
     </div>
   </div>
@@ -17,6 +17,12 @@ import FotoCard from '@/components/ui/FotoCard.vue';
 
 export default {
   name: 'HorizontalFotos',
+  props: {
+    fotos: {
+      type: Array,
+      required: true,
+    },
+  },
   components: {
     FotoCard,
   },

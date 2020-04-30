@@ -14,9 +14,10 @@ export default new Vuex.Store(
       activeCategory: {},
       activeStyle: {},
       activeBrand: {},
+      activeModel: {},
       categories: {},
-      posts: [],
-      users: [],
+      posts: {},
+      users: {},
       models: {},
       brands: {},
       styles: {},
@@ -38,8 +39,15 @@ export default new Vuex.Store(
 
       modelsFromBrandAndCategory: (state) => Object.values(state.models)
         .filter((model) => model.brand === state.activeBrand.id
-          && model.category === state.activeCategory.id
-          && model.style === state.activeStyle.id),
+        && model.category === state.activeCategory.id
+        && model.style === state.activeStyle.id),
+
+      postsFromModel: (state) => Object.values(state.posts)
+        .filter((post) => post.model === state.activeModel.id),
+
+      fotosFromPosts: (state, getters) => Object.values(getters.postsFromModel)
+        .map((post) => Object.values(post.media.images)
+          .map((foto) => foto.url)),
     },
 
     actions: {
@@ -113,6 +121,20 @@ export default new Vuex.Store(
         });
       },
 
+      fetchAllPosts({ state, commit }) {
+        return new Promise((resolve) => {
+          firebase.database().ref('posts').on('value', (snapshot) => {
+            const categoriesObject = snapshot.val();
+            Object.keys(categoriesObject).forEach((categoryId) => {
+              const categoryObj = categoriesObject[categoryId];
+              const category = { ...categoryObj, id: categoryId };
+              commit('SET_ITEM', { resource: 'posts', id: categoryId, item: category });
+            });
+            resolve(Object.values(state.brands));
+          });
+        });
+      },
+
       fetchAllModels({ state, commit }) {
         return new Promise((resolve) => {
           firebase.database().ref('models').once('value', (snapshot) => {
@@ -153,6 +175,9 @@ export default new Vuex.Store(
       },
       SET_ACTIVE_BRAND(state, brand) {
         state.activeBrand = brand;
+      },
+      SET_ACTIVE_MODEL(state, model) {
+        state.activeModel = model;
       },
       SET_PROFILE_USER(state, activeUser) {
         state.profileUser = activeUser;

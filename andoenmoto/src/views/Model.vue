@@ -7,8 +7,8 @@
         background-image:linear-gradient(232.8deg, #303030 0%, #1B1B1B 83.33%);
     `"
     >
-      <h1>{{activeModel}}</h1>
-      <h2>by {{activeBrand}}</h2>
+      <h1>{{activeModel.name}}</h1>
+      <h2>by {{activeBrand.name}}</h2>
       <div class="row m-0 justify-content-center">
           <div
             v-for="(review, reviewIndex) in reviews"
@@ -23,8 +23,12 @@
           </div>
           <h3>Ver más</h3>
       </div>
-      <horizontal-fotos/>
-      <horizontal-posts/>
+      <horizontal-fotos
+        :fotos="fotos"
+      />
+      <horizontal-posts
+        :posts="posts"
+      />
       <fixed-ctas/>
   </div>
 </template>
@@ -43,13 +47,17 @@ export default {
     HorizontalPosts,
     HorizontalFotos,
   },
-  // beforeCreate() {
-  //   this.$store.dispatch('displayModel', this.route.params.model);
-  // },
+  beforeCreate() {
+    this.$store.dispatch('fetchAllPosts');
+  },
+  computed: {
+    posts() { return this.$store.getters.postsFromModel; },
+    fotos() { return this.$store.getters.fotosFromPosts; },
+  },
   data() {
     return {
-      activeModel: 'SH-520',
-      activeBrand: 'Shaft',
+      activeModel: this.$store.state.activeModel,
+      activeBrand: this.$store.state.activeBrand,
       bgImg: 'sporter',
       reviews: [
         {

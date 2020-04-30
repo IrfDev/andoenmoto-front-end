@@ -1,9 +1,16 @@
 <template>
 <div class="card" style="width: 18rem;">
+  <div class="card-header">
+    {{post.title}}
+  </div>
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/bgs/sporter.png" class="d-block w-100" alt="/bgs/sporter.png">
+     <div
+      v-for="(url, urlIndex) in post.images"
+      :key="urlIndex"
+      class="carousel-item active"
+    >
+      <img :src="url" class="d-block w-100" alt="/bgs/sporter.png">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -16,11 +23,14 @@
   </a>
 </div>
     <div class="card-body d-flex flex-column align-content-start">
-        <i class="fa fa-life-ring" aria-hidden="true"></i>
+        <!-- <i class="fa fa-life-ring" aria-hidden="true"></i>
         <i class="fa fa-usd" aria-hidden="true"></i>
         <i class="fa fa-pie-chart" aria-hidden="true"></i>
         <i class="fa fa-pied-piper" aria-hidden="true"></i>
-        <i class="fa fa-plug" aria-hidden="true"></i>
+        <i class="fa fa-plug" aria-hidden="true"></i> -->
+        <p>
+          {{post.content}}
+        </p>
     </div>
     <div class="card-footer">
         <avatar/>
@@ -31,6 +41,12 @@
 <script>
 export default {
   name: 'PostCard',
+  props: {
+    post: {
+      type: Object,
+      required: true,
+    },
+  },
   data: () => ({
     user: 'Holo',
   }),

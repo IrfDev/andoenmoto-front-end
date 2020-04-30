@@ -5,8 +5,12 @@
     />
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/bgs/sporter.png" class="d-block w-100" alt="/bgs/sporter.png">
+    <div
+      v-for="(url, urlIndex) in urls"
+      :key="urlIndex"
+      class="carousel-item active"
+    >
+      <img :src="url" class="d-block w-100" alt="/bgs/sporter.png">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -24,6 +28,9 @@
 <script>
 export default {
   name: 'FotoCard',
+  props: {
+    urls: Array,
+  },
   data: () => ({
     user: 'Holo',
   }),

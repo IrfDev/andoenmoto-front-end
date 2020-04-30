@@ -28,7 +28,9 @@ export default {
     ModelCard,
   },
   methods: {
-    goToModel() {
+    goToModel(model) {
+      console.log(model);
+      this.$store.commit('SET_ACTIVE_MODEL', model);
       this.$router.push({
         name: 'categories-style-models-model',
       });

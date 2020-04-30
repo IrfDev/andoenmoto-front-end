@@ -2,7 +2,7 @@
 <div class="horizontal-posts mt-3 d-flex flex-row flex-nowrap overflow-auto">
   <div v-for="(post, postIndex) in posts" :key="postIndex">
     <post-card
-      v-bind="post"
+      :post="post"
     />
   </div>
 </div>
@@ -13,6 +13,12 @@ import PostCard from '@/components/ui/PostCard.vue';
 
 export default {
   name: 'HorizontalPosts',
+  props: {
+    posts: {
+      type: Array,
+      required: true,
+    },
+  },
   components: {
     PostCard,
   },
