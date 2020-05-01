@@ -28,7 +28,7 @@ export default new Vuex.Store(
     getters: {
       authUser: (state) => state.users[state.authId],
 
-      profileUser: (state) => (id) => state.sourceData.users
+      profileUser: (state) => (id) => state.users
         .find((user) => user[id])[id],
 
       activeCategory: (state) => (categoryName) => Object.values(state.categories)
@@ -133,6 +133,29 @@ export default new Vuex.Store(
             resolve(Object.values(state.brands));
           });
         });
+      },
+
+      submitPost({ state, commit }, newPost) {
+        const user = state.authId;
+        const postId = firebase.database().ref('posts').push().key;
+        const publishedAt = Math.floor(Date.now() / 1000);
+
+        const post = {
+          ...newPost,
+          user,
+          postId,
+          publishedAt,
+        };
+
+        const updates = {};
+        updates[`posts/${postId}`] = post;
+        updates[`users/${post.user}/posts/${postId}`] = postId;
+        firebase.database().ref().update(updates)
+          .then(() => {
+            commit('SET_ITEM', { resource: 'posts', item: post, id: postId });
+            // commit('appendPostToUser', { parentId: post.userId, childId: postId })
+            return Promise.resolve(state.posts[postId]);
+          });
       },
 
       fetchAllModels({ state, commit }) {
