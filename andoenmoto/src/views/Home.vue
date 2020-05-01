@@ -1,7 +1,10 @@
 <template>
-  <div class="container-fluid">
+  <div v-if="asyncDataStatus_ready" class="container-fluid">
     <Header class="pb-3"/>
     <categories/>
+  </div>
+  <div v-else class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only"></span>
   </div>
 </template>
 
@@ -9,14 +12,23 @@
 import Header from '@/components/sections/Header.vue';
 import Categories from '@/components/sections/Categories.vue';
 
+import { mapActions } from 'vuex';
+
+import asyncDataStatus from '@/mixins/asyncDataStatus';
+
 export default {
   name: 'Home',
   components: {
     Header,
     Categories,
   },
-  beforeCreate() {
-    this.$store.dispatch('fetchAllCategories');
+  methods: {
+    ...mapActions(['fetchAllCategories']),
+  },
+  mixins: [asyncDataStatus],
+  async created() {
+    await this.$store.dispatch('fetchAllCategories');
+    this.asyncDataStatus_fetched();
   },
 };
 </script>

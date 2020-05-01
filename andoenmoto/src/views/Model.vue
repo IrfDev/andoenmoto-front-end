@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="asyncDataStatus_ready"
     class="models pb-3"
     :style="`
         background-size:cover;
@@ -31,6 +32,9 @@
       />
       <fixed-ctas/>
   </div>
+  <div v-else class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only"></span>
+  </div>
 </template>
 
 <script>
@@ -38,6 +42,9 @@ import ReviewsStatsCard from '@/components/ui/ReviewsStatsCard.vue';
 import FixedCtas from '@/components/utilities/FixedCtas.vue';
 import HorizontalFotos from '@/components/sections/HorizontalFotos.vue';
 import HorizontalPosts from '@/components/sections/HorizontalPosts.vue';
+
+import asyncDataStatus from '@/mixins/asyncDataStatus';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Model',
@@ -47,17 +54,32 @@ export default {
     HorizontalPosts,
     HorizontalFotos,
   },
-  beforeCreate() {
-    this.$store.dispatch('fetchAllPosts');
+  mixins: [asyncDataStatus],
+  methods: {
+    ...mapState([
+      'activeModel',
+      'activeBrand',
+    ]),
+    ...mapActions([
+      'fetchAllPosts',
+    ]),
+    ...mapGetters([
+      'postsFromModel',
+      'fotosFromPosts',
+    ]),
+  },
+  created() {
+    this.fetchAllPosts();
+    this.asyncDataStatus_fetched();
   },
   computed: {
-    posts() { return this.$store.getters.postsFromModel; },
-    fotos() { return this.$store.getters.fotosFromPosts; },
+    posts() { return this.postsFromModel(); },
+    fotos() { return this.fotosFromPosts(); },
   },
   data() {
     return {
-      activeModel: this.$store.state.activeModel,
-      activeBrand: this.$store.state.activeBrand,
+      activeModel: this.activeModel(),
+      activeBrand: this.activeBrand(),
       bgImg: 'sporter',
       reviews: [
         {

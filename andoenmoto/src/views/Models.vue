@@ -1,5 +1,5 @@
 <template>
-  <div class="models">
+  <div v-if="asyncDataStatus_ready" class="models">
       <div class="row m-0 justify-content-center text-center flex-column">
         <h1>{{activeStyle.title}}</h1>
         <h2>{{activeBrand.name}}</h2>
@@ -17,37 +17,62 @@
           </div>
       </div>
   </div>
+  <div v-else class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only"></span>
+  </div>
 </template>
 
 <script>
 import ModelCard from '@/components/ui/ModelCard.vue';
+
+import {
+  mapActions, mapGetters, mapState, mapMutations,
+} from 'vuex';
+
+import asyncDataStatus from '@/mixins/asyncDataStatus';
 
 export default {
   name: 'Models',
   components: {
     ModelCard,
   },
+  mixins: [asyncDataStatus],
   methods: {
+    ...mapMutations([
+      'SET_ACTIVE_MODEL',
+    ]),
+    ...mapState([
+      'nameOfState',
+      'activeBrand',
+      'activeStyle',
+    ]),
+    ...mapGetters([
+      'modelsFromBrandAndCategory',
+    ]),
+    ...mapActions([
+      'fetchAllModels',
+    ]),
     goToModel(model) {
       console.log(model);
-      this.$store.commit('SET_ACTIVE_MODEL', model);
+      this.SET_ACTIVE_MODEL(model);
       this.$router.push({
         name: 'categories-style-models-model',
       });
     },
   },
-  beforeCreate() {
-    this.$store.dispatch('fetchAllModels');
+  created() {
+    this.fetchAllModels();
+    this.asyncDataStatus_fetched();
   },
   computed: {
     models() {
-      return this.$store.getters.modelsFromBrandAndCategory;
+      return this.modelsFromBrandAndCategory();
     },
   },
   data() {
     return {
-      activeBrand: this.$store.state.activeBrand,
-      activeStyle: this.$store.state.activeStyle,
+      activeBrand: this.activeBrand(),
+      activeStyle: this.activeStyle(),
     };
   },
 };

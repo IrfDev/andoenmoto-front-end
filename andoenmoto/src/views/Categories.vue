@@ -1,5 +1,8 @@
 <template>
-  <div class="container-fluid" :class="{style:categoryStyle, category: !categoryStyle}">
+  <div v-if="asyncDataStatus_ready"
+    class="container-fluid"
+    :class="{style:categoryStyle, category: !categoryStyle}"
+  >
       <div class="row justify-content-center">
           <div class="col-12">
             <img src="/identity/stars.png" class="img-fluid" alt="Ando En Moto">
@@ -28,12 +31,18 @@
       <styles v-if="!categoryStyle" :styles="styles"/>
       <brands v-else :brands="brands"/>
   </div>
+  <div v-else class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only"></span>
+  </div>
 </template>
 
 <script>
 import CategoryBadge from '@/components/ui/basics/CategoryBadge.vue';
 import Styles from '@/components/sections/selection/Styles.vue';
 import Brands from '@/components/sections/selection/Brands.vue';
+
+import { mapActions } from 'vuex';
+import asyncDataStatus from '@/mixins/asyncDataStatus';
 
 export default {
   name: 'Categoriess',
@@ -42,11 +51,21 @@ export default {
     Brands,
     Styles,
   },
-  async beforeCreate() {
-    await this.$store.dispatch('fetchAllCategories');
-    await this.$store.dispatch('findCategory', this.$route.params.category);
-    this.$store.dispatch('fetchBrands', Object.keys(this.$store.state.activeCategory.brands));
-    this.$store.dispatch('fetchStyles', Object.keys(this.$store.state.activeCategory.styles));
+  mixins: [asyncDataStatus],
+  methods: {
+    ...mapActions([
+      'fetchAllCategories',
+      'findCategory',
+      'fetchBrands',
+      'fetchStyles',
+    ]),
+  },
+  async created() {
+    await this.fetchAllCategories();
+    await this.findCategory(this.$route.params.category);
+    this.fetchBrands(Object.keys(this.$store.state.activeCategory.brands));
+    this.fetchStyles(Object.keys(this.$store.state.activeCategory.styles));
+    this.asyncDataStatus_fetched();
   },
   computed: {
     category() {
@@ -59,10 +78,11 @@ export default {
       return this.$store.state.styles;
     },
   },
-  data: () => ({
-    categoryName: 'Motocicletas',
-    categoryStyle: false,
-  }),
+  data() {
+    return {
+      categoryStyle: false,
+    };
+  },
 };
 </script>
 

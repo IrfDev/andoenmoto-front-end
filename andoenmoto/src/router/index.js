@@ -4,57 +4,57 @@ import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
-const routes = [
-{
-  path: '/',
-  name: 'Home',
-  component: Home,
-},
-{
-  path: '/:category',
-  name: 'categories-style',
-  component: () => import ( /* webpackChunkName: "abouts" */ '../views/Categories.vue'),
-},
-{
-  path: '/:category/:brand',
-  name: 'category-styles',
-  component: () => import ( /* webpackChunkName: "styles" */ '../views/reviews/Select.vue'),
-},
-{
-  path: '/:category/:style',
-  name: 'category-brands',
-  component: () => import ( /* webpackChunkName: "aboassaut" */ '../views/reviews/Select.vue'),
-},
-{
-  path: '/:category/:style/:brand/modelos',
-  name: 'categories-style-models',
-  component: () => import ( /* webpackChunkName: "categories" */ '../views/Models.vue'),
-},
-{
-  path: '/categories/models/model',
-  name: 'categories-style-models-model',
-  component: () => import ( /* webpackChunkName: "modeasdls" */ '../views/Model.vue'),
-},
-{
-  path: '/profile/me',
-  name: 'profile-page-edit',
-  props: {
-      itsMe: true
-  },
-  component: () => import ( /* webpackChunkName: "edight" */ '../views/PageProfile.vue'),
-},
-{
-  path: '/profile/:profileId',
-  name: 'profile-page-nam',
-  props: {itsMe: false},
-  component: () =>
-      import ( /* webpackChunkName: "names" */ '../views/PageProfile.vue'),
-},
-];
-
-const router = new VueRouter({
-    routes,
-    mode: 'history',
+export default new VueRouter({
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home,
+    },
+    {
+      path: '/categoria/:category',
+      name: 'categories-style',
+      component: () => import('../views/Categories.vue'),
+    },
+    {
+      path: '/categoria/:category/marca/:brand',
+      name: 'category-styles',
+      component: () => import('../views/reviews/Select.vue'),
+    },
+    {
+      path: '/categoria/:category/estilo/:style',
+      name: 'category-brands',
+      component: () => import('../views/reviews/Select.vue'),
+    },
+    {
+      path: '/categoria/:category/estilo/:style/marca/:brand/modelos',
+      name: 'categories-style-models',
+      component: () => import('../views/Models.vue'),
+    },
+    {
+      path: '/categories/models/model',
+      name: 'categories-style-models-model',
+      component: () => import('../views/Model.vue'),
+    },
+    {
+      path: '/profile/me',
+      name: 'profile-page-edit',
+      props: {
+        itsMe: true,
+      },
+      component: () => import('../views/PageProfile.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login-form',
+      component: () => import('../views/Login.vue'),
+    },
+    {
+      path: '/profile/:profileId',
+      name: 'profile-page-nam',
+      props: { itsMe: false },
+      component: () => import('../views/PageProfile.vue'),
+    },
+  ],
+  mode: 'history',
 });
-
-export default router;

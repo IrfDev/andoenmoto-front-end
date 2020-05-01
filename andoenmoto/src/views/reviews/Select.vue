@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="asyncDataStatus_ready">
     <brands
       :brands="brands"
       v-if="!selected"
@@ -9,10 +9,14 @@
       v-else
     />
 </div>
+<div v-else class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+  <span class="sr-only"></span>
+</div>
 </template>
 
 <script>
-// import firebase from 'firebase';
+import { mapActions } from 'vuex';
+import asyncDataStatus from '@/mixins/asyncDataStatus';
 
 export default {
   name: 'Select',
@@ -20,12 +24,20 @@ export default {
     Styles: () => import('@/components/sections/selection/Styles.vue'),
     Brands: () => import('@/components/sections/selection/Brands.vue'),
   },
-  beforeCreate() {
+  mixins: [asyncDataStatus],
+  methods: {
+    ...mapActions([
+      'fetchStyles',
+      'fetchAllBrands',
+    ]),
+  },
+  created() {
     if (this.$route.params.brand) {
-      this.$store.dispatch('fetchStyles', Object.keys(this.$store.state.activeBrand.styles));
+      this.fetchStyles(Object.keys(this.$store.state.activeBrand.styles));
     } else {
-      this.$store.dispatch('fetchAllBrands');
+      this.fetchAllBrands();
     }
+    this.asyncDataStatus_fetched();
   },
   computed: {
     selected() {
