@@ -187,6 +187,28 @@ export default new Vuex.Store(
         // ids = Array.isArray(ids) ? ids : Object.keys(ids);
         return Promise.all(ids.map((id) => dispatch('fetchItem', { id, resource })));
       },
+
+      updateUser ({state, commit}, {id, description}) {
+        return new Promise((resolve) => {
+          const user = state.users[id]
+          commit('setPost', {
+            postId: id,
+            user: {
+              ...user,
+              description,
+            }
+          })
+          resolve(user)
+
+    
+          const updates = { description }
+          firebase.database().ref('posts').child(id).update(updates)
+            .then(() => {
+              commit('setUser', {userId: id, user: {...user, description}})
+              resolve(user)
+            })
+        })
+      },
     },
 
     mutations: {

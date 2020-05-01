@@ -85,13 +85,13 @@ export default {
       default: true,
     },
   },
-  beforeCreate() {
-    this.$store.dispatch('findUser', this.$route.params.profileId);
-  },
+  // beforeCreate() {
+  //   this.$store.dispatch('findUser', this.$route.params.profileId);
+  // },
   computed: {
     // itsMe() {
     //   return this.$route.params.itsMe;
-    // },
+    // },'
     me() {
       return this.$store.getters.authUser;
     },
