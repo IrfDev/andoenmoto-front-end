@@ -21,7 +21,7 @@ export default new Vuex.Store(
       models: {},
       brands: {},
       styles: {},
-      authId: '0',
+      authId: null,
       profileUser: {},
     },
 
@@ -158,6 +158,101 @@ export default new Vuex.Store(
           });
       },
 
+      async fetchAuthUser({ dispatch, commit }) {
+        const userId = firebase.auth().currentUser.uid;
+        await dispatch('fetchUser', { id: userId });
+        commit('SET_AUTH_ID', userId);
+      },
+
+      registerUser({ commit, state }, {
+        email, name, username, avatar, gender = 'male', id,
+      }) {
+        return new Promise((res) => {
+          const registeredAt = Math.floor(Date.now() / 1000);
+          const usernameLower = username.toLowerCase();
+          const emailLower = email.toLowerCase();
+          const user = {
+            profile: avatar,
+            name,
+            description: 'Biker amante de las motos',
+            id,
+            email: emailLower,
+            gender,
+            username: usernameLower,
+            registeredAt,
+            posts: {},
+          };
+          firebase.database().ref('users').child(id).set(user)
+            .then((e) => {
+              console.log(user, e);
+              commit('SET_ITEM', { resource: 'users', id, item: user });
+              res(state.users[id]);
+            });
+        });
+      },
+
+      registerUserEmailPassword({ dispatch }, form) {
+        const {
+          email, name, username, password, avatar,
+        } = form;
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then((u) => {
+            dispatch('registerUser', {
+              id: u.user.uid, name, username, avatar, email,
+            });
+            console.log(u);
+          });
+      },
+
+      authRedirectResponse({ dispatch }) {
+        firebase.auth().getRedirectResult().then((result) => {
+          console.log(result);
+          if (result.additionalUserInfo) {
+            const {
+              gender,
+              name,
+              email,
+              picture,
+            } = result.additionalUserInfo.profile;
+
+            dispatch('registerUser', {
+              name: result.additionalUserInfo.profile.first_name,
+              username: name,
+              description: 'Esta es mi descripción',
+              gender,
+              email,
+              id: result.user.uid,
+              avatar: picture.data.url,
+            });
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            const token = result.credential.accessToken;
+            console.log(token);
+            console.log(name);
+            // ...
+          }
+        // The signed-in user info.
+        }).catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const { email } = error;
+          // The firebase.auth.AuthCredential type that was used.
+          const { credential } = error;
+          console.log(errorCode, errorMessage, email, credential);
+          // ...
+        });
+      },
+
+      registerUserFacebook() {
+        const provider = new firebase.auth.FacebookAuthProvider()
+          .addScope('public_profile')
+          .addScope('user_birthday')
+          .addScope('user_gender')
+          .addScope('user_location');
+        firebase.auth().signInWithRedirect(provider);
+      },
+
       fetchAllModels({ state, commit }) {
         return new Promise((resolve) => {
           firebase.database().ref('models').once('value', (snapshot) => {
@@ -211,6 +306,9 @@ export default new Vuex.Store(
     },
 
     mutations: {
+      SET_AUTH_ID(state, id) {
+        state.authId = id;
+      },
       SET_ACTIVE_CATEGORY(state, category) {
         state.activeCategory = category;
       },

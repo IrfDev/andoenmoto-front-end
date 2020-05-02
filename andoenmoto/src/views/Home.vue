@@ -23,10 +23,11 @@ export default {
     Categories,
   },
   methods: {
-    ...mapActions(['fetchAllCategories']),
+    ...mapActions(['fetchAllCategories', 'authRedirectResponse']),
   },
   mixins: [asyncDataStatus],
   async created() {
+    this.authRedirectResponse();
     await this.$store.dispatch('fetchAllCategories');
     this.asyncDataStatus_fetched();
   },

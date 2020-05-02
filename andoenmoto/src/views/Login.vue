@@ -36,9 +36,9 @@
 
       </form>
       <div class="text-center push-top">
-        <button class="btn-red btn-xsmall">
+        <button @click="registerFacebook" class="btn-red btn-xsmall">
             <i class="fa fa-google fa-btn"/>
-            Sign up with Google
+            Sign up with Facebook
         </button>
       </div>
     </div>
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Login',
   data() {
@@ -60,8 +62,17 @@ export default {
     };
   },
   methods: {
-    register() {
-      console.log(this.form);
+    ...mapActions([
+      'registerUserEmailPassword',
+      'registerUserFacebook',
+    ]),
+    async register() {
+      await this.registerUserEmailPassword(this.form);
+      this.$router.push('/');
+    },
+    async registerFacebook() {
+      await this.registerUserFacebook();
+      this.$router.push('/');
     },
   },
 };

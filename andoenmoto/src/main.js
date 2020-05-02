@@ -28,6 +28,12 @@ firebase.analytics();
 Vue.component('BasicButton', Buttonn);
 Vue.component('Avatar', Avatar);
 
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    store.dispatch('fetchAuthUser');
+  }
+});
+
 Vue.config.productionTip = false;
 
 new Vue({
