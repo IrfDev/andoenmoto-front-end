@@ -41,7 +41,7 @@ import CategoryBadge from '@/components/ui/basics/CategoryBadge.vue';
 import Styles from '@/components/sections/selection/Styles.vue';
 import Brands from '@/components/sections/selection/Brands.vue';
 
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import asyncDataStatus from '@/mixins/asyncDataStatus';
 
 export default {
@@ -54,10 +54,10 @@ export default {
   mixins: [asyncDataStatus],
   methods: {
     ...mapActions([
-      'fetchAllCategories',
-      'findCategory',
-      'fetchBrands',
-      'fetchStyles',
+      'categories/fetchAllCategories',
+      'categories/findCategory',
+      'categories/fetchBrands',
+      'categories/fetchStyles',
     ]),
   },
   async created() {
@@ -68,15 +68,11 @@ export default {
     this.asyncDataStatus_fetched();
   },
   computed: {
-    category() {
-      return this.$store.state.activeCategory;
-    },
-    brands() {
-      return this.$store.state.brands;
-    },
-    styles() {
-      return this.$store.state.styles;
-    },
+    ...mapState({
+      category: 'categories/activeItem',
+      brands: 'brands/items',
+      styles: 'styles/items',
+    }),
   },
   data() {
     return {

@@ -23,12 +23,11 @@ export default {
     Categories,
   },
   methods: {
-    ...mapActions(['fetchAllCategories', 'authRedirectResponse']),
+    ...mapActions(['categories/fetchAllCategories', 'auth/authRedirectResponse']),
   },
   mixins: [asyncDataStatus],
   async created() {
-    this.authRedirectResponse();
-    await this.$store.dispatch('fetchAllCategories');
+    await this.fetchAllCategories();
     this.asyncDataStatus_fetched();
   },
 };
@@ -37,6 +36,5 @@ export default {
 <style lang="scss" scoped>
 *{
   background:$alpha;
-  // height:100vh;
 }
 </style>

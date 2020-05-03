@@ -41,6 +41,9 @@
       >
         {{auth.description}}
       </p>
+      <button @click="signOut" class="sign-out" v-if="itsMe">
+        Sign Out
+      </button>
       <div class="row flex-nowrap overflow-auto">
         <div class="col">
           <profile-stats-card
@@ -83,6 +86,11 @@ export default {
     itsMe: {
       type: Boolean,
       default: true,
+    },
+  },
+  methods: {
+    signOut() {
+      this.$store.dispatch('signOut');
     },
   },
   // beforeCreate() {
@@ -129,5 +137,10 @@ p{
   font-family: $paragraph;
   width:100%;
   height:10vh;
+}
+.sign-out{
+  background-color:$alpha-white!important;
+  font-family: $title;
+  border-radius:8px;
 }
 </style>
