@@ -23,7 +23,10 @@ export default {
     Categories,
   },
   methods: {
-    ...mapActions(['categories/fetchAllCategories', 'auth/authRedirectResponse']),
+    ...mapActions({
+      fetchAllCategories: 'categories/fetchAllCategories',
+      authRedirectResponse: 'auth/authRedirectResponse',
+    }),
   },
   mixins: [asyncDataStatus],
   async created() {

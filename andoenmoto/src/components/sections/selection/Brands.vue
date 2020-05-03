@@ -23,8 +23,8 @@ export default {
     BrandCard,
   },
   methods: {
-    brandSelected(brand) {
-      this.$store.commit('SET_ACTIVE_BRAND', brand);
+    async brandSelected(brand) {
+      this.$store.commit('brands/SET_ACTIVE_BRAND', brand);
       if (this.$route.name === 'categories-style') {
         this.$router.push({
           name: 'category-styles',

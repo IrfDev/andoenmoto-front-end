@@ -34,13 +34,15 @@ export default new Vuex.Store(
       },
 
       fetchItems({ dispatch }, { ids, resource }) {
-        // ids = Array.isArray(ids) ? ids : Object.keys(ids);
+        // const ides = Array.isArray(ids) ? ids : Object.keys(ids);
+        console.log(ids, resource);
         return Promise.all(ids.map((id) => dispatch('fetchItem', { id, resource })));
       },
     },
 
     mutations: {
       SET_ITEM(state, { item, resource, id }) {
+        console.log(item, resource, id);
         Vue.set(state[resource].items, id, item);
       },
     },

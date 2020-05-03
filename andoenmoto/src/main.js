@@ -30,7 +30,7 @@ Vue.component('Avatar', Avatar);
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    store.dispatch('fetchAuthUser');
+    store.dispatch('auth/fetchAuthUserId');
   }
 });
 

@@ -90,21 +90,20 @@ export default {
   },
   methods: {
     signOut() {
-      this.$store.dispatch('signOut');
+      this.$store.dispatch('auth/signOut');
     },
   },
-  // beforeCreate() {
-  //   this.$store.dispatch('findUser', this.$route.params.profileId);
-  // },
+  created() {
+    if (!this.itsMe) {
+      this.$store.dispatch('auth/findUser', this.$route.params.profileId);
+    }
+  },
   computed: {
-    // itsMe() {
-    //   return this.$route.params.itsMe;
-    // },'
     me() {
-      return this.$store.getters.authUser;
+      return this.$store.state.auth.profileUser;
     },
     auth() {
-      return this.$store.state.profileUser;
+      return this.$store.state.auth.otherProfile;
     },
   },
 };

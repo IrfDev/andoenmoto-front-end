@@ -30,13 +30,13 @@ export default {
   },
   props: {
     styles: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
   methods: {
     styleSelected(style) {
-      this.$store.commit('SET_ACTIVE_STYLE', style);
+      this.$store.commit('styles/SET_ACTIVE_STYLE', style);
       if (this.$route.name === 'categories-style') {
         this.$router.push({
           name: 'category-brands',

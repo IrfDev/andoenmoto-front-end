@@ -10,7 +10,6 @@
       <avatar
         :displayName="false"
       />
-        <!-- style="max-width:50px;" -->
     </router-link>
     </span>
 </nav>

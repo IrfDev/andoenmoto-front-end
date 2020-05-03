@@ -26,14 +26,15 @@ export default {
   },
   mixins: [asyncDataStatus],
   methods: {
-    ...mapActions([
-      'fetchStyles',
-      'fetchAllBrands',
-    ]),
+    ...mapActions({
+      fetchStyles: 'styles/fetchStyles',
+      fetchAllBrands: 'brands/fetchAllBrands',
+    }),
   },
   created() {
     if (this.$route.params.brand) {
-      this.fetchStyles(Object.keys(this.$store.state.activeBrand.styles));
+      console.log(this.$store.state.brands.activeItem.styles);
+      this.fetchStyles(Object.keys(this.$store.state.brands.activeItem.styles));
     } else {
       this.fetchAllBrands();
     }
@@ -44,10 +45,10 @@ export default {
       return this.$route.params.brand;
     },
     brands() {
-      return this.$store.getters.brandsFromActiveStyleId;
+      return this.$store.getters.brands.brandsFromActiveStyleId;
     },
     styles() {
-      return Object.values(this.$store.state.styles);
+      return this.$store.state.styles.items;
     },
   },
 };

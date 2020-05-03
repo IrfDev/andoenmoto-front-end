@@ -8,9 +8,9 @@ export default {
   },
 
   getters: {
-    postsFromModel({ rootState, state }) {
+    postsFromModel(state, getters, rootState) {
       return Object.values(state.items)
-        .filter((post) => post.model === rootState.model.activeItem.id);
+        .filter((post) => post.model === rootState.models.activeItem.id);
     },
 
     fotosFromPosts: (state, getters) => Object.values(getters.postsFromModel)

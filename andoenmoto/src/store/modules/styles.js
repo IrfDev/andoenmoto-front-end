@@ -2,27 +2,38 @@ import firebase from 'firebase';
 import Vue from 'vue';
 
 export default {
+  namespaced: true,
+
   state: {
-    activeStyle: {},
+    activeItem: {},
     styles: {},
+    items: {},
   },
   getters: {
+    getStylesFromActiveBrand: (state, rootState) => Object.keys(rootState.brands.activeItem.styles)
+      .map((style) => state.items === style),
   },
   mutations: {
     SET_STYLES(state, styles) {
       state.styles = styles;
     },
     PUSH_STYLE(state, brand) {
-      Vue.set(state.stylesB, brand);
+      Vue.set(state.styles, brand);
     },
     SET_ACTIVE_STYLE(state, style) {
-      state.activeStyle = style;
+      state.activeItem = style;
+    },
+    CLEAR_ITEMS_STATE(state) {
+      state.items = {};
+      state.styles = {};
     },
   },
   actions: {
-    fetchStyles({ dispatch, state }, ids) {
-      state.styles = {};
-      dispatch('fetchItems', { resource: 'styles', ids });
+    fetchStyles({ dispatch, commit }, ids) {
+      commit('CLEAR_ITEMS_STATE');
+      console.log(ids);
+      dispatch('fetchItems', { resource: 'styles', ids },
+        { root: true });
     },
 
     fetchAllStyles({ state, commit }) {

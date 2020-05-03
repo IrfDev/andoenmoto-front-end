@@ -1,0 +1,98 @@
+{
+
+    "posts": [{
+
+        "user": "0",
+        "title": "Buen Casco",
+        "content": "Es un buen casco, hubiera preferido algo mejor",
+        "media": {
+            "images": [{
+                "url": "http://localhost:8080/img/logo.82b9c7a5.png"
+            }],
+            "video": "http://localhost:8080/img/logo.82b9c7a5.png"
+        },
+        "review": {
+            "comodidad": "5",
+            "cosas": "4",
+            "ajuste": "4",
+            "proteccion": "5"
+        }
+    }],
+    "users": [
+        {
+                "name": "Irving",
+                "profile": "/images/users/profile.png",
+                "description": "Soy el biker más grande de toda la historia de los bikers en el mundo, princpalmente México",
+                "posts": [
+                    "0"
+                ]
+                }
+],
+    "categories": [
+        
+            {
+            "colWidth": 12,
+            "name": "Motocicletas",
+            "image":"/categories/motocicletas.png",
+            "brands": ["0"]
+},
+    {
+        "name": "Guantes",
+        "colWidth": 4,
+        "image":"/categories/guantes.png",
+        "brands": ["0"]
+    },
+    {
+        "name": "Cascos",
+        "colWidth": 4,
+        "image":"/categories/cascos.png",
+        "brands": ["0"]
+    },
+    {
+        "colWidth": 4,
+        "image":"/categories/botas.png",
+        "name": "Botas",
+        "brands": ["0"]
+    },
+    {
+        "image":"/categories/accesorios.png",
+        "colWidth": 4,
+        "name": "Accesorios",
+        "brands": ["0"]
+    },
+    {
+        "image":"/categories/refacciones.png",
+        "name": "Refacciones",
+        "colWidth": 4,
+        "brands": ["0"]
+        }
+],
+    "styles": [
+        {
+        "title": "Chopper",
+        "description": "El verdadero poder de las motocicletas está en la libertad"
+    },
+        {
+        "title": "Enduro",
+        "description": "CARVE THE CANYONS OF THE URBAN GRID"
+    }
+],
+    "brands": [
+        {
+        "name": "Shaft",
+        "categories": ["0"]
+    },
+        {
+        "name": "hebotech",
+        "categories": ["0"]
+    },
+        {
+        "name": "hebotechno",
+        "categories": ["0"]
+    }
+],
+    "models": [{
+        "name": "SH-520",
+        "brand": "0"
+    }]
+}

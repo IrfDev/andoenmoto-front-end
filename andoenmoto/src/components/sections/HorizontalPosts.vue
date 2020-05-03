@@ -15,7 +15,7 @@ export default {
   name: 'HorizontalPosts',
   props: {
     posts: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },

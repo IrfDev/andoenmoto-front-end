@@ -1,15 +1,19 @@
 import firebase from 'firebase';
 
 export default {
+  namespaced: true,
+
   state: {
     items: {},
     activeItems: {},
   },
   getters: {
-    modelsFromBrandAndCategory: (state) => Object.values(state.items)
-      .filter((model) => model.brand === state.activeBrand.id
-        && model.category === state.activeCategory.id
-        && model.style === state.activeStyle.id),
+    modelsFromBrandAndCategory(state, getters, rootState) {
+      return Object.values(state.items)
+        .filter((model) => model.brand === rootState.brands.activeItem.id
+          && model.category === rootState.categories.activeItem.id
+          && model.style === rootState.styles.activeItem.id);
+    },
   },
   mutations: {
     SET_ACTIVE_MODEL(state, model) {

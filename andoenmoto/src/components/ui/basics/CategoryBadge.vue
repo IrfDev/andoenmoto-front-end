@@ -13,7 +13,7 @@ export default {
   name: 'CategoryBadge',
   methods: {
     async activateCategoryy(category) {
-      await this.$store.dispatch('activateCategory', category);
+      await this.$store.dispatch('categories/activateCategory', category);
       this.$router.push({
         name: 'categories-style',
         params: { category: category.name },

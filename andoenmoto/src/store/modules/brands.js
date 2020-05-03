@@ -7,10 +7,12 @@ export default {
     activeItem: {},
     items: {},
   },
+
   getters: {
     brandsFromActiveStyleId: (state) => Object.values(state.brands)
       .filter((brand) => brand.styles[state.activeStyle.id]),
   },
+
   mutations: {
     SET_ACTIVE_BRAND(state, brand) {
       state.activeItem = brand;
@@ -20,6 +22,7 @@ export default {
       state.items = brands;
     },
   },
+
   actions: {
     fetchBrands({ dispatch, state }, ids) {
       state.items = {};

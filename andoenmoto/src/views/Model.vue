@@ -56,23 +56,23 @@ export default {
   },
   mixins: [asyncDataStatus],
   methods: {
-    ...mapState([
-      'activeModel',
-      'activeBrand',
-    ]),
-    ...mapActions([
-      'fetchAllPosts',
-    ]),
-    ...mapGetters([
-      'postsFromModel',
-      'fotosFromPosts',
-    ]),
+    ...mapActions({
+      fetchAllPosts: 'posts/fetchAllPosts',
+    }),
+    ...mapGetters({
+      postsFromModel: 'posts/postsFromModel',
+      fotosFromPosts: 'posts/fotosFromPosts',
+    }),
   },
   created() {
     this.fetchAllPosts();
     this.asyncDataStatus_fetched();
   },
   computed: {
+    ...mapState({
+      activeModel: (state) => state.models.activeItem,
+      activeBrand: (state) => state.brands.activeItem,
+    }),
     posts() { return this.postsFromModel(); },
     fotos() { return this.fotosFromPosts(); },
   },

@@ -62,10 +62,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions([
-      'registerUserEmailPassword',
-      'registerUserFacebook',
-    ]),
+    ...mapActions({
+      registerUserEmailPassword: 'auth/registerUserEmailPassword',
+      registerUserFacebook: 'auth/registerUserFacebook',
+    }),
     async register() {
       await this.registerUserEmailPassword(this.form);
       this.$router.push('/');

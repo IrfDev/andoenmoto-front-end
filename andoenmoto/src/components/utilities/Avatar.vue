@@ -14,24 +14,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import firebase from 'firebase';
+import { mapState } from 'vuex';
+// import firebase from 'firebase';
 
 export default {
   name: 'Avatar',
   props: {
     displayName: Boolean,
   },
-  beforeCreate() {
-    firebase.database().ref('users').once('value', (snapshot) => {
-      const users = snapshot.val();
+  // beforeCreate() {
+  //   firebase.database().ref('users').once('value', (snapshot) => {
+  //     const users = snapshot.val();
 
-      this.$store.commit('SET_USERS', users);
-    });
-  },
+  //     this.$store.commit('SET_USERS', users);
+  //   });
+  // },
   computed: {
-    ...mapGetters(
-      { user: 'authUser' },
+    ...mapState(
+      { user: (state) => state.auth.profileUser },
     ),
   },
 };

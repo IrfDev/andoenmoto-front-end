@@ -28,7 +28,7 @@
             :labels="{checked: 'Ver estílos', unchecked: 'Ver marcas'}"
           />
       </div>
-      <styles v-if="!categoryStyle" :styles="styles"/>
+      <styles v-if="!categoryStyle" :styles="styless"/>
       <brands v-else :brands="brands"/>
   </div>
   <div v-else class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
@@ -53,25 +53,26 @@ export default {
   },
   mixins: [asyncDataStatus],
   methods: {
-    ...mapActions([
-      'categories/fetchAllCategories',
-      'categories/findCategory',
-      'categories/fetchBrands',
-      'categories/fetchStyles',
-    ]),
+    ...mapActions({
+      findCategory: 'categories/findCategory',
+      fetchAllCategories: 'categories/fetchAllCategories',
+      fetchBrands: 'brands/fetchBrands',
+      fetchStyles: 'styles/fetchStyles',
+    }),
   },
   async created() {
     await this.fetchAllCategories();
     await this.findCategory(this.$route.params.category);
-    this.fetchBrands(Object.keys(this.$store.state.activeCategory.brands));
-    this.fetchStyles(Object.keys(this.$store.state.activeCategory.styles));
+    await this.fetchStyles(Object.keys(this.$store.state.categories.activeItem.styles));
+    await this.fetchBrands(Object.keys(this.$store.state.categories.activeItem.brands));
     this.asyncDataStatus_fetched();
+    console.log(this.styles);
   },
   computed: {
     ...mapState({
-      category: 'categories/activeItem',
-      brands: 'brands/items',
-      styles: 'styles/items',
+      category: (state) => state.categories.activeItem,
+      brands: (state) => state.brands.items,
+      styless: (state) => state.styles.items,
     }),
   },
   data() {

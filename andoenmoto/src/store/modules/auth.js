@@ -6,6 +6,8 @@ export default {
   state: {
     items: {},
     authId: null,
+    profileUser: {},
+    otherProfile: {},
   },
 
   getters: {
@@ -23,17 +25,37 @@ export default {
     SET_PROFILE_USER(state, activeUser) {
       state.profileUser = activeUser;
     },
+
+    SET_OTHER_USER(state, activeUser) {
+      state.otherProfile = activeUser;
+    },
+
+    SIGN_OUT(state) {
+      state.authId = null;
+      state.profileUser = null;
+    },
   },
 
   actions: {
-    findUser({ commit, getters }, userId) {
-      const activeUser = getters.profileUser(userId);
-      commit('SET_PROFILE_USER', activeUser);
+    fetchAuthUser({ commit }, userId) {
+      firebase.database().ref('users').child(userId.id).once('value', (snapshot) => {
+        const authUser = snapshot.val();
+
+        commit('SET_PROFILE_USER', authUser);
+      });
     },
 
-    async fetchAuthUser({ dispatch, commit }) {
+    findUser({ commit }, userId) {
+      firebase.database().ref('users').child(userId).once('value', (snapshot) => {
+        const authUser = snapshot.val();
+
+        commit('SET_OTHER_USER', authUser);
+      });
+    },
+
+    async fetchAuthUserId({ dispatch, commit }) {
       const userId = firebase.auth().currentUser.uid;
-      await dispatch('fetchUser', { id: userId });
+      await dispatch('fetchAuthUser', { id: userId });
       commit('SET_AUTH_ID', userId);
     },
 
@@ -120,7 +142,7 @@ export default {
 
     signOut({ commit }) {
       firebase.auth().signOut();
-      commit('SET_AUTH_ID', null);
+      commit('SIGN_OUT');
     },
 
     updateUser({ state, commit }, { id, description }) {

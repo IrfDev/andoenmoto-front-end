@@ -1,98 +1,142 @@
 {
-
-    "posts": [{
-
-        "user": "0",
-        "title": "Buen Casco",
-        "content": "Es un buen casco, hubiera preferido algo mejor",
-        "media": {
-            "images": [{
-                "url": "http://localhost:8080/img/logo.82b9c7a5.png"
-            }],
-            "video": "http://localhost:8080/img/logo.82b9c7a5.png"
+  "brands" : {
+    "b1" : {
+      "categories" : {
+        "c1" : true
+      },
+      "name" : "shaft"
+    },
+    "b2" : {
+      "categories" : {
+        "c1" : true,
+        "c2" : true,
+        "c3" : true
+      },
+      "name" : "Hebotech"
+    },
+    "b3" : {
+      "categories" : {
+        "c1" : true,
+        "c2" : true
+      },
+      "name" : "hebotech"
+    }
+  },
+  "categories" : {
+    "c1" : {
+      "brands" : {
+        "b1" : true
+      },
+      "colWidth" : 12,
+      "image" : "/categories/motocicletas.png",
+      "name" : "Motocicletas",
+      "styles" : {
+        "s1" : true,
+        "s3" : true
+      }
+    },
+    "c2" : {
+      "brand" : {
+        "b1" : true,
+        "b2" : true
+      },
+      "colWidth" : 4,
+      "image" : "/categories/guantes.png",
+      "name" : "Guantes",
+      "styles" : {
+        "s1" : true,
+        "s2" : true
+      }
+    },
+    "c3" : {
+      "brands" : {
+        "b3" : true
+      },
+      "colWidth" : 4,
+      "image" : "/categories/botas.png",
+      "name" : "Botas",
+      "styles" : {
+        "s1" : true
+      }
+    },
+    "c4" : {
+      "brands" : {
+        "b2" : true
+      },
+      "colWidth" : 4,
+      "image" : "/categories/accesorios.png",
+      "name" : "Accesorios",
+      "styles" : {
+        "s1" : true,
+        "s2" : true
+      }
+    },
+    "c5" : {
+      "brands" : {
+        "b2" : true
+      },
+      "colWidth" : 4,
+      "image" : "/categories/refacciones.png",
+      "name" : "Refacciones",
+      "styles" : {
+        "s1" : true,
+        "s2" : true
+      }
+    }
+  },
+  "models" : {
+    "m1" : {
+      "brand" : "b1",
+      "name" : "SH-520"
+    }
+  },
+  "posts" : {
+    "p1" : {
+      "content" : "Es un buen casco, hubiera preferido algo mejor",
+      "media" : {
+        "images" : {
+          "i1" : {
+            "url" : "http://localhost:8080/img/logo.82b9c7a5.png"
+          }
         },
-        "review": {
-            "comodidad": "5",
-            "cosas": "4",
-            "ajuste": "4",
-            "proteccion": "5"
-        }
-    }],
-    "users": [
-        {
-                "name": "Irving",
-                "profile": "/images/users/profile.png",
-                "description": "Soy el biker más grande de toda la historia de los bikers en el mundo, princpalmente México",
-                "posts": [
-                    "0"
-                ]
-                }
-],
-    "categories": [
-        
-            {
-            "colWidth": 12,
-            "name": "Motocicletas",
-            "image":"/categories/motocicletas.png",
-            "brands": ["0"]
-},
-    {
-        "name": "Guantes",
-        "colWidth": 4,
-        "image":"/categories/guantes.png",
-        "brands": ["0"]
-    },
-    {
-        "name": "Cascos",
-        "colWidth": 4,
-        "image":"/categories/cascos.png",
-        "brands": ["0"]
-    },
-    {
-        "colWidth": 4,
-        "image":"/categories/botas.png",
-        "name": "Botas",
-        "brands": ["0"]
-    },
-    {
-        "image":"/categories/accesorios.png",
-        "colWidth": 4,
-        "name": "Accesorios",
-        "brands": ["0"]
-    },
-    {
-        "image":"/categories/refacciones.png",
-        "name": "Refacciones",
-        "colWidth": 4,
-        "brands": ["0"]
-        }
-],
-    "styles": [
-        {
-        "title": "Chopper",
-        "description": "El verdadero poder de las motocicletas está en la libertad"
-    },
-        {
-        "title": "Enduro",
-        "description": "CARVE THE CANYONS OF THE URBAN GRID"
+        "video" : "http://localhost:8080/img/logo.82b9c7a5.png"
+      },
+      "review" : {
+        "ajuste" : 4,
+        "comodidad" : 5,
+        "cosas" : 4,
+        "proteccion" : 5
+      },
+      "title" : "Buen Casco",
+      "user" : 0
     }
-],
-    "brands": [
-        {
-        "name": "Shaft",
-        "categories": ["0"]
+  },
+  "styles" : {
+    "s1" : {
+      "description" : "El verdadero poder de las motocicletas está en ...",
+      "title" : "Chopper"
     },
-        {
-        "name": "hebotech",
-        "categories": ["0"]
-    },
-        {
-        "name": "hebotechno",
-        "categories": ["0"]
+    "s2" : {
+      "description" : "El verdadero poder de las motocicletas está en ...",
+      "title " : "Enduro"
     }
-],
-    "models": [{
-        "name": "SH-520",
-        "brand": "0"
-    }]
+  },
+  "users" : {
+    "0" : {
+      "description" : "Soy el biker más grande de toda la historia de los bikers en el mundo, princpalmente México",
+      "name" : "Irving Suárez",
+      "posts" : [ "0" ],
+      "profile" : "/images/users/profile.png"
+    },
+    "ENTpbmbe0tSm4cGlH337Zld0m9e2" : {
+      "description" : "Biker amante de las motos",
+      "email" : "bonokirvi@hotmail.com",
+      "gender" : "male",
+      "id" : "ENTpbmbe0tSm4cGlH337Zld0m9e2",
+      "name" : "Irving",
+      "profile" : "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2983926314956825&height=100&width=100&ext=1590978067&hash=AeSJmTai7wzwwtiM",
+      "registeredAt" : 1588386066,
+      "username" : "irving suárez"
+    }
+  }
 }

@@ -26,7 +26,7 @@
 import ModelCard from '@/components/ui/ModelCard.vue';
 
 import {
-  mapActions, mapGetters, mapState, mapMutations,
+  mapActions, mapGetters, mapState,
 } from 'vuex';
 
 import asyncDataStatus from '@/mixins/asyncDataStatus';
@@ -38,23 +38,15 @@ export default {
   },
   mixins: [asyncDataStatus],
   methods: {
-    ...mapMutations([
-      'SET_ACTIVE_MODEL',
-    ]),
-    ...mapState([
-      'nameOfState',
-      'activeBrand',
-      'activeStyle',
-    ]),
-    ...mapGetters([
-      'modelsFromBrandAndCategory',
-    ]),
-    ...mapActions([
-      'fetchAllModels',
-    ]),
+    ...mapGetters({
+      modelsFromBrandAndCategory: 'models/modelsFromBrandAndCategory',
+    }),
+    ...mapActions({
+      fetchAllModels: 'models/fetchAllModels',
+    }),
     goToModel(model) {
       console.log(model);
-      this.SET_ACTIVE_MODEL(model);
+      this.$store.commit('models/SET_ACTIVE_MODEL', model);
       this.$router.push({
         name: 'categories-style-models-model',
       });
@@ -68,12 +60,10 @@ export default {
     models() {
       return this.modelsFromBrandAndCategory();
     },
-  },
-  data() {
-    return {
-      activeBrand: this.activeBrand(),
-      activeStyle: this.activeStyle(),
-    };
+    ...mapState({
+      activeBrand: (state) => state.brands.activeItem,
+      activeStyle: (state) => state.styles.activeItem,
+    }),
   },
 };
 </script>
