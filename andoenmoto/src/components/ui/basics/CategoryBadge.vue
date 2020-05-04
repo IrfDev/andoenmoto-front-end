@@ -1,10 +1,16 @@
 <template>
   <div
-    :class="`col-${colWidth} flex-nowrap align-content-stretch`"
+    :class="[
+    `col-${colWidth} flex-nowrap d-flex`,
+    reverse ? 'flex-column-reverse' : 'flex-column align-content-stretch']"
     @click="activateCategoryy($attrs.category)"
   >
+    <div class="badge-image m-0">
       <img :src="image" :alt="name" class="img-fluid">
-      <h4 class="mt-2">{{name}}</h4>
+    </div>
+    <div class="badge-title m-0">
+      <h4 class="">{{name}}</h4>
+    </div>
   </div>
 </template>
 
@@ -32,6 +38,10 @@ export default {
     colWidth: {
       type: Number,
     },
+    reverse: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -41,5 +51,12 @@ h4{
   color:$alpha-white;
   font-family: $title;
   font-size:5vw;
+}
+.flex-column-reverse{
+  h4{
+    font-family: $typo!important;
+    font-size: 25vw;
+    color:$alpha-white;
+  }
 }
 </style>

@@ -8,6 +8,7 @@ export default {
     authId: null,
     profileUser: {},
     otherProfile: {},
+    unsubscribeAuthObserver: null,
   },
 
   getters: {
@@ -34,14 +35,38 @@ export default {
       state.authId = null;
       state.profileUser = null;
     },
+
+    SET_UNSUSCRIBE_AUTH_OBSERVER(state, unsubscribe) {
+      state.unsubscribeAuthObserver = unsubscribe;
+    },
   },
 
   actions: {
     fetchAuthUser({ commit }, userId) {
+      console.log(userId);
       firebase.database().ref('users').child(userId.id).once('value', (snapshot) => {
         const authUser = snapshot.val();
 
         commit('SET_PROFILE_USER', authUser);
+      });
+    },
+
+    initAuthentication({ dispatch, commit, state }) {
+      return new Promise((resolve) => {
+        // unsubscribe observer if already listening
+        if (state.unsubscribeAuthObserver) {
+          state.unsubscribeAuthObserver();
+        }
+
+        const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            dispatch('fetchAuthUser')
+              .then((dbUser) => resolve(dbUser));
+          } else {
+            resolve(null);
+          }
+        });
+        commit('SET_UNSUSCRIBE_AUTH_OBSERVER', unsubscribe);
       });
     },
 
@@ -55,6 +80,7 @@ export default {
 
     async fetchAuthUserId({ dispatch, commit }) {
       const userId = firebase.auth().currentUser.uid;
+      console.log(userId);
       await dispatch('fetchAuthUser', { id: userId });
       commit('SET_AUTH_ID', userId);
     },

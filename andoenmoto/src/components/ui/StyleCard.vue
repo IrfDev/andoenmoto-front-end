@@ -2,7 +2,7 @@
   <div class="card mt-3" :class="`${title}-background`">
       <h2>{{title}}</h2>
       <h4>{{description}}</h4>
-      <img :src="`/images/styles/${title}.png`" width="130%" alt="">
+      <img :src="`/images/styles/${title}.png`" width="120%" alt="">
       <div class="card-content">
         <basic-button
           :main="true"
@@ -48,6 +48,6 @@ h4{
 img{
     position: relative;
     bottom:20vw;
-    right:10vw;
+    right:7vw;
 }
 </style>

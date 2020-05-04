@@ -1,9 +1,13 @@
 import Vue from 'vue';
 import Buttonn from '@/components/utilities/buttonn.vue';
 import Avatar from '@/components/utilities/Avatar.vue';
+import WingieRow from '@/components/utilities/WingieRow.vue';
+import ThundieRow from '@/components/utilities/ThundieRow.vue';
+import LightieRow from '@/components/utilities/LightieRow.vue';
 import ToggleButton from 'vue-js-toggle-button';
 
 import firebase from 'firebase';
+import vuelidate from 'vuelidate';
 
 import App from './App.vue';
 import router from './router';
@@ -27,12 +31,31 @@ firebase.analytics();
 
 Vue.component('BasicButton', Buttonn);
 Vue.component('Avatar', Avatar);
+Vue.component('WingsRow', WingieRow);
+Vue.component('LightieRow', LightieRow);
+Vue.component('ThundieRow', ThundieRow);
+
+router.beforeEach((to, from, next) => {
+  store.dispatch('auth/initAuthentication');
+  if (to.matched.some((route) => route.meta.requiresAuth)) {
+    if (store.state.authId) {
+      next();
+    } else {
+      next({ name: 'Home' });
+    }
+  } else {
+    next();
+  }
+});
+
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     store.dispatch('auth/fetchAuthUserId');
   }
 });
+
+Vue.use(vuelidate);
 
 Vue.config.productionTip = false;
 

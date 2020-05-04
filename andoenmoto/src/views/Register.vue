@@ -1,10 +1,10 @@
 <template>
   <div class="column-fluid login">
     <div class="">
-        <h1>Inicia sesión</h1>
-      <div class="title d-flex justify-content-between align-items-center">
-        <img src="/images/util/left-thunder.png" alt="" class="">
-        <img src="/images/util/right-thunder.png" alt="" class="">
+      <div class="title d-flex justify-content-around align-items-center">
+        <img src="/images/util/left-wing.png" alt="" class="">
+        <h1 class="text-center">Registrate</h1>
+        <img src="/images/util/right-wing.png" alt="" class="">
       </div>
        <div class="text-center cta-facebook mt-3">
         <button @click="registerFacebook" class="btn-red btn-xsmall">
@@ -14,8 +14,41 @@
       </div>
       <form
         @submit.prevent="register"
-        class="row m-3 mt-4"
+        class="row m-3 mt-5"
       >
+
+        <div class="form-group col-12">
+          <input
+            v-model="form.name"
+            id="name"
+            type="text"
+            class="form-control"
+            placeholder="Nombre"
+            @blur="$v.form.name.$touch()"
+          >
+          <template v-if="$v.form.name.$error">
+            <h1 v-if="!$v.form.name.required" class="form-error">El nombre es requerido</h1>
+          </template>
+        </div>
+
+        <div class="form-group col-12">
+          <input
+            v-model="form.username"
+            id="username"
+            type="text"
+            placeholder="Nombre de usuario"
+            @blur="$v.form.username.$touch()"
+            class="form-control">
+          <template v-if="$v.form.username.$error">
+            <span v-if="!$v.form.username.required" class="form-error">
+              Es necesario especificar un nombre de usuario
+            </span>
+            <span v-if="!$v.form.username.minLength" class="form-error">
+              Necesitas al menos 5 caracteres
+            </span>
+          </template>
+        </div>
+
         <div class="form-group col-12">
           <input
             v-model.lazy="form.email"
@@ -53,12 +86,34 @@
           </template>
         </div>
 
+        <div class="form-group col-12">
+          <input
+            v-model.lazy="form.avatar"
+            id="avatar"
+            type="text"
+            class="form-control"
+            placeholder="Foto de perfil"
+            @blur="$v.form.avatar.$touch()"
+          >
+          <template v-if="$v.form.avatar.$error">
+            <span v-if="!$v.form.avatar.url" class="form-error">
+              Ingresa una url válida
+            </span>
+            <span v-if="!$v.form.avatar.supportedImageFile" class="form-error">
+              Ingresa un formato válido de imágenes
+            </span>
+            <span v-if="$v.form.avatar.responseOk" class="form-error">
+              El URL no puede traer ninguna imagen
+            </span>
+          </template>
+        </div>
+
         <div class="form-register col-12">
-          <button type="submit" class="btn-blue btn-block">Inicia sesión</button>
+          <button type="submit" class="btn-blue btn-block">Regístrate</button>
         </div>
         <div class="cta-log-gin text-center w-100 mt-2">
-          <router-link class="cta-login" to="/register">
-            Crear cuenta nueva
+          <router-link class="cta-login" to="/">
+            Ya tengo cuenta
           </router-link>
         </div>
       </form>
@@ -75,13 +130,15 @@ import {
 } from 'vuelidate/lib/validators';
 
 export default {
-  name: 'Login',
+  name: 'Register',
   data() {
     return {
       form: {
+        name: null,
         username: null,
         email: null,
         password: null,
+        avatar: null,
       },
     };
   },
@@ -184,14 +241,12 @@ input{
 h1{
   font-family:$typo;
   color:white;
-  text-align: center;
-  font-size:25vw;
+  font-size:20vw;
 }
 .title{
-    margin-top:-8vh;
   img{
-    // max-width: 40vw;
-    // height:100%;
+    max-width: 20vw;
+    height:100%;
   }
 }
 .form-register{

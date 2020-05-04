@@ -9,8 +9,16 @@ export default {
   },
 
   getters: {
-    brandsFromActiveStyleId: (state) => Object.values(state.brands)
-      .filter((brand) => brand.styles[state.activeStyle.id]),
+    brandsFromActiveStyleId(state, getters, rootState) {
+      const style = rootState.styles.activeItem.id;
+      const brandsIds = Object.keys(state.items)
+        .filter((key) => state.items[key].styles[style]);
+      return Object.values(brandsIds)
+        .map((brandId) => state.items[brandId]);
+    },
+
+    activeBrand: (state) => (brandName) => Object.values(state.items)
+      .find((brand) => brand.name === brandName),
   },
 
   mutations: {
@@ -29,6 +37,11 @@ export default {
       dispatch('fetchItems', { resource: 'brands', ids }, { root: true });
     },
 
+    findAndActiveBrand({ commit, getters }, brandName) {
+      const brand = getters.activeBrand(brandName);
+      commit('SET_ACTIVE_BRAND', brand);
+    },
+
     fetchAllBrands({ state, commit }) {
       return new Promise((resolve) => {
         firebase.database().ref('brands').once('value', (snapshot) => {
@@ -36,7 +49,8 @@ export default {
           Object.keys(categoriesObject).forEach((categoryId) => {
             const categoryObj = categoriesObject[categoryId];
             const category = { ...categoryObj, id: categoryId };
-            commit('SET_ITEM', { resource: 'brands', id: categoryId, item: category });
+            commit('SET_ITEM', { resource: 'brands', id: categoryId, item: category },
+              { root: true });
           });
           resolve(Object.values(state.items));
         });

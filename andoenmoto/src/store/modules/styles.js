@@ -12,6 +12,9 @@ export default {
   getters: {
     getStylesFromActiveBrand: (state, rootState) => Object.keys(rootState.brands.activeItem.styles)
       .map((style) => state.items === style),
+
+    activeStyle: (state) => (styleName) => Object.values(state.items)
+      .find((style) => style.title === styleName),
   },
   mutations: {
     SET_STYLES(state, styles) {
@@ -34,6 +37,11 @@ export default {
       console.log(ids);
       dispatch('fetchItems', { resource: 'styles', ids },
         { root: true });
+    },
+
+    findAndActiveStyle({ commit, getters }, styleName) {
+      const style = getters.activeStyle(styleName);
+      commit('SET_ACTIVE_STYLE', style);
     },
 
     fetchAllStyles({ state, commit }) {

@@ -2,7 +2,9 @@
   <div v-if="asyncDataStatus_ready" class="models">
       <div class="row m-0 justify-content-center text-center flex-column">
         <h1>{{activeStyle.title}}</h1>
-        <h2>{{activeBrand.name}}</h2>
+        <wings-row>
+          <h2>{{activeBrand.name}}</h2>
+        </wings-row>
       </div>
       <div class="row m-0 justify-content-center">
           <div

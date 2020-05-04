@@ -1,5 +1,5 @@
 <template>
-<div class="card" style="width: 18rem;">
+<div class="card">
   <div class="card-body">
     <img
         :src="`/images/brands/${brand}.png`"

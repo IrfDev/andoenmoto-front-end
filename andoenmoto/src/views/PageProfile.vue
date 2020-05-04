@@ -95,7 +95,7 @@ export default {
   },
   created() {
     if (!this.itsMe) {
-      this.$store.dispatch('auth/findUser', this.$route.params.profileId);
+      this.$store.dispatch('auth/fetchAuthUser', this.$route.params.profileId);
     }
   },
   computed: {

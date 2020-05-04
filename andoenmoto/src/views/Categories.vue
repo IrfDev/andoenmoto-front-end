@@ -13,6 +13,7 @@
               :image="category.image"
               :name="category.name"
               class="category-badge"
+              :reverse="true"
             />
           </div>
           <!-- <toggle-button @change="..."/> -->
@@ -23,6 +24,7 @@
             :height="25"
             :width="150"
             :value="false"
+            class="mt-4"
             :color="{ checked:'#303030' , unchecked:'#353E28'}"
             :sync="false"
             :labels="{checked: 'Ver estílos', unchecked: 'Ver marcas'}"
@@ -77,7 +79,7 @@ export default {
   },
   data() {
     return {
-      categoryStyle: false,
+      categoryStyle: true,
     };
   },
 };

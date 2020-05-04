@@ -1,7 +1,7 @@
 <template>
-<div class="row justify-content-center">
+<div class="row m-0 justify-content-center">
   <div
-    class="col-md-6 col-12"
+    class="col-md-6 col-10"
     v-for="(brand, brandIndex) in brands"
     :key="brandIndex"
     @click="brandSelected(brand)"
@@ -46,7 +46,7 @@ export default {
   },
   props: {
     brands: {
-      type: Array,
+      type: [Object, Array],
       required: true,
     },
   },

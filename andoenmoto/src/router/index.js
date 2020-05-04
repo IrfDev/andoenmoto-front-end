@@ -1,10 +1,12 @@
 import Vue from 'vue';
+import store from '@/store';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
 export default new VueRouter({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -39,14 +41,20 @@ export default new VueRouter({
     {
       path: '/profile/me',
       name: 'profile-page-edit',
+      meta: { requiresAuth: true },
       props: {
         itsMe: true,
       },
       component: () => import('../views/PageProfile.vue'),
     },
     {
+      path: '/registro',
+      name: 'registro',
+      component: () => import('../views/Register.vue'),
+    },
+    {
       path: '/login',
-      name: 'login-form',
+      name: 'login',
       component: () => import('../views/Login.vue'),
     },
     {
@@ -55,6 +63,13 @@ export default new VueRouter({
       props: { itsMe: false },
       component: () => import('../views/PageProfile.vue'),
     },
+    {
+      path: '/sign-out',
+      name: 'sign-out',
+      beforeEnter(to, from, next) {
+        store.dispatch('auth/signOut')
+          .then(() => next({ name: 'Home' }));
+      },
+    },
   ],
-  mode: 'history',
 });
