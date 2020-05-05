@@ -78,8 +78,6 @@ export default {
   },
   data() {
     return {
-      activeModel: this.activeModel(),
-      activeBrand: this.activeBrand(),
       bgImg: 'sporter',
       reviews: [
         {

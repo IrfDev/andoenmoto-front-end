@@ -1,5 +1,5 @@
 <template>
-<div class="card" style="width: 18rem;">
+<div class="card">
     <avatar
         :user="user"
     />
@@ -10,7 +10,7 @@
       :key="urlIndex"
       class="carousel-item active"
     >
-      <img :src="url" class="d-block w-100" alt="/bgs/sporter.png">
+      <img :src="url" class="d-block img-fluid" alt="/bgs/sporter.png">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -38,5 +38,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
+.card{
+  border:none;
+}
 </style>

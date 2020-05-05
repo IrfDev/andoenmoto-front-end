@@ -58,5 +58,48 @@ export default {
           return Promise.resolve(state.items[postId]);
         });
     },
+
+    uploadImage({ state, commit, rootState }, newImage) {
+      const user = rootState.auth.authId;
+      const imageId = firebase.database().ref('images').push({ url: 'ss' }).key;
+      const publishedAt = Math.floor(Date.now() / 1000);
+
+      const newImageObject = {
+        ...newImage,
+        user,
+        imageId,
+        publishedAt,
+      };
+      console.log(imageId);
+      const updates = {};
+      updates[`images/${imageId}`] = newImageObject;
+      firebase.database().ref('images').child(imageId).update(newImageObject)
+        .then(() => {
+          commit('SET_ITEM', { resource: 'posts', item: newImageObject, id: imageId }, { root: true });
+          return Promise.resolve(state.items[imageId]);
+        });
+      return imageId;
+    },
+
+    uploadVideo({ state, commit, rootState }, newVideo) {
+      const user = rootState.auth.authId;
+      const videoId = firebase.database().ref('videos').push({ url: 'ss' }).key;
+      const publishedAt = Math.floor(Date.now() / 1000);
+
+      const newImageObject = {
+        ...newVideo,
+        user,
+        videoId,
+        publishedAt,
+      };
+      const updates = {};
+      updates[`videos/${videoId}`] = newImageObject;
+      firebase.database().ref('videos').child(videoId).update(newImageObject)
+        .then(() => {
+          commit('SET_ITEM', { resource: 'videos', item: newImageObject, id: videoId }, { root: true });
+          return Promise.resolve(state.items[videoId]);
+        });
+      return videoId;
+    },
   },
 };

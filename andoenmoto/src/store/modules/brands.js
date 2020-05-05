@@ -17,6 +17,9 @@ export default {
         .map((brandId) => state.items[brandId]);
     },
 
+    brandsFromActiveCategoryId: (state) => (id) => Object.keys(state.items)
+      .filter((brand) => brand.categories[id]),
+
     activeBrand: (state) => (brandName) => Object.values(state.items)
       .find((brand) => brand.name === brandName),
   },

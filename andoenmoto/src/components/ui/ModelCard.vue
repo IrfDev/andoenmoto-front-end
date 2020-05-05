@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    {{name}}
+    <h4>
+      {{name}}
+    </h4>
   </div>
 </template>
 
@@ -16,6 +18,12 @@ export default {
 };
 </script>
 
-<style lang ='scss' scoped>
-
+<style lang='scss' scoped>
+h4{
+  font-family: $paragraph;
+  color: $alpha;
+}
+.card{
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
+}
 </style>

@@ -19,7 +19,7 @@ export default {
   name: 'HorizontalFotos',
   props: {
     fotos: {
-      type: Object,
+      type: [Object, Array],
       required: true,
     },
   },

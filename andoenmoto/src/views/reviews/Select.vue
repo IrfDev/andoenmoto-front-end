@@ -116,7 +116,7 @@ font-family: $title;
   background:$main-gradient;
   transition:1s ease-in;
   h1{
-    color:$alpha;
+    color:white;
   }
   h2{
     color:white;
