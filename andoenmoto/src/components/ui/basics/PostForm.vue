@@ -8,7 +8,7 @@
     aria-hidden="true"
   >
   <div class="modal-dialog modal-dialog-centered " role="document">
-    <div class="modal-content">
+    <div class="modal-content" v-if="notAuth">
     <lightie-row>
         <avatar
           :widthPx="100"
@@ -91,6 +91,17 @@
         </button>
       </div>
     </div>
+    <div v-else class="modal-content not-auth pt-3 pb-3">
+      <h2>
+        Inicia sesión para poder subir tu reseña
+      </h2>
+      <router-link class="go-to-login" to="/login">
+        Iniciar Sesión
+      </router-link>
+      <router-link class="go-to-login" to="/register">
+        Regístrate
+      </router-link>
+    </div>
   </div>
 </div>
 </template>
@@ -136,11 +147,34 @@ export default {
       return Object.values(this.$store.state.brands.items)
         .filter((brand) => brand.categories[this.newPost.category]);
     },
+    notAuth() {
+      return this.$store.state.auth.authId;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.go-to-login{
+  color: white;
+  margin:.5em;
+  padding: 2% 5%;
+  border-radius: 8px;
+  font-family: $title;
+}
+.go-to-login:nth-of-type(1){
+  background: $main-gradient;
+}
+.go-to-login:nth-of-type(2){
+  background: $complementary-gradient;
+}
+
+.not-auth{
+  h2{
+    color: $alpha;
+    font-family: $title;
+  }
+}
 .super{
   transition: .5s ease-in-out;
   background: $complementary-gradient!important;

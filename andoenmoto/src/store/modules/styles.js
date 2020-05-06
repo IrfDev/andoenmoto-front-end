@@ -40,7 +40,9 @@ export default {
     },
 
     findAndActiveStyle({ commit, getters }, styleName) {
+      console.log(styleName);
       const style = getters.activeStyle(styleName);
+      console.log(style);
       commit('SET_ACTIVE_STYLE', style);
     },
 

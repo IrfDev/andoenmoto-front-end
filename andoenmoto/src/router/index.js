@@ -34,7 +34,7 @@ export default new VueRouter({
       component: () => import('../views/Models.vue'),
     },
     {
-      path: '/categories/models/model',
+      path: '/categoria/:category/estilo/:style/marca/:brand/modelo/:model',
       name: 'categories-style-models-model',
       component: () => import('../views/Model.vue'),
     },

@@ -45,17 +45,35 @@ export default {
     }),
     ...mapActions({
       fetchAllModels: 'models/fetchAllModels',
+      findCategory: 'categories/findCategory',
+      fetchAllCategories: 'categories/fetchAllCategories',
+      fetchAllBrands: 'brands/fetchAllBrands',
+      findAndActiveBrand: 'brands/findAndActiveBrand',
+      findAndActiveStyle: 'styles/findAndActiveStyle',
+      fetchAllStyles: 'styles/fetchAllStyles',
     }),
     goToModel(model) {
       console.log(model);
       this.$store.commit('models/SET_ACTIVE_MODEL', model);
       this.$router.push({
         name: 'categories-style-models-model',
+        params: {
+          category: this.$store.state.categories.activeItem.name,
+          brand: this.activeBrand.name,
+          style: this.activeStyle.title,
+          model: model.name,
+        },
       });
     },
   },
-  created() {
-    this.fetchAllModels();
+  async created() {
+    await this.fetchAllCategories();
+    await this.findCategory(this.$route.params.category);
+    await this.fetchAllBrands();
+    await this.findAndActiveBrand(this.$route.params.brand);
+    await this.fetchAllStyles();
+    await this.findAndActiveStyle(this.$route.params.style);
+    await this.fetchAllModels();
     this.asyncDataStatus_fetched();
   },
   computed: {
@@ -82,6 +100,7 @@ h2{
     font-size: 10vw;
 }
 .models{
-    background:$main-gradient;
+  background:$main-gradient;
+  min-height: 100vh;
 }
 </style>

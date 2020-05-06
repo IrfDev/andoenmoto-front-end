@@ -9,10 +9,14 @@
        data-toggle="modal"
        data-target="#exampleModal"
       />
-      <basic-button
-       :content="'Iniciar sesión'"
-       :secondary="true"
-      />
+      <router-link to="/login">
+        <basic-button
+        :content="'Iniciar sesión'"
+        :secondary="true"
+        v-if="!notAuth"
+        @click="goToLogin"
+        />
+      </router-link>
     </div>
     <post-form
     class="modal fade"/>
@@ -28,6 +32,17 @@ export default {
   components: {
     PostForm,
     logo,
+  },
+  computed: {
+    notAuth() {
+      return this.$store.state.auth.authId;
+    },
+  },
+  methods: {
+    goToLogin() {
+      console.log(this.$router);
+      this.$router.push({ name: 'login' });
+    },
   },
 };
 </script>

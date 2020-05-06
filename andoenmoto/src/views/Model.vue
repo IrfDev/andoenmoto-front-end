@@ -54,27 +54,39 @@ export default {
     HorizontalPosts,
     HorizontalFotos,
   },
+  async created() {
+    await this.fetchAllBrands();
+    await this.findAndActiveBrand(this.$route.params.brand);
+    await this.fetchAllModels();
+    await this.findAndActiveModel(this.$route.params.model);
+    this.fetchAllPosts();
+    this.asyncDataStatus_fetched();
+  },
   mixins: [asyncDataStatus],
   methods: {
     ...mapActions({
       fetchAllPosts: 'posts/fetchAllPosts',
+      fetchAllModels: 'models/fetchAllModels',
+      findCategory: 'categories/findCategory',
+      fetchAllCategories: 'categories/fetchAllCategories',
+      fetchAllBrands: 'brands/fetchAllBrands',
+      findAndActiveBrand: 'brands/findAndActiveBrand',
+      findAndActiveStyle: 'styles/findAndActiveStyle',
+      findAndActiveModel: 'models/findAndActiveModel',
+      fetchAllStyles: 'styles/fetchAllStyles',
     }),
-    ...mapGetters({
-      postsFromModel: 'posts/postsFromModel',
-      fotosFromPosts: 'posts/fotosFromPosts',
-    }),
-  },
-  created() {
-    this.fetchAllPosts();
-    this.asyncDataStatus_fetched();
   },
   computed: {
     ...mapState({
       activeModel: (state) => state.models.activeItem,
       activeBrand: (state) => state.brands.activeItem,
     }),
-    posts() { return this.postsFromModel(); },
-    fotos() { return this.fotosFromPosts(); },
+    ...mapGetters({
+      posts: 'posts/postsFromModel',
+      fotos: 'posts/fotosFromPosts',
+    }),
+    // posts() { return this.postsFromModel(); },
+    // fotos() { return this.fotosFromPosts(); },
   },
   data() {
     return {

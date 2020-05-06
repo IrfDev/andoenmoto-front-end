@@ -14,6 +14,9 @@ export default {
           && model.category === rootState.categories.activeItem.id
           && model.style === rootState.styles.activeItem.id);
     },
+
+    activeModel: (state) => (modelName) => Object.values(state.items)
+      .find((model) => model.name === modelName),
   },
   mutations: {
     SET_ACTIVE_MODEL(state, model) {
@@ -24,6 +27,11 @@ export default {
     },
   },
   actions: {
+    findAndActiveModel({ commit, getters }, modelName) {
+      const model = getters.activeModel(modelName);
+      commit('SET_ACTIVE_MODEL', model);
+    },
+
     fetchAllModels({ state, commit }) {
       return new Promise((resolve) => {
         firebase.database().ref('models').once('value', (snapshot) => {
