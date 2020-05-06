@@ -57,22 +57,29 @@
               </option>
             </select>
           </div>
-          <div class="form-group alpha" v-if="newPost.model">
+          <div class="form-group alpha" :class="{super: newPost.model}" v-if="newPost.style">
             <label for="recipient-name" class="alpha col-form-label">Modelo:</label>
             <input v-model="newPost.model" type="text" class="form-control" id="model-name">
           </div>
-          <media-input/>
-          <reviews-input
-          v-if="newPost.review"
-            v-model="newPost.review"
+          <media-input
+            :class="{super:newPost.images || newPost.video}"
+            @uploadedMedia="addingMedia($event)"
+            v-if="newPost.model"
+            :model="newPost.model"
           />
-          <div class="form-group" v-if="newPost.content">
+          <reviews-input
+            :model="newPost.model"
+            v-if="media"
+            :class="{super: newPost.review}"
+            @uploadedReview="addingReview($event)"
+          />
+          <div class="form-group" v-if="newPost.review">
             <label for="message-text" class="alpha col-form-label">Comentarios:</label>
             <textarea v-model="newPost.content" class="form-control" id="message-text"></textarea>
           </div>
         </form>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer d-flex justify-content-around">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button @click="submitPost" type="button" class="btn btn-primary">Enviar reseña</button>
       </div>
@@ -82,14 +89,11 @@
 </template>
 
 <script>
-import MediaInput from './forms/MediaInput.vue';
-import ReviewsInput from './forms/ReviewsInput.vue';
-
 export default {
   name: 'PostForm',
   components: {
-    ReviewsInput,
-    MediaInput,
+    ReviewsInput: () => import('./forms/ReviewsInput.vue'),
+    MediaInput: () => import('./forms/MediaInput.vue'),
   },
   created() {
     this.$store.dispatch('categories/fetchAllCategories');
@@ -98,14 +102,26 @@ export default {
   },
   methods: {
     submitPost() {
-      this.$store.dispatch('submitPost', this.newPost);
+      this.$store.dispatch('posts/submitPost', this.newPost);
+    },
+
+    addingMedia(e) {
+      this.newPost.images = e.images;
+      this.newPost.video = e.video;
+      this.media = true;
+    },
+
+    addingReview(e) {
+      console.log(e);
+      this.newPost.review = e;
     },
   },
   data() {
     return {
-      newPost: {},
       categories: this.$store.state.categories.items,
       styles: this.$store.state.styles.items,
+      newPost: {},
+      media: false,
     };
   },
   computed: {
@@ -120,8 +136,12 @@ export default {
 <style lang="scss" scoped>
 .super{
   transition: .5s ease-in-out;
-  background: $complementary-gradient;
+  background: $complementary-gradient!important;
   border-radius:8px;
+  color: white!important;
+  h4{
+    color: white!important;
+  }
   label{
     color:white!important;
     font-family: $title;

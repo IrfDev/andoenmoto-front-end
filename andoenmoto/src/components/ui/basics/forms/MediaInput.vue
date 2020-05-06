@@ -1,14 +1,14 @@
 <template>
-<div class="custom-file">
+<div class="custom-file form-group">
   <h4>
-    Sube tus archivos
+    {{uploaded ? 'Tus archivos' : 'Sube tus archivos'}}
   </h4>
   <div class="text-center" v-if="loading">
     <div class="spinner-border" role="status">
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-  <div v-if="imagesIds !== [] || videoId !== ''"
+  <div v-if="imagesIds !== [] || videoId !== '' || uploaded"
     class="files-preview d-flex justify-content-around"
   >
     <div
@@ -19,28 +19,25 @@
     <i class="fa fa-times m-1"
       style="font-size:.9em; color:red;"
       aria-hidden="true"
+      v-if="!uploaded"
       @click="removeImage(imageIndex)"
     />
-      <img :src="image" alt="" style="width:50px;">
+      <img :src="image" alt="" style="width:50px; border-radius:8px;">
     </div>
     <div v-if="videoId !== ''" class="video-preview">
     <i
       class="fa fa-times m-1"
       style="font-size:.9em; color:red;"
       aria-hidden="true"
+      v-if="!uploaded"
       @click="removeVideo"
     />
       <video width="30" height="24" controls>
       <source :src="videoId" type="video">
       </video>
     </div>
-    <div class="save-all">
-      <button @click="uploadFiles">
-        Subir todos
-      </button>
-    </div>
   </div>
-  <div v-if="!addingMedia" class="cta d-flex justify-content-around">
+  <div v-if="!addingMedia && !uploaded" class="cta d-flex justify-content-around">
     <div class="cta-image" @click.prevent="addMedia('image')">
       <basic-button
         :content="'Añadir Imagen'"
@@ -70,7 +67,13 @@
         Subir {{media === 'image' ? 'imagen' : 'video'}}
       </label>
   </div>
-  <a v-if="addingMedia" @click="addingMedia = false">Cancelar</a>
+  <a class="cancel-a" v-if="addingMedia" @click="addingMedia = false">Cancelar</a>
+   <div v-if="ready && !uploaded" @click="uploadFiles" class="save-all mt-3">
+      <button :secondary="true">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Subir archivos
+      </button>
+    </div>
 </div>
 </template>
 
@@ -86,6 +89,8 @@ export default {
       imagesIds: [],
       videoId: '',
       loading: false,
+      ready: false,
+      uploaded: false,
     };
   },
   props: {
@@ -95,8 +100,9 @@ export default {
     },
   },
   methods: {
-    uploadFiles(){
-      
+    uploadFiles() {
+      this.$emit('uploadedMedia', { images: this.imagesIds, video: this.videoId });
+      this.uploaded = true;
     },
 
     removeImage(imageIndex) {
@@ -140,13 +146,27 @@ export default {
           }
         });
       this.loading = false;
+      this.ready = true;
     },
   },
 };
 </script>
 
 <style lang="scss">
+.save-all{
+  button{
+    background: $main-gradient;
+    color:white!important;
+    padding: 2% 8%;
+    border-radius: 8px;
+    border:none!important;
+  }
+}
 a{
+  text-decoration: underline;
+}
+.cancel-a{
+  color:red;
   text-decoration: underline;
 }
 </style>

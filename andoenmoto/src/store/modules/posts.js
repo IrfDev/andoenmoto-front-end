@@ -5,6 +5,8 @@ export default {
 
   state: {
     items: {},
+    features: {},
+    newReview: '',
   },
 
   getters: {
@@ -19,9 +21,26 @@ export default {
   },
 
   mutations: {
+    SET_ALL_FEATURES(state, features) {
+      state.features = features;
+    },
+
+    SET_NEW_REVIEW(state, id) {
+      state.newReview = id;
+    },
   },
 
   actions: {
+    fetchAllFeatures({ commit, state }) {
+      return new Promise((res) => {
+        firebase.database().ref('features').on('value', (snapshot) => {
+          const featArray = Object.keys(snapshot.val());
+          commit('SET_ALL_FEATURES', featArray);
+        });
+        return res(state.features);
+      });
+    },
+
     fetchAllPosts({ state, commit }) {
       return new Promise((resolve) => {
         firebase.database().ref('posts').on('value', (snapshot) => {
@@ -56,6 +75,29 @@ export default {
         .then(() => {
           commit('SET_ITEM', { resource: 'posts', item: post, id: postId }, { root: true });
           return Promise.resolve(state.items[postId]);
+        });
+    },
+
+    submitReview({ state, commit, rootState }, newReview) {
+      console.log(newReview);
+      const user = rootState.auth.authId;
+      const reviewId = firebase.database().ref('reviews').push().key;
+      const publishedAt = Math.floor(Date.now() / 1000);
+
+      const review = {
+        reviews: newReview,
+        user,
+        id: reviewId,
+        publishedAt,
+      };
+
+      const updates = {};
+      updates[`reviews/${reviewId}`] = review;
+      firebase.database().ref().update(updates)
+        .then(() => {
+          commit('SET_NEW_REVIEW', reviewId);
+          commit('SET_ITEM', { resource: 'posts', item: review, id: reviewId }, { root: true });
+          return Promise.resolve(state.items[reviewId]);
         });
     },
 
