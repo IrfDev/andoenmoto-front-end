@@ -1,5 +1,5 @@
 <template>
-<div :class="`card text-white bg-${color} mb-3`" style="max-width: 18rem;">
+<div :class="`card text-white bg-${color} mb-3`">
     <div class="card-header">
         {{category}}
     </div>

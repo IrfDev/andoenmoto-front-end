@@ -77,16 +77,20 @@ export default {
     }),
   },
   computed: {
+    activeModel() {
+      return this.$store.state.models.activeItem;
+    },
+    activeBrand() {
+      return this.$store.state.brands.activeItem;
+    },
     ...mapState({
-      activeModel: (state) => state.models.activeItem,
-      activeBrand: (state) => state.brands.activeItem,
+      // activeModel: (state) => state.models.activeItem,
+      // activeBrand: (state) => state.brands.activeItem,
     }),
     ...mapGetters({
       posts: 'posts/postsFromModel',
       fotos: 'posts/fotosFromPosts',
     }),
-    // posts() { return this.postsFromModel(); },
-    // fotos() { return this.fotosFromPosts(); },
   },
   data() {
     return {
