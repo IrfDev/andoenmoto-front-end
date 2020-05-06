@@ -90,6 +90,9 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.container-fluid{
+  min-height: 100vh;
+}
 h1{
 font-size:25vw;
 font-family: $typo;

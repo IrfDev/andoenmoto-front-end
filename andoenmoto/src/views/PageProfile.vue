@@ -11,24 +11,16 @@
       >
         {{auth.name}}
       </h5>
-      <div class="row align-items-center">
-        <div class="col-3">
-          <img src="/images/util/left-wing.png" alt="">
-        </div>
-        <div class="col-6">
-          <img
-          v-if="!itsMe"
-          :src="auth.profile" alt="" class="img-fluid"
-          >
-          <img
-            v-else
-            :src="me.profile" alt="" class="img-fluid"
-          >
-        </div>
-        <div class="col-3">
-          <img src="/images/util/right-wing.png" alt="">
-        </div>
-      </div>
+      <wings-row>
+        <img
+        v-if="!itsMe"
+        :src="auth.profile" alt="" class="img-fluid rounded-circle"
+        >
+        <img
+          v-else
+          :src="me.profile" alt="" class="img-fluid rounded-circle"
+        >
+      </wings-row>
       <textarea
         v-if="itsMe"
         class="auth-description"
@@ -41,10 +33,10 @@
       >
         {{auth.description}}
       </p>
-      <button @click="signOut" class="sign-out" v-if="itsMe">
-        Sign Out
-      </button>
-      <div class="row flex-nowrap overflow-auto">
+      <router-link class="sign-out m-4" v-if="itsMe" to="/sign-out">
+        Cerrar sesión
+      </router-link>
+      <div class="row flex-nowrap overflow-auto mt-3">
         <div class="col">
           <profile-stats-card
             :statText="'Hola perriux'"
@@ -90,7 +82,7 @@ export default {
   },
   methods: {
     signOut() {
-      this.$store.dispatch('auth/signOut');
+      this.$router.push({ to: '/sign-out' });
     },
   },
   created() {
@@ -141,5 +133,8 @@ p{
   background-color:$alpha-white!important;
   font-family: $title;
   border-radius:8px;
+  padding: 1% 5%;
+  margin: 5em;
+  color: red;
 }
 </style>

@@ -68,7 +68,7 @@ export default new VueRouter({
       name: 'sign-out',
       beforeEnter(to, from, next) {
         store.dispatch('auth/signOut')
-          .then(() => next({ name: 'Home' }));
+          .then(() => next({ path: '/' }));
       },
     },
   ],

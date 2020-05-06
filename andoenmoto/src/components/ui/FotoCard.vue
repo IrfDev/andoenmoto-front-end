@@ -1,8 +1,5 @@
 <template>
 <div class="card">
-    <avatar
-        :user="user"
-    />
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div
@@ -13,11 +10,23 @@
       <img :src="url" class="d-block img-fluid" alt="/bgs/sporter.png">
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+  <a
+    class="carousel-control-prev"
+    href="#carouselExampleControls"
+    role="button"
+    data-slide="prev"
+    v-if="urls > 0"
+  >
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+  <a
+    class="carousel-control-next"
+    href="#carouselExampleControls"
+    role="button"
+    v-if="urls > 0"
+    data-slide="next"
+  >
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
@@ -31,9 +40,6 @@ export default {
   props: {
     urls: Array,
   },
-  data: () => ({
-    user: 'Holo',
-  }),
 };
 </script>
 

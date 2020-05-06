@@ -87,15 +87,17 @@ export default {
 
 <style lang="scss" scoped>
 .category{
-    background:white;
-    transition:1s ease-in;
-    .category-badge{
-      filter: invert(100%);
-    }
-
+  background:white;
+  transition:1s ease-in;
+  .category-badge{
+    filter: invert(100%);
+  }
 }
 .style{
-    background:$main-gradient;
-    transition:1s ease-in;
+  background:$main-gradient;
+  transition:1s ease-in;
+}
+.container-fluid{
+  min-height: 100vh!important;
 }
 </style>

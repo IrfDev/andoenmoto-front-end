@@ -1,39 +1,22 @@
 <template>
-<div class="card" style="width: 18rem;">
+<div class="card post-card" style="width: 18rem;">
   <div class="card-header">
     {{post.title}}
   </div>
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-     <div
-      v-for="(url, urlIndex) in post.images"
-      :key="urlIndex"
-      class="carousel-item active"
+    <div
+      class="card-body d-flex flex-column align-content-start"
     >
-      <img :src="url" class="d-block w-100" alt="/bgs/sporter.png">
+      <p>
+        {{post.content}}
+      </p>
     </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-    <div class="card-body d-flex flex-column align-content-start">
-        <!-- <i class="fa fa-life-ring" aria-hidden="true"></i>
-        <i class="fa fa-usd" aria-hidden="true"></i>
-        <i class="fa fa-pie-chart" aria-hidden="true"></i>
-        <i class="fa fa-pied-piper" aria-hidden="true"></i>
-        <i class="fa fa-plug" aria-hidden="true"></i> -->
-        <p>
-          {{post.content}}
-        </p>
-    </div>
-    <div class="card-footer">
-        <avatar/>
+    <div class="card-footer d-flex">
+      <avatar
+        :widthPer="10"
+        :userId="post.user"
+        :auth="false"
+        :displayName="true"
+      />
     </div>
 </div>
 </template>
@@ -47,14 +30,21 @@ export default {
       required: true,
     },
   },
-  data: () => ({
-    user: 'Holo',
-  }),
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .post-card {
+  background: linear-gradient(216.93deg, #28283E 0%, #181726 83.33%);
+  color: white;
+  .card-header{
+    font-size: 6vw;
+    font-family: $title;
+  }
+  .card-body{
+    font-size:3vw;
+    font-family: $paragraph;
+  }
     i{
         font-size:.5em
     }

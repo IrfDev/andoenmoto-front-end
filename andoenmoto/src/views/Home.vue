@@ -1,5 +1,5 @@
 <template>
-  <div v-if="asyncDataStatus_ready" class="container-fluid">
+  <div v-if="asyncDataStatus_ready" class="container-fluid pt-3">
     <Header class="pb-3"/>
     <categories/>
   </div>

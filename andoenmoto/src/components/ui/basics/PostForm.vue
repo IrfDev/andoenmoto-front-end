@@ -9,10 +9,13 @@
   >
   <div class="modal-dialog modal-dialog-centered " role="document">
     <div class="modal-content">
+    <lightie-row>
         <avatar
+          :widthPx="100"
         />
+    </lightie-row>
       <div class="modal-header  align-self-center">
-        <h5 class="modal-title alpha" id="exampleModalLabel">Enviar reseña</h5>
+        <h5 class="modal-title alpha" id="exampleModalLabel">Subir reseña</h5>
       </div>
       <div class="modal-body alpha">
         <form>
@@ -80,8 +83,12 @@
         </form>
       </div>
       <div class="modal-footer d-flex justify-content-around">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button @click="submitPost" type="button" class="btn btn-primary">Enviar reseña</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button @click="submitPost" data-dismiss="modal"
+          type="button" class="btn btn-primary"
+        >
+          Enviar reseña
+        </button>
       </div>
     </div>
   </div>
@@ -172,5 +179,15 @@ font-size:6vw;
 }
 .alpha{
   color:$alpha!important;
+}
+.btn-primary{
+  background: $complementary-gradient;
+  border: none;
+  font-family: $title;
+}
+.btn-secondary{
+  background: #592323;
+  border: none;
+  font-family: $title;
 }
 </style>

@@ -16,6 +16,13 @@ export default {
 
     profileUser: (state) => (id) => state.items
       .find((user) => user[id])[id],
+
+    findUser: () => (userId) => new Promise((resolve) => {
+      firebase.database().ref('users').child(userId).once('value', (snapshot) => {
+        const authUser = snapshot.val();
+        resolve(authUser);
+      });
+    }),
   },
 
   mutations: {
@@ -60,7 +67,7 @@ export default {
 
         const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            dispatch('fetchAuthUser')
+            dispatch('fetchAuthUser', { user, id: user.uid })
               .then((dbUser) => resolve(dbUser));
           } else {
             resolve(null);

@@ -16,8 +16,7 @@ export default {
     },
 
     fotosFromPosts: (state, getters) => Object.values(getters.postsFromModel)
-      .map((post) => Object.values(post.media.images)
-        .map((foto) => foto.url)),
+      .map((post) => post.media.images),
   },
 
   mutations: {
@@ -63,6 +62,10 @@ export default {
 
       const post = {
         ...newPost,
+        media: {
+          images: newPost.images,
+          video: newPost.video,
+        },
         user,
         postId,
         publishedAt,
@@ -112,7 +115,6 @@ export default {
         imageId,
         publishedAt,
       };
-      console.log(imageId);
       const updates = {};
       updates[`images/${imageId}`] = newImageObject;
       firebase.database().ref('images').child(imageId).update(newImageObject)

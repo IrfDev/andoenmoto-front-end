@@ -38,7 +38,7 @@ Vue.component('ThundieRow', ThundieRow);
 router.beforeEach((to, from, next) => {
   store.dispatch('auth/initAuthentication');
   if (to.matched.some((route) => route.meta.requiresAuth)) {
-    if (store.state.authId) {
+    if (store.state.auth.authId) {
       next();
     } else {
       next({ name: 'Home' });
