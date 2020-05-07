@@ -44,7 +44,7 @@ import HorizontalFotos from '@/components/sections/HorizontalFotos.vue';
 import HorizontalPosts from '@/components/sections/HorizontalPosts.vue';
 
 import asyncDataStatus from '@/mixins/asyncDataStatus';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Model',
@@ -83,10 +83,6 @@ export default {
     activeBrand() {
       return this.$store.state.brands.activeItem;
     },
-    ...mapState({
-      // activeModel: (state) => state.models.activeItem,
-      // activeBrand: (state) => state.brands.activeItem,
-    }),
     ...mapGetters({
       posts: 'posts/postsFromModel',
       fotos: 'posts/fotosFromPosts',

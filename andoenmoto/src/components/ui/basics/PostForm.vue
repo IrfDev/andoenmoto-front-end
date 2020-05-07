@@ -8,10 +8,11 @@
     aria-hidden="true"
   >
   <div class="modal-dialog modal-dialog-centered " role="document">
-    <div class="modal-content" v-if="notAuth">
+    <div class="modal-content pt-3" v-if="notAuth">
     <lightie-row>
         <avatar
           :widthPx="100"
+          class="avatar-form-post"
         />
     </lightie-row>
       <div class="modal-header  align-self-center">
@@ -155,6 +156,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatar-form-post{
+  img{
+    box-shadow: 0px 4px 36px rgba(0, 0, 0, 0.14);
+  }
+}
 .go-to-login{
   color: white;
   margin:.5em;
