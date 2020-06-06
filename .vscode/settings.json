@@ -1,0 +1,22 @@
+{
+  "window.title": "🏍💨 AndoEnMoto.club 📑 ${activeEditorShort}",
+  "peacock.color": "#FCAC02",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#fdbd34",
+    "activityBar.activeBorder": "#029e6c",
+    "activityBar.background": "#fdbd34",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#029e6c",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#fcac02",
+    "statusBar.border": "#fcac02",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#c98902",
+    "titleBar.activeBackground": "#fcac02",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.border": "#fcac02",
+    "titleBar.inactiveBackground": "#fcac0299",
+    "titleBar.inactiveForeground": "#15202b99"
+  }
+}
