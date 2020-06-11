@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN ls -a
+
 RUN npm run build
 
 EXPOSE 8080
