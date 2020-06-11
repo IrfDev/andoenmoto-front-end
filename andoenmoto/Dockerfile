@@ -1,7 +1,5 @@
 FROM node:10-alpine
 
-RUN apt-get update && apt-get install -y curl
-
 RUN npm install -g http-server
 
 WORKDIR /
