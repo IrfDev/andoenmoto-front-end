@@ -1,34 +1,31 @@
 <template>
-<div
-  class="row mt-3 justify-content-center"
->
+  <div class="row mt-3 justify-content-center">
     <category-badge
-        :key="category['.key']"
-        v-for="category in categories"
-        :colWidth="category.colWidth"
-        :name="category.name"
-        :image="category.image"
-        :category="category"
+      :key="category['.key']"
+      v-for="category in categories"
+      :colWidth="category.colWidth"
+      :name="category.name"
+      :image="category.image"
+      :category="category"
     />
-</div>
+  </div>
 </template>
 
 <script>
-import CategoryBadge from '@/components/ui/basics/CategoryBadge.vue';
+import CategoryBadge from "@/components/ui/basics/CategoryBadge.vue";
 
 export default {
-  name: 'Categories',
+  name: "Categories",
   components: {
-    CategoryBadge,
+    CategoryBadge
   },
   computed: {
     categories() {
       return this.$store.state.categories.items;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style>
-
 </style>

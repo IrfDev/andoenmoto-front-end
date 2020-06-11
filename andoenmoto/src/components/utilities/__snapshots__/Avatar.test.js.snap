@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar.test.js Avatar/Utilities component 1`] = `
+<div
+  class="d-flex align-items-center"
+>
+  <img
+    alt="asdasd"
+    class="profile-pic"
+    src="asdasd"
+    style="width: 25%;"
+  />
+   
+  <!---->
+</div>
+`;

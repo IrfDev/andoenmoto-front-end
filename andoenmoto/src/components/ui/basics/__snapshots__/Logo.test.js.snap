@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logo test snapshot Logo are the same 1`] = `
+<div
+  class="d-inline-block align-center"
+>
+  <img
+    class="img-fluid d-block text-center"
+    src="/identity/stars.png"
+  />
+   
+  <img
+    class="img-fluid d-block text-center"
+    src="/identity/logo.png"
+  />
+</div>
+`;
+
+exports[`Logo test snapshot Logo are the same as always 1`] = `
+<div
+  class="d-inline-block align-center"
+>
+  <img
+    class="img-fluid d-block text-center"
+    src="/identity/stars.png"
+  />
+   
+  <img
+    class="img-fluid d-block text-center"
+    src="/identity/logo.png"
+  />
+</div>
+`;

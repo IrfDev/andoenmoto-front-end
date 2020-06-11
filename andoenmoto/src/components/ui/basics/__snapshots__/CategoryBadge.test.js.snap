@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Category Badge Snapshot Props are corrects 1`] = `
+<div
+  class="col-undefined flex-nowrap d-flex flex-column align-content-stretch"
+>
+  <div
+    class="badge-image m-0"
+  >
+    <img
+      alt="Motos"
+      class="img-fluid"
+      src="/motos.png"
+    />
+  </div>
+   
+  <div
+    class="badge-title m-0"
+  >
+    <h4>
+      Motos
+    </h4>
+  </div>
+</div>
+`;

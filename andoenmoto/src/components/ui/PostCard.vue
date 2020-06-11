@@ -14,7 +14,9 @@
       </p>
     </div>
     <div class="card-footer d-flex">
-      <router-link :to="{ name: 'profile-page-nam', params: { profileId: post.user }}">
+      <router-link
+        :to="{ name: 'profile-page-nam', params: { profileId: post.user }}"
+      >
         <avatar
           :widthPer="10"
           :userId="post.user"

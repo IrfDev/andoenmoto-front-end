@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logo test snapshot Logo are the same 1`] = `
+<nav
+  class="navbar d-flex justify-content-between"
+>
+  <a
+    class="navbar-brand"
+  >
+    <router-link
+      to="/"
+    >
+      <img
+        alt=""
+        class="d-inline-block align-top"
+        height="30"
+        id="logo-nav"
+        src="/identity/logo.png"
+        width="30"
+      />
+    </router-link>
+  </a>
+   
+  <span
+    class="navbar-text"
+  >
+    <router-link
+      class="d-flex justify-content-flex-end"
+      to="/profile/me"
+    >
+      <avatar
+        class="nav-avatar"
+        displayname="true"
+        verticalalignment="true"
+      />
+    </router-link>
+  </span>
+</nav>
+`;

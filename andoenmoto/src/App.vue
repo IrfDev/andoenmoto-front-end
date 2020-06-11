@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <the-nav-bar/>
-    <router-view/>
+    <the-nav-bar />
+    <router-view />
   </div>
 </template>
 
@@ -17,12 +17,11 @@ export default {
 
 <style lang="scss">
 @font-face {
-    font-family: 'bredan';
-    src: url('../public/fonts/the-bredan-webfont.woff2') format('woff2'),
-         url('../public/fonts/the-bredan-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "bredan";
+  src: url("../public/fonts/the-bredan-webfont.woff2") format("woff2"),
+    url("../public/fonts/the-bredan-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

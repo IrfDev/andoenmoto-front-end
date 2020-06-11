@@ -3,12 +3,12 @@
       <h2>{{title}}</h2>
       <h4>{{description}}</h4>
       <img :src="`/images/styles/${title}.png`" width="120%" alt="">
-      <div class="card-content">
-        <basic-button
-          :main="true"
-          :content="'Ver más'"
-        />
-      </div>
+    <div class="card-content">
+      <basic-button
+        :main="true"
+        :content="'Ver más'"
+      />
+    </div>
   </div>
 </template>
 

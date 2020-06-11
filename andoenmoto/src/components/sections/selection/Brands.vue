@@ -1,58 +1,54 @@
 <template>
-<div class="row m-0 justify-content-center">
-  <div
-    class="col-md-6 col-10"
-    v-for="(brand, brandIndex) in brands"
-    :key="brandIndex"
-    @click="brandSelected(brand)"
-  >
-      <brand-card
-        :brand="brand.name"
-        class="mt-3"
-      />
+  <div class="row m-0 justify-content-center">
+    <div
+      class="col-md-6 col-10 brand-wrapper"
+      v-for="(brand, brandIndex) in brands"
+      :key="brandIndex"
+      @click="brandSelected(brand)"
+    >
+      <brand-card :brand="brand.name" class="mt-3" />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import BrandCard from '@/components/ui/BrandCard.vue';
+import BrandCard from "@/components/ui/BrandCard.vue";
 
 export default {
-  name: 'Brands',
+  name: "Brands",
   components: {
-    BrandCard,
+    BrandCard
   },
   methods: {
     async brandSelected(brand) {
-      this.$store.commit('brands/SET_ACTIVE_BRAND', brand);
-      if (this.$route.name === 'categories-style') {
+      this.$store.commit("brands/SET_ACTIVE_BRAND", brand);
+      if (this.$route.name === "categories-style") {
         this.$router.push({
-          name: 'category-styles',
+          name: "category-styles",
           params: {
-            brand: brand.name,
-          },
+            brand: brand.name
+          }
         });
       } else {
         this.$router.push({
-          name: 'categories-style-models',
+          name: "categories-style-models",
           params: {
             brand: brand.name,
             category: this.$route.params.category,
-            style: this.$route.params.style,
-          },
+            style: this.$route.params.style
+          }
         });
       }
-    },
+    }
   },
   props: {
     brands: {
       type: [Object, Array],
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 };
 </script>
 
 <style>
-
 </style>

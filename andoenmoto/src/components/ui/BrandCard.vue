@@ -19,6 +19,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      validUrl: true,
+    };
+  },
 };
 </script>
 
