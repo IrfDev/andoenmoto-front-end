@@ -25,26 +25,25 @@
 </template>
 
 <script>
-import logo from "@/components/ui/basics/logo.vue";
-import PostForm from "@/components/ui/basics/PostForm.vue";
+import logo from '@/components/ui/basics/logo.vue';
+import PostForm from '@/components/ui/basics/PostForm.vue';
 
 export default {
-  name: "Header",
+  name: 'Header',
   components: {
     PostForm,
-    logo
+    logo,
   },
   computed: {
     notAuth() {
       return this.$store.state.auth.authId;
-    }
+    },
   },
   methods: {
     goToLogin() {
-      console.log(this.$router);
-      this.$router.push({ name: "login" });
-    }
-  }
+      this.$router.push({ name: 'login' });
+    },
+  },
 };
 </script>
 

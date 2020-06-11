@@ -12,18 +12,18 @@
 </template>
 
 <script>
-import CategoryBadge from "@/components/ui/basics/CategoryBadge.vue";
+import CategoryBadge from '@/components/ui/basics/CategoryBadge.vue';
 
 export default {
-  name: "Categories",
+  name: 'Categories',
   components: {
-    CategoryBadge
+    CategoryBadge,
   },
   computed: {
     categories() {
       return this.$store.state.categories.items;
-    }
-  }
+    },
+  },
 };
 </script>
 
