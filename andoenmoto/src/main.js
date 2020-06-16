@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import Vue from 'vue';
 import Buttonn from '@/components/utilities/buttonn.vue';
 import Avatar from '@/components/utilities/Avatar.vue';
@@ -13,17 +14,19 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+dotenv.config();
+
 Vue.use(ToggleButton);
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDIoNZxJK7Ur_fLvILmcJEzvEUSWUJIuP0',
-  authDomain: 'andoenmoto-mexico.firebaseapp.com',
-  databaseURL: 'https://andoenmoto-mexico.firebaseio.com',
-  projectId: 'andoenmoto-mexico',
-  storageBucket: 'andoenmoto-mexico.appspot.com',
-  messagingSenderId: '713017173595',
-  appId: '1:713017173595:web:d01761cc39263bf984417e',
-  measurementId: 'G-W4E23LENB0',
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKER,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID,
+  measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
