@@ -48,7 +48,7 @@ export default new VueRouter({
       component: () => import('../views/PageProfile.vue'),
     },
     {
-      path: '/registro',
+      path: '/register',
       name: 'registro',
       component: () => import('../views/Register.vue'),
     },
@@ -67,8 +67,7 @@ export default new VueRouter({
       path: '/sign-out',
       name: 'sign-out',
       beforeEnter(to, from, next) {
-        store.dispatch('auth/signOut')
-          .then(() => next({ path: '/' }));
+        store.dispatch('auth/signOut').then(() => next({ path: '/' }));
       },
     },
   ],

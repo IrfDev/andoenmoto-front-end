@@ -1,21 +1,12 @@
 <template>
-  <div
-    class="
-      row align-content-center
-      align-center
-      justify-content-center
-      justify-content-md-around
-      "
-  >
+  <div class="row m-0 justify-content-center justify-content-md-around">
     <div
-      class="col-10 col-md-5"
+      class="col-10 col-md-5 align-items-stretch"
       v-for="(style, styleIndex) in styles"
       :key="styleIndex"
       @click="styleSelected(style)"
     >
-      <style-card
-        v-bind="style"
-      />
+      <style-card v-bind="style" />
     </div>
   </div>
 </template>
@@ -28,12 +19,14 @@ export default {
   components: {
     StyleCard,
   },
+
   props: {
     styles: {
       type: Object,
       required: true,
     },
   },
+
   methods: {
     styleSelected(style) {
       this.$store.commit('styles/SET_ACTIVE_STYLE', style);
@@ -58,7 +51,3 @@ export default {
   },
 };
 </script>
-
-<style lang='scss' scoped>
-
-</style>

@@ -17,18 +17,11 @@ export default {
 
 <style lang="scss">
 @font-face {
-  font-family: "bredan";
-  src: url("../public/fonts/the-bredan-webfont.woff2") format("woff2"),
-    url("../public/fonts/the-bredan-webfont.woff") format("woff");
+  font-family: 'bredan';
+  src: url('../public/fonts/the-bredan-webfont.woff2') format('woff2'),
+    url('../public/fonts/the-bredan-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 #nav {

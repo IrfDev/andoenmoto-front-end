@@ -1,9 +1,11 @@
 <template>
-<div class="title d-flex justify-content-around align-items-center">
-  <img src="/images/util/left-thunder.png" alt="" class="">
-  <slot class="col"></slot>
-  <img src="/images/util/right-thunder.png" alt="" class="">
-</div>
+  <div class="thundie d-flex justify-content-center align-items-center">
+    <img src="/images/util/left-thunder.png" alt="thunder-row" class="" />
+    <div>
+      <slot />
+    </div>
+    <img src="/images/util/right-thunder.png" alt="thunder-row" class="" />
+  </div>
 </template>
 
 <script>
@@ -12,9 +14,18 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-h1{
+<style lang="scss" scoped>
+@media (min-width: 768px) {
+  img {
+    margin: 0px 0px;
+    width: 10%;
+  }
+}
+img {
+  margin: 0px 0px;
+}
+h1 {
   font-family: $typo;
-  color:white;
+  color: white;
 }
 </style>

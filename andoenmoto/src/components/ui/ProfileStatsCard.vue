@@ -1,9 +1,9 @@
 <template>
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">{{statText}}</h5>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ statText }}</h5>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -20,10 +20,9 @@ export default {
 
 <style lang="scss">
 .card {
-    h5{
-        font-family:$title;
-        color:$alpha;
-        font-size:10vw;
-    }
+  h5 {
+    font-family: $title;
+    color: $alpha;
+  }
 }
 </style>

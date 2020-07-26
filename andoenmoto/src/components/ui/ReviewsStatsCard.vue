@@ -1,14 +1,10 @@
 <template>
-<div :class="`card text-white bg-${color} mb-3`">
-    <div class="card-header">
-        {{category}}
-    </div>
+  <div class="card text-white mb-3" :class="[pro ? 'pro' : 'cons']">
+    <div class="card-header">{{category}}</div>
     <div class="card-body">
-    <p class="card-text">
-        {{description}}
-    </p>
+      <p class="card-text">{{description}}</p>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -23,8 +19,8 @@ export default {
       type: String,
       required: true,
     },
-    color: {
-      type: String,
+    pro: {
+      type: Boolean,
       required: true,
     },
   },
@@ -32,5 +28,11 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.pro {
+  background-color: #235c3d;
+}
 
+.cons {
+  background-color: #5c2323;
+}
 </style>

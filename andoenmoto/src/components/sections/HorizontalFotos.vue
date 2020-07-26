@@ -3,11 +3,9 @@
     <div
       v-for="(foto, fotoIndex) in fotos"
       :key="fotoIndex"
-      class="mr-3"
+      class="mr-3 col-5 col-lg-10"
     >
-        <foto-card
-          :urls="foto"
-        />
+      <foto-card :urls="foto" />
     </div>
   </div>
 </template>
@@ -17,18 +15,18 @@ import FotoCard from '@/components/ui/FotoCard.vue';
 
 export default {
   name: 'HorizontalFotos',
+
   props: {
     fotos: {
       type: [Object, Array],
       required: true,
     },
   },
+
   components: {
     FotoCard,
   },
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

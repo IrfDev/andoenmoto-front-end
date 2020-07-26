@@ -1,23 +1,28 @@
 <template>
   <div
     :class="{
-      'd-flex flex-row-reverse align-items-center': reverse,
-      'd-flex align-items-center': !reverse,
-      'd-flex flex-column justify-content-end': verticalAlignment}"
+      'd-flex flex-row-reverse align-items-center ': reverse,
+      'd-flex align-items-center flex-column': !reverse,
+      'd-flex flex-column justify-content-end': verticalAlignment,
+    }"
   >
+    <slot />
+    <div>
       <img
-        :style="widthPx ? `width: ${widthPx}px!important;` : `width: ${widthPer}%!important;`"
+        :style="
+          widthPx
+            ? `width: ${widthPx}px!important;`
+            : `width: ${widthPer}%!important;`
+        "
         :src="auth ? user.profile : otherUser.profile"
         :alt="auth ? user.profile : otherUser.profile"
         class="profile-pic"
-      >
-      <div v-if="displayName" class="ml-1 name align-self-center">
-        <h4
-          class="m-0"
-        >
-          {{auth ? user.name : otherUser.username}}
-        </h4>
-      </div>
+      />
+    </div>
+
+    <div v-if="displayName" class="ml-1 name">
+      <h5 class="m-0">{{ auth ? user.name : otherUser.username }}</h5>
+    </div>
   </div>
 </template>
 
@@ -69,26 +74,24 @@ export default {
     ...mapGetters({
       findUser: 'auth/findUser',
     }),
-    ...mapState(
-      {
-        user: (state) => state.auth.profileUser,
-      },
-    ),
+    ...mapState({
+      user: (state) => state.auth.profileUser,
+    }),
   },
 };
 </script>
 
-<style lang='scss' scoped>
-.name{
+<style lang="scss" scoped>
+.name {
   text-transform: capitalize;
 }
-h4{
+
+h5 {
   font-family: $title;
   margin-block-end: unset;
-  font-size:2vw;
-  color: $alpha-white;
+  color: $alpha;
 }
-.profile-pic{
+.profile-pic {
   border-radius: 50%;
 }
 </style>

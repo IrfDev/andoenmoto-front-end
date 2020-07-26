@@ -1,15 +1,20 @@
 <template>
   <div
-    :class="[
-    `col-${colWidth} flex-nowrap d-flex`,
-    reverse ? 'flex-column-reverse' : 'flex-column align-content-stretch']"
+    class="flex-nowrap d-flex justify-content-end"
+    :class="{
+      'flex-column-reverse': reverse,
+      'flex-column align-content-stretch': !reverse,
+      'col-12': name === 'Motocicletas',
+      'col-md-3 col-4': name !== 'Motocicletas',
+    }"
     @click="activateCategoryy($attrs.category)"
   >
     <div class="badge-image m-0">
-      <img :src="image" :alt="name" class="img-fluid">
+      <img :src="image" :alt="name" class="img-fluid w-50" />
     </div>
     <div class="badge-title m-0">
-      <h4 class="">{{name}}</h4>
+      <h2 v-if="reverse">{{ name }}</h2>
+      <h3 v-else>{{ name }}</h3>
     </div>
   </div>
 </template>
@@ -19,11 +24,13 @@ export default {
   name: 'CategoryBadge',
   methods: {
     async activateCategoryy(category) {
-      await this.$store.dispatch('categories/activateCategory', category);
-      this.$router.push({
-        name: 'categories-style',
-        params: { category: category.name },
-      });
+      if (this.$route.name !== 'categories-style') {
+        await this.$store.dispatch('categories/activateCategory', category);
+        this.$router.push({
+          name: 'categories-style',
+          params: { category: category.name },
+        });
+      }
     },
   },
   props: {
@@ -47,16 +54,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h4{
-  color:$alpha-white;
+h3,
+h2 {
+  color: $alpha-white;
   font-family: $title;
-  font-size:5vw;
 }
-.flex-column-reverse{
-  h4{
-    font-family: $typo!important;
-    font-size: 25vw;
-    color:$alpha-white;
+.flex-column-reverse {
+  h3,
+  h2 {
+    font-family: $typo !important;
+    color: $alpha-white;
   }
 }
 </style>

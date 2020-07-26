@@ -1,21 +1,16 @@
 <template>
-<div
-  class="card post-card"
-  :style="`background: ${bgColor}`"
->
-  <div class="card-header">
-    {{post.title}}
-  </div>
-    <div
-      class="card-body d-flex flex-column align-content-start"
-    >
-      <p>
-        {{post.content}}
-      </p>
+  <div class="card post-card" :style="`background: ${bgColor}`">
+    <div class="card-header">
+      <h4>
+        {{ post.title }}
+      </h4>
+    </div>
+    <div class="card-body d-flex flex-column align-content-start">
+      <p>{{ post.content }}</p>
     </div>
     <div class="card-footer d-flex">
       <router-link
-        :to="{ name: 'profile-page-nam', params: { profileId: post.user }}"
+        :to="{ name: 'profile-page-nam', params: { profileId: post.user } }"
       >
         <avatar
           :widthPer="10"
@@ -25,7 +20,7 @@
         />
       </router-link>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -54,7 +49,7 @@ export default {
   computed: {
     bgColor() {
       const randomNumber = Math.random() * this.backgroundsGradients.length;
-      return this.backgroundsGradients[Math.round(randomNumber) - 1];
+      return this.backgroundsGradients[Math.round(randomNumber)];
     },
   },
 };
@@ -63,19 +58,20 @@ export default {
 <style lang="scss" scoped>
 .post-card {
   color: white;
-  .card-header{
-    font-size: 6vw;
+  .card-header {
     font-family: $title;
   }
-  .card-footer{
+  .card-footer {
     padding: 0.25rem 0.25rem;
   }
-  .card-body{
-    font-size:3vw;
+  .card-body {
     font-family: $paragraph;
   }
-    i{
-        font-size:.5em
-    }
+  p {
+    font-size: 2vw;
+  }
+  i {
+    font-size: 0.5em;
+  }
 }
 </style>

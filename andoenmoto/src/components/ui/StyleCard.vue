@@ -1,19 +1,18 @@
 <template>
-  <div class="card mt-3" :class="`${title}-background`">
-      <h2>{{title}}</h2>
-      <h4>{{description}}</h4>
-      <img :src="`/images/styles/${title}.png`" width="120%" alt="">
-    <div class="card-content">
-      <basic-button
-        :main="true"
-        :content="'Ver más'"
-      />
+  <div
+    class="card mt-3 text-center d-flex flex-column justify-content-around"
+    :class="`${title}-background`"
+  >
+    <h3 class="typo-font-size">{{ title }}</h3>
+    <p>{{ description }}</p>
+    <img :src="`/images/styles/${title}.png`" width="120%" :alt="title" />
+    <div class="card-content mb-3">
+      <basic-button :main="true" :content="'Ver más'" />
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'StyleCard',
   props: {
@@ -29,25 +28,27 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-.card{
-    overflow:visible;
-    background: $complementary-gradient;
-    color:$alpha-white;
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
+<style lang="scss" scoped>
+.card {
+  overflow: visible;
+  background: $complementary-gradient;
+  color: $alpha-white;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  min-height: 100%;
 }
-h2{
-    font-family: $typo;
-    font-size: 25vw;
+
+h3 {
+  font-family: $typo;
 }
-h4{
-    font-family:$title;
-    // font-weight: $bolds;
+
+p {
+  font-family: $title;
+  font-weight: 400;
+  margin: 1.5em;
 }
-img{
-    position: relative;
-    bottom:20vw;
-    right:7vw;
+img {
+  position: relative;
+  right: 7vw;
 }
 </style>

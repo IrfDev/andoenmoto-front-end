@@ -1,6 +1,6 @@
 <template>
-  <button :class="{secondary:secondary,main:main}" class="mt-3">
-      {{content}}
+  <button :class="{ secondary: secondary, main: main }" class="mt-3">
+    {{ content }}
   </button>
 </template>
 
@@ -18,22 +18,21 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-button{
-font-family: Oswald;
-font-size: 7vw;
-padding: .3em 1.5em;
+<style lang="scss" scoped>
+button {
+  font-family: Oswald;
+  padding: 0.3em 1.5em;
 }
-.secondary{
-color: #FCAC00;
-border: 3px solid #FCAC00;
-border-radius: 4px;
-background-color: transparent;
+.secondary {
+  color: #fcac00;
+  border: 3px solid #fcac00;
+  border-radius: 4px;
+  background-color: transparent;
 }
-.main{
-border:none;
-background: #FCAC00;
-border-radius: 4px;
-color:$alpha;
+.main {
+  border: none;
+  background: #fcac00;
+  border-radius: 4px;
+  color: $alpha;
 }
 </style>

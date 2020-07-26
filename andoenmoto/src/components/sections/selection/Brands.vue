@@ -1,7 +1,7 @@
 <template>
   <div class="row m-0 justify-content-center">
     <div
-      class="col-md-6 col-10 brand-wrapper"
+      class="col-md-4 col-10 brand-wrapper align-content-center"
       v-for="(brand, brandIndex) in brands"
       :key="brandIndex"
       @click="brandSelected(brand)"
@@ -16,9 +16,18 @@ import BrandCard from '@/components/ui/BrandCard.vue';
 
 export default {
   name: 'Brands',
+
   components: {
     BrandCard,
   },
+
+  props: {
+    brands: {
+      type: [Object, Array],
+      required: true,
+    },
+  },
+
   methods: {
     async brandSelected(brand) {
       this.$store.commit('brands/SET_ACTIVE_BRAND', brand);
@@ -41,14 +50,5 @@ export default {
       }
     },
   },
-  props: {
-    brands: {
-      type: [Object, Array],
-      required: true,
-    },
-  },
 };
 </script>
-
-<style>
-</style>

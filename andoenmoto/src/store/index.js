@@ -10,50 +10,53 @@ import models from './modules/models';
 import posts from './modules/posts';
 import styles from './modules/styles';
 
-
 Vue.use(Vuex);
 
-export default new Vuex.Store(
-  {
-    state: {
-    },
+export default new Vuex.Store({
+  state: {},
 
-    getters: {
-    },
+  getters: {},
 
-    actions: {
-      fetchItem({ state, commit }, { id, resource }) {
-        return new Promise((resolve) => {
-          firebase.database().ref(resource).child(id).once('value', (snapshot) => {
+  actions: {
+    fetchItem({ state, commit }, { id, resource }) {
+      return new Promise((resolve) => {
+        firebase
+          .database()
+          .ref(resource)
+          .child(id)
+          .once('value', (snapshot) => {
             const itemObj = snapshot.val();
             const item = { ...itemObj, id };
-            commit('SET_ITEM', { resource, id: snapshot.key, item });
+            commit(
+              `${resource}/SET_ITEM`,
+              { resource, id: snapshot.key, item },
+              { root: true },
+            );
             resolve(state[resource].items[id]);
           });
-        });
-      },
-
-      fetchItems({ dispatch }, { ids, resource }) {
-        // const ides = Array.isArray(ids) ? ids : Object.keys(ids);
-        console.log(ids, resource);
-        return Promise.all(ids.map((id) => dispatch('fetchItem', { id, resource })));
-      },
+      });
     },
 
-    mutations: {
-      SET_ITEM(state, { item, resource, id }) {
-        console.log(item, resource, id);
-        Vue.set(state[resource].items, id, item);
-      },
-    },
-
-    modules: {
-      auth,
-      brands,
-      categories,
-      models,
-      posts,
-      styles,
+    fetchItems({ dispatch }, { ids, resource }) {
+      console.log('[Fetching item]:', ids);
+      return Promise.all(
+        ids.map((id) => dispatch('fetchItem', { id, resource })),
+      );
     },
   },
-);
+
+  mutations: {
+    SET_ITEM(state, { item, resource, id }) {
+      Vue.set(state[resource].items, id, item);
+    },
+  },
+
+  modules: {
+    auth,
+    brands,
+    categories,
+    models,
+    posts,
+    styles,
+  },
+});

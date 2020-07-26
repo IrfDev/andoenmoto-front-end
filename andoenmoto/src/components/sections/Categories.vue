@@ -1,7 +1,8 @@
 <template>
-  <div class="row mt-3 justify-content-center">
+  <div class="row mt-3 pb-3 justify-content-center text-center align-items-stretch m-0">
     <category-badge
       :key="category['.key']"
+      class="mt-5 mb-md-5"
       v-for="category in categories"
       :colWidth="category.colWidth"
       :name="category.name"
@@ -26,6 +27,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

@@ -1,39 +1,29 @@
 <template>
-  <div
-    v-if="asyncDataStatus_ready"
-    class="models pb-3"
-    :style="`
-        background-size:cover;
-        background-image:url('/bgs/${bgImg}.png');
-        background-image:linear-gradient(232.8deg, #303030 0%, #1B1B1B 83.33%);
-    `"
-    >
-      <h1>{{activeModel.name}}</h1>
-      <h2>by {{activeBrand.name}}</h2>
-      <div class="row m-0 justify-content-center">
-          <div
-            v-for="(review, reviewIndex) in reviews"
-            :key="reviewIndex"
-            class="col-12"
-            >
-            <reviews-stats-card
-                :color="review.color"
-                :category="review.category"
-                :description="review.description"
-            />
-          </div>
-          <h3>Ver más</h3>
-      </div>
-      <horizontal-fotos
-        :fotos="fotos"
-      />
-      <horizontal-posts
-        :posts="posts"
-      />
-      <fixed-ctas/>
+  <div v-if="asyncDataStatus_ready" class="models pb-3 pt-2 text-center">
+    <thundie-row>
+      <h1>{{ activeModel.name }}</h1>
+    </thundie-row>
+    <h2>By {{ activeBrand.name }}</h2>
+    <h2 class="typo-font-size title mt-5 mb-5">Galery</h2>
+    <horizontal-fotos :fotos="fotos" class="d-md-none" />
+    <galery-photos :fotos="fotos" class="d-md-flex d-none" />
+
+    <h3 class="typo-font-size title mt-5 mb-5">Posts</h3>
+
+    <horizontal-posts :posts="posts" />
+    <fixed-ctas />
+    <post-form class="fade" />
   </div>
-  <div v-else class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-    <span class="sr-only"></span>
+  <div class="models" v-else>
+    <thundie-row>
+      <div
+        class="spinner-border text-light"
+        style="width: 3rem; height: 3rem;"
+        role="status"
+      >
+        <span class="sr-only"></span>
+      </div>
+    </thundie-row>
   </div>
 </template>
 
@@ -42,70 +32,73 @@ import ReviewsStatsCard from '@/components/ui/ReviewsStatsCard.vue';
 import FixedCtas from '@/components/utilities/FixedCtas.vue';
 import HorizontalFotos from '@/components/sections/HorizontalFotos.vue';
 import HorizontalPosts from '@/components/sections/HorizontalPosts.vue';
+import GaleryPhotos from '@/components/sections/GaleryPhotos.vue';
 
 import asyncDataStatus from '@/mixins/asyncDataStatus';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Model',
   components: {
-    ReviewsStatsCard,
     FixedCtas,
     HorizontalPosts,
     HorizontalFotos,
+    GaleryPhotos,
+    PostForm: () => import('@/components/ui/basics/PostForm.vue'),
   },
-  async created() {
-    await this.fetchAllBrands();
-    await this.findAndActiveBrand(this.$route.params.brand);
-    await this.fetchAllModels();
-    await this.findAndActiveModel(this.$route.params.model);
-    this.fetchAllPosts();
-    this.asyncDataStatus_fetched();
-  },
-  mixins: [asyncDataStatus],
+
   methods: {
     ...mapActions({
       fetchAllPosts: 'posts/fetchAllPosts',
-      fetchAllModels: 'models/fetchAllModels',
+
       findCategory: 'categories/findCategory',
-      fetchAllCategories: 'categories/fetchAllCategories',
-      fetchAllBrands: 'brands/fetchAllBrands',
+
       findAndActiveBrand: 'brands/findAndActiveBrand',
-      findAndActiveStyle: 'styles/findAndActiveStyle',
+
       findAndActiveModel: 'models/findAndActiveModel',
+
       fetchAllStyles: 'styles/fetchAllStyles',
     }),
   },
+
+  async created() {
+    await this.findAndActiveBrand(this.$route.params.brand);
+    await this.findAndActiveModel(this.$route.params.model);
+
+    this.fetchAllPosts();
+    this.asyncDataStatus_fetched();
+  },
+
+  mixins: [asyncDataStatus],
+
   computed: {
-    activeModel() {
-      return this.$store.state.models.activeItem;
-    },
-    activeBrand() {
-      return this.$store.state.brands.activeItem;
-    },
+    ...mapState({
+      activeModel: (state) => state.models.activeItem,
+
+      activeBrand: (state) => state.brands.activeItem,
+    }),
+
     ...mapGetters({
       posts: 'posts/postsFromModel',
+
       fotos: 'posts/fotosFromPosts',
     }),
   },
+
   data() {
     return {
       bgImg: 'sporter',
       reviews: [
         {
-          category: 'Comidad',
-          color: 'danger',
-          description: 'GGG',
+          category: 'Comfort',
+          pro: true,
+          description:
+            'The comfort of this product is nice but could be better',
         },
         {
-          category: 'Comidad',
-          color: 'primary',
-          description: 'GGG',
-        },
-        {
-          category: 'Comidad',
-          color: 'danger',
-          description: 'GGG',
+          category: 'Size',
+          pro: false,
+          description: 'Carefull with the size!',
         },
       ],
     };
@@ -113,27 +106,36 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-h1{
-    font-family:$typo;
-    color:$alpha-white;
-    font-size: 30vw;
+<style lang="scss" scoped>
+h1 {
+  font-family: $title;
+  font-weight: normal;
+  color: $alpha-white;
 }
-h2{
-    font-family:$title;
-    color:$alpha-white;
-    font-size: 10vw;
+
+h2,
+h3 {
+  font-family: $typo;
+  color: $alpha-white;
 }
-h3{
-    color:white;
+
+h3 {
+  color: white;
 }
-.models::before{
-    content:'';
-    top:0;
-    position: relative;
-    z-index: 100;
-    height:100vh;
-    width:100vw;
-    background:$main-gradient!important;
+
+.models::before {
+  content: '';
+  top: 0;
+  position: relative;
+  z-index: 100;
+  height: 100vh;
+  width: 100vw;
+  background: $main-gradient !important;
+}
+
+.models {
+  background-size: cover;
+  min-height: 100vh;
+  background-image: linear-gradient(232.8deg, #303030 0%, #1b1b1b 83.33%);
 }
 </style>

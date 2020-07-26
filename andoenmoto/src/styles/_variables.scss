@@ -1,19 +1,95 @@
-$alpha: #292929;
-$alpha-white:#F6F6F6;
-$complementary: #FCAC00;
-$main-gradient:linear-gradient(232.8deg, #303030 0%, #1B1B1B 83.33%);
-$complementary-gradient:linear-gradient(220.21deg, #353E28 0%, #202617 83.33%);
-$typo:bredan;
-$title:Oswald;
-$subtitle:Montserrat;
-$paragraph:Montserrat;
-$wide:500;
-$light:300;
-$bold:600;
-$bolder:800;
-.Chopper-background{
-    background: $main-gradient!important;
+:root {
+  --base-font-size: 0.43em;
+  --type-scale: 1.5;
+
+  --scale-ctas: 2;
+  --paragraphs: calc((var(--base-font-size) * 1.3) * var(--type-scale));
+  --ctas: calc((var(--base-font-size) * var(--scale-ctas)) * var(--type-scale));
+  --h5: calc(var(--base-font-size) * var(--type-scale));
+  --h4: calc(var(--h5) * var(--type-scale));
+  --h3: calc(var(--h4) * var(--type-scale));
+  --h2: calc(var(--h3) * var(--type-scale));
+  --h1: calc(var(--h2) * var(--type-scale));
 }
-.Enduro-background{
-    background: $complementary-gradient!important;
+
+.typo-font-size {
+  font-size: calc((var(--base-font-size) * 4) * var(--type-scale));
+}
+
+.typo-font-size.title {
+  font-size: calc((var(--base-font-size) * 6) * var(--type-scale));
+}
+.typo-font-size.title.wingie {
+  font-size: calc((var(--base-font-size) * 7.5) * var(--type-scale));
+}
+
+p {
+  font-size: var(--paragraphs);
+}
+button {
+  font-size: var(--ctas);
+}
+
+h1 {
+  margin-top: 0;
+  font-size: var(--h1);
+}
+
+h2 {
+  font-size: var(--h2);
+}
+
+h3 {
+  font-size: var(--h3);
+}
+
+h4 {
+  font-size: var(--h4);
+}
+
+h5 {
+  font-size: var(--h5);
+}
+
+@media (min-width: 480px) {
+  :root {
+    --base-font-size: 4em;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --base-font-size: 0.7em;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --base-font-size: 1em;
+    --scale-ctas: 1.7;
+  }
+  .typo-font-size {
+    font-size: calc((var(--base-font-size) * 3) * var(--type-scale));
+  }
+}
+
+$alpha: #292929;
+$alpha-white: #f6f6f6;
+$complementary: #fcac00;
+$main-gradient: linear-gradient(232.8deg, #303030 0%, #1b1b1b 83.33%);
+$complementary-gradient: linear-gradient(220.21deg, #353e28 0%, #202617 83.33%);
+$typo: bredan;
+$title: Oswald;
+$subtitle: Montserrat;
+$paragraph: Montserrat;
+$wide: 500;
+$light: 300;
+$bold: 600;
+$bolder: 800;
+
+.Chopper-background {
+  background: $main-gradient !important;
+}
+.Enduro-background {
+  background: $complementary-gradient !important;
 }

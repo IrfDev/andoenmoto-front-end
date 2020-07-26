@@ -1,10 +1,10 @@
 <template>
-  <div v-if="asyncDataStatus_ready" class="container-fluid pt-3">
-    <Header class="pb-3"/>
-    <categories/>
-  </div>
-  <div v-else class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
-    <span class="sr-only"></span>
+  <div class="container-fluid pt-3 home">
+    <Header class="pb-3" />
+    <categories v-if="asyncDataStatus_ready" />
+    <div v-else class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only"></span>
+    </div>
   </div>
 </template>
 
@@ -37,7 +37,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-*{
-  background:$alpha;
+.home {
+  min-height: 100vh;
+}
+* {
+  background: $alpha;
 }
 </style>

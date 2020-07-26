@@ -1,22 +1,11 @@
 <template>
-<div class="
-    d-none
-    cta-model-view
-    fixed-bottom
-    justify-content-center
-    text-center
-    fixed-ctas
-    "
->
-    <basic-button
-        :main="true"
-        :content="'Ver fotos'"
-    />
-    <basic-button
-        :secondary="true"
-        :content="'Ver posts'"
-    />
-</div>
+  <basic-button
+    data-toggle="modal"
+    :content="'Subir Reseña'"
+    :main="true"
+    data-target="#exampleModal"
+    class="modal-button-trrigger fixed-bottom-center fixed-cta align-self-center"
+  />
 </template>
 
 <script>
@@ -27,6 +16,6 @@ export default {
 
 <style lang="scss" scoped>
 .fixed-cta {
-z-index: 100;
+  z-index: 100;
 }
 </style>
