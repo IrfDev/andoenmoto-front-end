@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row  justify-content-around text-center align-items-center">
+    <div class="row justify-content-center text-center align-items-center">
       <div class="col-4 col-md-3">
         <logo class="d-md-none" />
         <img
@@ -13,21 +13,44 @@
         <h1>Ando en moto</h1>
         <h3>Reviews and pictures for biker products</h3>
       </section>
-      <div class="col-lg-5 col-md-5 col-12">
+
+      <div
+        v-if="notAuth"
+        class="col-lg-6 col-md-5 col-12 text-center text-lg-right"
+      >
         <basic-button
           data-toggle="modal"
-          :content="'Subir Reseña'"
+          :content="'Upload review'"
           :main="true"
           data-target="#exampleModal"
           class="modal-button-trrigger"
         />
       </div>
-      <div class="col-lg-5 col-md-5 col-12">
+
+      <div
+        class="col-lg-6 col-md-5 col-12"
+        :class="{
+          'text-left': notAuth,
+          'text-right': !notAuth,
+        }"
+        @click="scrollToCategories"
+      >
+        <basic-button
+          data-toggle="modal"
+          :content="'Reviews'"
+          :secondary="notAuth"
+          :main="!notAuth"
+        />
+      </div>
+
+      <div
+        v-if="!notAuth"
+        class="col-lg-6 col-md-5 col-12 text-md-left text-center"
+      >
         <router-link to="/login">
           <basic-button
-            :content="'Iniciar sesión'"
+            :content="'Log In'"
             :secondary="true"
-            v-if="!notAuth"
             @click="goToLogin"
           />
         </router-link>
@@ -42,19 +65,26 @@ import logo from '@/components/ui/basics/logo.vue';
 
 export default {
   name: 'Header',
+
   components: {
     PostForm: () => import('@/components/ui/basics/PostForm.vue'),
     logo,
   },
+
   computed: {
     notAuth() {
       return this.$store.state.auth.authId;
     },
   },
+
   methods: {
     goToLogin() {
       this.$analytics.logEvent('notification_received');
       this.$router.push({ name: 'login' });
+    },
+
+    scrollToCategories() {
+      this.$emit('clickReviews');
     },
 
     openModal() {

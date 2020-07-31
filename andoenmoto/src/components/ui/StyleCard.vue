@@ -15,11 +15,17 @@
 <script>
 export default {
   name: 'StyleCard',
+
+  inLowerCase(text) {
+    return text.toLowerCase();
+  },
+
   props: {
     title: {
       type: String,
       required: true,
     },
+
     description: {
       type: String,
       required: true,
@@ -49,6 +55,6 @@ p {
 }
 img {
   position: relative;
-  right: 7vw;
+  right: 2vw;
 }
 </style>

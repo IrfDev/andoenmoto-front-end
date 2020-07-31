@@ -29,6 +29,7 @@
 
 <script>
 import ReviewsStatsCard from '@/components/ui/ReviewsStatsCard.vue';
+
 import FixedCtas from '@/components/utilities/FixedCtas.vue';
 import HorizontalFotos from '@/components/sections/HorizontalFotos.vue';
 import HorizontalPosts from '@/components/sections/HorizontalPosts.vue';

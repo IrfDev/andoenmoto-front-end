@@ -1,3 +1,4 @@
+// Responsive Fonts
 :root {
   --base-font-size: 0.43em;
   --type-scale: 1.5;
@@ -73,11 +74,19 @@ h5 {
   }
 }
 
+// Color Variables
+
 $alpha: #292929;
 $alpha-white: #f6f6f6;
 $complementary: #fcac00;
+// BGC Gradients
+
 $main-gradient: linear-gradient(232.8deg, #303030 0%, #1b1b1b 83.33%);
 $complementary-gradient: linear-gradient(220.21deg, #353e28 0%, #202617 83.33%);
+$navy-gradient: linear-gradient(206.57deg, #282e3e 0%, #171c26 83.33%);
+$red-gradient: linear-gradient(206.57deg, #592323 0%, #432424 83.33%);
+
+// Fonts
 $typo: bredan;
 $title: Oswald;
 $subtitle: Montserrat;
@@ -87,9 +96,43 @@ $light: 300;
 $bold: 600;
 $bolder: 800;
 
+// BGC Classes
 .Chopper-background {
   background: $main-gradient !important;
 }
 .Enduro-background {
-  background: $complementary-gradient !important;
+  background: $navy-gradient !important;
+}
+.Track-background {
+  background: $main-gradient;
+}
+.Scooter-background {
+  background: $red-gradient;
+}
+.Tyres-background {
+  background: $main-gradient;
+}
+.Engine-background {
+  background: $navy-gradient;
+}
+.Oil-background {
+  background: $main-gradient;
+}
+.OffRoad-background {
+  background: $main-gradient;
+}
+.Open-background {
+  background: $navy-gradient;
+}
+.Closed-background {
+  background: $main-gradient;
+}
+.OffTrack-background {
+  background: $red-gradient;
+}
+.Sneakers-background {
+  background: $main-gradient;
+}
+.Boots-background {
+  background: $complementary-gradient;
 }

@@ -1,8 +1,13 @@
 <template>
   <div class="container-fluid pt-3 home">
-    <Header class="pb-3" />
+    <Header class="pb-3" @clickReviews="scrollToCategories" />
     <categories v-if="asyncDataStatus_ready" />
-    <div v-else class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+    <div
+      v-else
+      class="spinner-grow"
+      style="width: 3rem; height: 3rem;"
+      role="status"
+    >
       <span class="sr-only"></span>
     </div>
   </div>
@@ -18,17 +23,28 @@ import asyncDataStatus from '@/mixins/asyncDataStatus';
 
 export default {
   name: 'Home',
+
   components: {
     Header,
     Categories,
   },
+
   methods: {
+    scrollToCategories() {
+      let el = this.$el.getElementsByClassName('categories-home')[0];
+      console.log(el);
+      el.scrollIntoView({ behavior: 'smooth' });
+    },
+
     ...mapActions({
       fetchAllCategories: 'categories/fetchAllCategories',
+
       authRedirectResponse: 'auth/authRedirectResponse',
     }),
   },
+
   mixins: [asyncDataStatus],
+
   async created() {
     await this.fetchAllCategories();
     this.asyncDataStatus_fetched();

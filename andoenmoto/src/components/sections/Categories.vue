@@ -1,5 +1,7 @@
 <template>
-  <div class="row mt-3 pb-3 justify-content-center text-center align-items-stretch m-0">
+  <div
+    class="row mt-3 pb-3 justify-content-center text-center align-items-stretch m-0 categories-home"
+  >
     <category-badge
       :key="category['.key']"
       class="mt-5 mb-md-5"

@@ -7,19 +7,14 @@
         </thundie-row>
       </div>
 
-      <div
-        class="text-center cta-facebook col-10 mt-3 order-md-2 justify-content-center"
-      >
+      <div class="text-center cta-facebook col-10 mt-3 order-md-2 justify-content-center">
         <button @click="registerFacebook" class="btn-red btn-xsmall">
           Sign In
           <i class="fa fa-facebook fa-btn" />
         </button>
       </div>
 
-      <form
-        @submit.prevent="register"
-        class="row m-3 mt-4 order-md-1 justify-content-center"
-      >
+      <form @submit.prevent="register" class="row m-3 mt-4 order-md-1 justify-content-center">
         <div class="form-group col-12 col-md-6">
           <input
             v-model.lazy="form.email"
@@ -30,12 +25,8 @@
             placeholder="Correo electrónico"
           />
           <template v-if="$v.form.email.$error">
-            <span v-if="!$v.form.email.required" class="form-error"
-              >E-mail is required</span
-            >
-            <span v-else-if="!$v.form.email.email" class="form-error"
-              >Please enter a valid e-mail</span
-            >
+            <span v-if="!$v.form.email.required" class="form-error">E-mail is required</span>
+            <span v-else-if="!$v.form.email.email" class="form-error">Please enter a valid e-mail</span>
           </template>
         </div>
 
@@ -49,13 +40,11 @@
             @blur="$v.form.password.$touch()"
           />
           <template v-if="$v.form.password.$error">
-            <span v-if="!$v.form.password.required" class="form-error"
-              >Password field is required</span
-            >
-            <span v-if="!$v.form.password.minLength" class="form-error"
-              >Password is less than 6 characters, please double check your
-              password</span
-            >
+            <span v-if="!$v.form.password.required" class="form-error">Password field is required</span>
+            <span v-if="!$v.form.password.minLength" class="form-error">
+              Password is less than 6 characters, please double check your
+              password
+            </span>
           </template>
         </div>
 
@@ -63,9 +52,7 @@
           <button type="submit" class="btn-blue btn-block">Log in</button>
         </div>
         <div class="cta-log-gin text-center w-100 mt-2">
-          <router-link class="cta-login" to="/register"
-            >Create new account</router-link
-          >
+          <router-link class="cta-login" to="/register">Create new account</router-link>
         </div>
       </form>
     </div>
@@ -74,8 +61,8 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-import { mapActions } from 'vuex';
+import firebase from "firebase";
+import { mapActions } from "vuex";
 import {
   required,
   minLength,
@@ -83,10 +70,10 @@ import {
   email,
   url,
   helpers as vuelidateHelpers,
-} from 'vuelidate/lib/validators';
+} from "vuelidate/lib/validators";
 
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
     return {
       form: {
@@ -96,6 +83,7 @@ export default {
       },
     };
   },
+
   validations: {
     form: {
       name: {
@@ -103,33 +91,40 @@ export default {
         maxLength: maxLength(20),
         required,
       },
+
       username: {
         required,
         minLength: minLength(5),
         maxLength: maxLength(20),
       },
+
       email: {
         required,
         email,
       },
+
       password: {
         required,
         minLength: minLength(6),
       },
     },
   },
+
   methods: {
     ...mapActions({
-      registerUserEmailPassword: 'auth/registerUserEmailPassword',
-      registerUserFacebook: 'auth/registerUserFacebook',
+      registerUserEmailPassword: "auth/registerUserEmailPassword",
+
+      registerUserFacebook: "auth/registerUserFacebook",
     }),
+
     async register() {
       await this.registerUserEmailPassword(this.form);
-      this.$router.push('/');
+      this.$router.push("/");
     },
+
     async registerFacebook() {
       await this.registerUserFacebook();
-      this.$router.push('/');
+      this.$router.push("/");
     },
   },
 };
@@ -142,7 +137,7 @@ export default {
 }
 
 .form-error::before {
-  content: ' ❌ ';
+  content: " ❌ ";
 }
 
 .form-error {

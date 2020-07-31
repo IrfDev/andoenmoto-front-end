@@ -61,14 +61,14 @@ export default {
 
       let images = await this.$store.dispatch(
         'posts/fetchUserImages',
-        this.$route.params.profileId,
+        this.$route.params.profileId
       );
 
       this.images = Object.values(images);
     } else {
       let images = await this.$store.dispatch(
         'posts/fetchUserImages',
-        this.me.id,
+        this.me.id
       );
 
       this.images = Object.values(images);

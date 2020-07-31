@@ -144,10 +144,16 @@
         </div>
       </div>
 
-      <div v-else class="modal-content not-auth pt-3 pb-3">
-        <h2>Login to upload your review</h2>
-        <router-link class="go-to-login" to="/login">LogIng</router-link>
-        <router-link class="go-to-login" to="/register">Register</router-link>
+      <div v-else class="modal-content not-auth pt-3 pb-3 ">
+        <div class="m-3 text-center">
+          <h4>Login to upload your review</h4>
+          <div class="cta mt-4">
+            <router-link class="go-to-login" to="/login">Log In</router-link>
+            <router-link class="go-to-login" to="/register"
+              >Register</router-link
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -184,7 +190,7 @@ export default {
           .once('value', (snapshot) =>
             snapshot.exists()
               ? resolve(snapshot.val())
-              : resolve(snapshot.exists()),
+              : resolve(snapshot.exists())
           );
       });
     },
@@ -202,7 +208,6 @@ export default {
 
     async submitPost() {
       let modelExists = await this.modelExists(this.newPost.model);
-      console.log('[SubmitPost] Model exists:', modelExists);
 
       if (modelExists) {
         let modelId = Object.keys(modelExists);
@@ -225,8 +230,6 @@ export default {
           model: this.newModel,
         };
 
-        console.log('[SubmitPost] NewPostObject:', newPost);
-
         this.$store.dispatch('posts/submitPost', newPost);
       }
     },
@@ -238,7 +241,6 @@ export default {
     },
 
     addingReview() {
-      console.log(this.newReview);
       this.newPost.review = this.newReview;
     },
   },
@@ -256,7 +258,7 @@ export default {
 
     brands() {
       return Object.values(this.$store.state.brands.items).filter(
-        (brand) => brand.categories[this.newPost.category],
+        (brand) => brand.categories[this.newPost.category]
       );
     },
 
@@ -297,7 +299,7 @@ export default {
 }
 
 .not-auth {
-  h2 {
+  h4 {
     color: $alpha;
     font-family: $title;
   }

@@ -1,7 +1,7 @@
 <template>
-  <div class="row m-0 justify-content-center justify-content-md-around">
+  <div class="row m-0 justify-content-around justify-content-md-around">
     <div
-      class="col-10 col-md-5 align-items-stretch"
+      class="align-items-stretch style-card mb-5"
       v-for="(style, styleIndex) in styles"
       :key="styleIndex"
       @click="styleSelected(style)"
@@ -51,3 +51,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.style-card {
+  flex-basis: 40%;
+  @media screen and (min-width: 800px) {
+    flex-basis: 28%;
+  }
+}
+</style>

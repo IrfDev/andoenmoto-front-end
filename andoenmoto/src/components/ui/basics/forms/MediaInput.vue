@@ -10,11 +10,7 @@
       v-if="imagesIds !== [] || videoId !== '' || uploaded"
       class="files-preview d-flex justify-content-around"
     >
-      <div
-        v-for="(image, imageIndex) in imagesIds"
-        :key="imageIndex"
-        class="image-preview"
-      >
+      <div v-for="(image, imageIndex) in imagesIds" :key="imageIndex" class="image-preview">
         <i
           class="fa fa-times m-1"
           style=" color:red;"
@@ -37,18 +33,11 @@
         </video>
       </div>
     </div>
-    <div
-      v-if="!addingMedia && !uploaded"
-      class="cta d-flex justify-content-around"
-    >
+    <div v-if="!addingMedia && !uploaded" class="cta d-flex justify-content-around">
       <div class="cta-image" @click.prevent="addMedia('image')">
         <basic-button :content="'Añadir Imagen'" :main="true" />
       </div>
-      <div
-        class="cta-video"
-        v-if="videoId === ''"
-        @click.prevent="addMedia('video')"
-      >
+      <div class="cta-video" v-if="videoId === ''" @click.prevent="addMedia('video')">
         <basic-button :content="'Añadir video'" :secondary="true" />
       </div>
     </div>
@@ -62,13 +51,12 @@
         aria-describedby="inputGroupFileAddon01"
         @change="processFile($event)"
       />
-      <label class="custom-file-label" for="inputGroupFile01"
-        >Subir {{ media === 'image' ? 'imagen' : 'video' }}</label
-      >
+      <label
+        class="custom-file-label"
+        for="inputGroupFile01"
+      >Subir {{ media === 'image' ? 'imagen' : 'video' }}</label>
     </div>
-    <a class="cancel-a" v-if="addingMedia" @click="addingMedia = false"
-      >Cancelar</a
-    >
+    <a class="cancel-a" v-if="addingMedia" @click="addingMedia = false">Cancelar</a>
     <div v-if="ready && !uploaded" @click="uploadFiles" class="save-all mt-3">
       <button :secondary="true">
         <i class="fa fa-check" aria-hidden="true"></i>
@@ -79,30 +67,33 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import firebase from "firebase";
 
 export default {
-  name: 'MediaInput',
+  name: "MediaInput",
+
   data() {
     return {
       addingMedia: false,
-      media: '',
+      media: "",
       imagesIds: [],
-      videoId: '',
+      videoId: "",
       loading: false,
       ready: false,
       uploaded: false,
     };
   },
+
   props: {
     model: {
       type: String,
-      default: 'm1',
+      default: "m1",
     },
   },
+
   methods: {
     uploadFiles() {
-      this.$emit('uploadedMedia', {
+      this.$emit("uploadedMedia", {
         images: this.imagesIds,
         video: this.videoId,
       });
@@ -114,7 +105,7 @@ export default {
     },
 
     removeVideo() {
-      this.videoId = '';
+      this.videoId = "";
     },
 
     addMedia(fileType) {
@@ -128,11 +119,11 @@ export default {
       const ref = firebase
         .storage()
         .ref(`/${this.media}/${this.model}/${e.target.files[0].name}`);
+
       await ref.put(e.target.files[0]).then((refie) => {
-        if (this.media === 'image') {
+        if (this.media === "image") {
           ref.getDownloadURL().then((url) => {
-            console.log(refie);
-            this.$store.dispatch('posts/uploadImage', {
+            this.$store.dispatch("posts/uploadImage", {
               model: this.model,
               url,
             });
@@ -141,8 +132,7 @@ export default {
           });
         } else {
           ref.getDownloadURL().then((url) => {
-            console.log(refie);
-            this.$store.dispatch('posts/uploadVideo', {
+            this.$store.dispatch("posts/uploadVideo", {
               model: this.model,
               url,
             });

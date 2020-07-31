@@ -2,16 +2,21 @@
   <div
     class="flex-nowrap d-flex justify-content-end"
     :class="{
-      'flex-column-reverse': reverse,
-      'flex-column align-content-stretch': !reverse,
-      'col-12': name === 'Motocicletas',
-      'col-md-3 col-4': name !== 'Motocicletas',
+      'flex-column-reverse col-md-5 col-lg-5 col-12': reverse,
+
+      'flex-column align-content-stretch category-home': !reverse,
+
+      'col-12 col-lg-10 flex-grow-1 motocicletas':
+        name === 'Motocicletas' && !reverse,
+
+      'col-md-3 col-4': name !== 'Motocicletas' && !reverse,
     }"
     @click="activateCategoryy($attrs.category)"
   >
     <div class="badge-image m-0">
       <img :src="image" :alt="name" class="img-fluid w-50" />
     </div>
+
     <div class="badge-title m-0">
       <h2 v-if="reverse">{{ name }}</h2>
       <h3 v-else>{{ name }}</h3>
@@ -38,13 +43,16 @@ export default {
       type: String,
       required: true,
     },
+
     image: {
       type: String,
       required: true,
     },
+
     colWidth: {
       type: Number,
     },
+
     reverse: {
       type: Boolean,
       default: false,
@@ -54,6 +62,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.category-home {
+  transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  img,
+  h2,
+  h3 {
+    transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  &:hover {
+    img,
+    h2,
+    h3 {
+      filter: invert(100%);
+      transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    background-color: $complementary;
+    border-radius: 8px;
+    transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+.motocicletas {
+  flex-basis: 100%;
+}
+
 h3,
 h2 {
   color: $alpha-white;

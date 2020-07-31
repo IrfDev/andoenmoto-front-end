@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container-fluid"
+    class="container-fluid pt-3"
     :class="{ style: categoryStyle, category: !categoryStyle }"
   >
     <div v-if="asyncDataStatus_ready" class="category-content pb-5">
@@ -74,10 +74,10 @@ export default {
   async beforeMount() {
     await this.findCategory(this.$route.params.category);
     await this.fetchBrands(
-      Object.keys(this.$store.state.categories.activeItem.brands),
+      Object.keys(this.$store.state.categories.activeItem.brands)
     );
     await this.fetchStyles(
-      Object.keys(this.$store.state.categories.activeItem.styles),
+      Object.keys(this.$store.state.categories.activeItem.styles)
     );
 
     this.asyncDataStatus_fetched();

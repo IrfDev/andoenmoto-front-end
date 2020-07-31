@@ -13,15 +13,19 @@
       </router-link>
     </a>
     <div class="navbar-text overflow-auto">
-      <avatar
-        :displayName="true"
-        :verticalAlignment="true"
-        :widthPx="50"
-        class="nav-avatar"
+      <router-link
         v-if="notAuth"
+        to="/profile/me"
+        class="d-flex justify-content-flex-end"
       >
-        <router-link to="/profile/me" class="d-flex justify-content-flex-end" />
-      </avatar>
+        <avatar
+          :displayName="true"
+          :verticalAlignment="true"
+          :widthPx="50"
+          class="nav-avatar"
+        >
+        </avatar>
+      </router-link>
 
       <router-link to="/login" id="login-navbar" v-else>
         <span>
