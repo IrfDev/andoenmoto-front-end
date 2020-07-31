@@ -1,7 +1,7 @@
 <template>
   <div class="row m-0 justify-content-center">
     <div
-      class="col-md-4 col-10 brand-wrapper align-content-center"
+      class="col-md-4 mt-4 col-10 brand-wrapper align-content-center brand-column"
       v-for="(brand, brandIndex) in brands"
       :key="brandIndex"
       @click="brandSelected(brand)"
@@ -52,3 +52,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped></style>

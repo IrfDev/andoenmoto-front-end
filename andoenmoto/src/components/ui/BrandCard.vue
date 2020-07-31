@@ -1,7 +1,11 @@
 <template>
   <div class="card">
     <div class="card-body d-flex align-items-center flex-row">
-      <img :src="`/images/brands/${brand}.png`" :alt="brand" class="img-fluid" />
+      <img
+        :src="`/images/brands/${brand}.png`"
+        :alt="brand"
+        class="img-fluid"
+      />
     </div>
   </div>
 </template>
@@ -29,6 +33,7 @@ export default {
   height: 100%;
   img {
     margin: 0 auto;
+    max-height: 5em;
   }
 }
 </style>
