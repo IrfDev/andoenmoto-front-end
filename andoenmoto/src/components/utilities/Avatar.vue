@@ -1,13 +1,13 @@
 <template>
   <div
     :class="{
-      'd-flex flex-row-reverse align-items-center ': reverse,
+      'd-flex flex-row align-items-center justify-content-start': reverse,
       'd-flex align-items-center flex-column': !reverse,
       'd-flex flex-column justify-content-end': verticalAlignment,
     }"
   >
     <slot />
-    <div>
+    <div :class="{'picture-horizontal': reverse}">
       <img
         :style="
           widthPx
@@ -20,7 +20,7 @@
       />
     </div>
 
-    <div v-if="displayName" class="ml-1 name">
+    <div v-if="displayName" :class="{'postName': reverse}" class="ml-1 name">
       <h5 class="m-0">{{ auth ? user.name : otherUser.username }}</h5>
     </div>
   </div>
@@ -62,7 +62,6 @@ export default {
   async mounted() {
     if (this.auth === false) {
       this.otherUser = await this.findUser(this.userId);
-      console.log(this.findUser(this.userId), 'usuario');
     }
   },
   data() {
@@ -74,6 +73,7 @@ export default {
     ...mapGetters({
       findUser: 'auth/findUser',
     }),
+
     ...mapState({
       user: (state) => state.auth.profileUser,
     }),
@@ -82,6 +82,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.picture-horizontal {
+  flex-basis: 10%;
+}
+.postName {
+  h5 {
+    color: $alpha-white;
+    font-size: calc(var(--h5) * 0.62);
+  }
+}
+
 .name {
   text-transform: capitalize;
 }

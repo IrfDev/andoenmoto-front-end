@@ -1,6 +1,12 @@
 <template>
   <nav class="navbar d-flex justify-content-between align-items-center">
-    <a class="navbar-brand">
+    <a class="navbar-brand align-items-center d-flex">
+      <a
+        @click="$router.go(-1)"
+        v-if="!this.$route.path.includes('profile') && this.$route.path !== '/'"
+      >
+        <i class="fas fa-angle-left mr-3" />
+      </a>
       <router-link to="/">
         <img
           src="/identity/logo.png"
@@ -43,6 +49,9 @@ export default {
 .navbar {
   background: #fcac00;
   padding: 0.1rem 1rem;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 }
 
 @media (min-width: 1200px) {
@@ -63,9 +72,8 @@ export default {
     align-self: flex-end;
   }
   .name {
-    h4 {
-      color: black;
-      font-weight: 400;
+    h5 {
+      font-size: 0.8em;
     }
   }
 }

@@ -22,7 +22,7 @@
           class="mt-4"
           :color="{ checked: '#303030', unchecked: '#353E28' }"
           :sync="false"
-          :labels="{ checked: 'Ver estílos', unchecked: 'Ver marcas' }"
+          :labels="{ checked: 'Styles', unchecked: 'Brands' }"
         />
       </div>
       <styles v-if="!categoryStyle" :styles="styless" />

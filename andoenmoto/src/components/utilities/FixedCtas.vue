@@ -1,7 +1,7 @@
 <template>
   <basic-button
     data-toggle="modal"
-    :content="'Subir Reseña'"
+    :content="'Upload review'"
     :main="true"
     data-target="#exampleModal"
     class="modal-button-trrigger fixed-bottom-center fixed-cta align-self-center"

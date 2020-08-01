@@ -1,22 +1,20 @@
 <template>
   <div class="card post-card" :style="`background: ${bgColor}`">
     <div class="card-header">
-      <h4>
-        {{ post.title }}
-      </h4>
+      <h4>{{ post.title }}</h4>
     </div>
     <div class="card-body d-flex flex-column align-content-start">
       <p>{{ post.content }}</p>
     </div>
     <div class="card-footer d-flex">
-      <router-link
-        :to="{ name: 'profile-page-nam', params: { profileId: post.user } }"
-      >
+      <router-link :to="{ name: 'profile-page-nam', params: { profileId: post.user } }">
         <avatar
-          :widthPer="10"
+          :widthPer="80"
           :userId="post.user"
           :auth="false"
           :displayName="true"
+          :reverse="true"
+          class="avatar-post"
         />
       </router-link>
     </div>
@@ -56,8 +54,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatar-post {
+  color: $alpha-white !important;
+  margin: 0.3em;
+}
 .post-card {
   color: white;
+
   .card-header {
     font-family: $title;
   }

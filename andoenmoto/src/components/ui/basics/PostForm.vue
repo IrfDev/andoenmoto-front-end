@@ -18,11 +18,11 @@
         <div class="modal-body alpha">
           <form>
             <div class="form-group alpha" :class="{ super: newPost.title }">
-              <label for="recipient-name" class="alpha col-form-label">Título:</label>
+              <label for="recipient-name" class="alpha col-form-label">Title:</label>
               <input v-model="newPost.title" type="text" class="form-control" id="title-name" />
             </div>
             <div class="form-group mb-3" :class="{ super: newPost.category }" v-if="newPost.title">
-              <label class="input-text" for="category-name">Categoría</label>
+              <label class="input-text" for="category-name">Category:</label>
               <select
                 v-model="newPost.category"
                 class="form-control custom-select"
@@ -36,20 +36,20 @@
               </select>
             </div>
             <div class="form-group mb-3" :class="{ super: newPost.brand }" v-if="newPost.category">
-              <label class="input-text" for="brand-name">Marca:</label>
+              <label class="input-text" for="brand-name">Brand:</label>
               <select v-model="newPost.brand" class="custom-select" id="brand-name">
                 <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{ brand.name }}</option>
               </select>
             </div>
 
             <div class="form-group mb-3" :class="{ super: newPost.style }" v-if="newPost.brand">
-              <label class="input-text" for="style-name">Estílo:</label>
+              <label class="input-text" for="style-name">Style:</label>
               <select v-model="newPost.style" class="custom-select" id="style-name">
                 <option v-for="style in styles" :key="style.id" :value="style.id">{{ style.title }}</option>
               </select>
             </div>
             <div class="form-group alpha" :class="{ super: newPost.model }" v-if="newPost.style">
-              <label for="recipient-name" class="alpha col-form-label">Modelo:</label>
+              <label for="recipient-name" class="alpha col-form-label">Model:</label>
               <input v-model="newPost.model" type="text" class="form-control" id="model-name" />
             </div>
 
@@ -153,7 +153,9 @@ export default {
 
         let newPost = { ...this.newPost, model: modelId[0] };
 
-        this.$store.dispatch('posts/submitPost', newPost);
+        await this.$store.dispatch('posts/submitPost', newPost);
+
+        this.newPost = { review: this.newReview };
       } else {
         let newModelObject = this.newPost;
 
@@ -169,7 +171,8 @@ export default {
           model: this.newModel,
         };
 
-        this.$store.dispatch('posts/submitPost', newPost);
+        await this.$store.dispatch('posts/submitPost', newPost);
+        this.newPost = { review: this.newReview };
       }
     },
 
@@ -202,10 +205,6 @@ export default {
     },
 
     styles() {
-      console.log(
-        this.$store.state.categories.items[this.newPost.category].styles
-      );
-
       const categoryStyles = Object.keys(
         this.$store.state.brands.items[this.newPost.brand].styles
       );
@@ -215,8 +214,6 @@ export default {
       const idArray = categoryStyles.filter((style) => {
         return brandStyles.includes(style);
       });
-
-      console.log(idArray);
 
       return this.$store.getters['styles/stylesByArray'](idArray);
     },

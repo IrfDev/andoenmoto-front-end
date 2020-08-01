@@ -5,14 +5,16 @@ export default {
 
   state: {
     items: {},
+
     features: {},
+
     newReview: '',
   },
 
   getters: {
     postsFromModel(state, getters, rootState) {
       return Object.values(state.items).filter(
-        (post) => post.model === rootState.models.activeItem.id,
+        (post) => post.model === rootState.models.activeItem.id
       );
     },
 
@@ -31,6 +33,10 @@ export default {
 
     SET_NEW_ITEM(state, { id, item }) {
       state[id] = item;
+    },
+
+    CLEAN_NEW_REVIEW(state) {
+      state.newReview = '';
     },
   },
 
@@ -64,7 +70,7 @@ export default {
               commit(
                 'SET_ITEM',
                 { resource: 'posts', id: categoryId, item: category },
-                { root: true },
+                { root: true }
               );
             });
 
@@ -104,8 +110,10 @@ export default {
           commit(
             'SET_ITEM',
             { resource: 'posts', item: post, id: postId },
-            { root: true },
+            { root: true }
           );
+
+          commit('CLEAN_NEW_REVIEW');
 
           return Promise.resolve(state.items[postId]);
         });
@@ -207,7 +215,7 @@ export default {
           commit(
             'SET_ITEM',
             { resource: 'videos', item: newImageObject, id: videoId },
-            { root: true },
+            { root: true }
           );
           return Promise.resolve(state.items[videoId]);
         });

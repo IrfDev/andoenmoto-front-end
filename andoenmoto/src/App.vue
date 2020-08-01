@@ -29,6 +29,9 @@ html {
   font-weight: normal;
   font-style: normal;
 }
+main {
+  padding-top: 5%;
+}
 
 #nav {
   padding: 30px;
