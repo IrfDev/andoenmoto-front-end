@@ -14,7 +14,7 @@
     </a>
     <div class="navbar-text overflow-auto">
       <router-link v-if="notAuth" to="/profile/me" class="d-flex justify-content-flex-end">
-        <avatar :displayName="true" :verticalAlignment="true" :widthPx="50" class="nav-avatar"></avatar>
+        <avatar :displayName="true" :verticalAlignment="true" :widthPx="25" class="nav-avatar"></avatar>
       </router-link>
 
       <router-link to="/login" id="login-navbar" v-else>

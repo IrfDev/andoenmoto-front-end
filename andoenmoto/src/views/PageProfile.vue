@@ -1,16 +1,11 @@
 <template>
-  <div class="Profile container-fluid m-0">
+  <div class="Profile container-fluid m-0 text-center">
     <input v-if="itsMe" v-model="me.name" class="auth-name" />
-    <h5 class="text-center m-0" v-else>{{ auth.name }}</h5>
+    <h2 class="text-center m-0" v-else>{{ auth.name }}</h2>
 
     <wings-row>
-      <img
-        v-if="!itsMe"
-        :src="auth.profile"
-        alt
-        class="img-fluid rounded-circle"
-      />
-      <img v-else :src="me.profile" alt class="img-fluid rounded-circle" />
+      <img v-if="!itsMe" :src="auth.profile" alt class="img-fluid rounded-circle w-100" />
+      <img v-else :src="me.profile" alt class="img-fluid rounded-circle w-100" />
     </wings-row>
 
     <textarea
@@ -21,22 +16,12 @@
     ></textarea>
     <p v-else>{{ auth.description }}</p>
 
-    <router-link class="sign-out m-4" v-if="itsMe" to="/sign-out"
-      >Cerrar sesión</router-link
-    >
+    <router-link class="sign-out m-4 text-center" v-if="itsMe" to="/sign-out">Cerrar sesión</router-link>
 
-    <!-- <h3>Images</h3> -->
-    <div class="row flex-nowrap overflow-auto mt-3">
-      <div
-        v-for="imageObject in images"
-        :key="imageObject.imageId"
-        class="col-4"
-      >
-        <img
-          :src="imageObject.url"
-          :alt="imageObject.model"
-          class="img-fluid"
-        />
+    <h3 class="mt-4">Images</h3>
+    <div class="row align-items-center flex-nowrap overflow-auto mt-3">
+      <div v-for="imageObject in images" :key="imageObject.imageId" class="col-4 image-col">
+        <img :src="imageObject.url" :alt="imageObject.model" class="img-fluid" />
       </div>
     </div>
     <profile-badge :titleBadge="'Principiante'" />
@@ -105,17 +90,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.image-col {
+  img {
+    border-radius: 8px;
+    box-shadow: 0px 4px 36px rgba(0, 0, 0, 0.14);
+  }
+}
 .container-fluid {
   background: $main-gradient;
-  min-height: 100vh;
+  min-height: 120vh;
 }
 
 .auth-name {
   max-width: 80vw;
+  font-size: var(--h2);
 }
 
 .auth-name,
-h5 {
+h5,
+h3 {
   color: $alpha-white;
   font-family: $typo;
   background-color: transparent;
@@ -144,6 +137,7 @@ p {
   font-family: $title;
   border-radius: 8px;
   padding: 1% 5%;
+  box-shadow: 0px 4px 36px rgba(0, 0, 0, 0.14);
   margin: 5em;
   color: red;
 }

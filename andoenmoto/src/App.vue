@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <the-nav-bar />
-    <router-view />
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
@@ -16,6 +18,10 @@ export default {
 </script>
 
 <style lang="scss">
+html {
+  background-color: #292929;
+}
+
 @font-face {
   font-family: 'bredan';
   src: url('../public/fonts/the-bredan-webfont.woff2') format('woff2'),

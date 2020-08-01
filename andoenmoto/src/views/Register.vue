@@ -12,115 +12,106 @@
           <i class="fa fa-facebook fa-btn" />
         </button>
       </div>
-      <form
-        @submit.prevent="register"
-        class="row m-3 mt-5 justify-content-center"
-      >
-        <div class="form-group col-12 col-md-6">
+      <form @submit.prevent="register" class="row m-3 mt-5 justify-content-center">
+        <div class="form-group col-12 col-md-5">
           <input
             v-model="form.name"
             id="name"
             type="text"
             class="form-control"
-            placeholder="Nombre"
+            placeholder="Name"
             @blur="$v.form.name.$touch()"
           />
           <template v-if="$v.form.name.$error">
-            <h1 v-if="!$v.form.name.required" class="form-error">
-              Name is required
-            </h1>
+            <span v-if="!$v.form.name.required" class="form-error">Name is required</span>
           </template>
         </div>
 
-        <div class="form-group col-12 col-md-6">
+        <div class="form-group col-12 col-md-5">
           <input
             v-model="form.username"
             id="username"
             type="text"
-            placeholder="Nombre de usuario"
+            placeholder="Username"
             @blur="$v.form.username.$touch()"
             class="form-control"
           />
           <template v-if="$v.form.username.$error">
-            <span v-if="!$v.form.username.required" class="form-error"
-              >Username is required</span
-            >
-            <span v-if="!$v.form.username.minLength" class="form-error"
-              >Username should have at least 5 characters</span
-            >
+            <span v-if="!$v.form.username.required" class="form-error">Username is required</span>
+            <span
+              v-if="!$v.form.username.minLength"
+              class="form-error"
+            >Username should have at least 5 characters</span>
           </template>
         </div>
 
-        <div class="form-group col-12 col-md-6">
+        <div class="form-group col-12 col-md-5">
           <input
             v-model.lazy="form.email"
             id="email"
             type="email"
             @blur="$v.form.email.$touch()"
             class="form-control"
-            placeholder="Correo electrónico"
+            placeholder="E-mail"
           />
           <template v-if="$v.form.email.$error">
-            <span v-if="!$v.form.email.required" class="form-error"
-              >E-mail is required</span
-            >
-            <span v-else-if="!$v.form.email.email" class="form-error"
-              >It doesn't seems like an E-mail, please try again</span
-            >
-            <span v-else-if="!$v.form.email.unique" class="form-error"
-              >This e-mail was already registered</span
-            >
+            <span v-if="!$v.form.email.required" class="form-error">E-mail is required</span>
+            <span
+              v-else-if="!$v.form.email.email"
+              class="form-error"
+            >It doesn't seems like an E-mail, please try again</span>
+            <span
+              v-else-if="!$v.form.email.unique"
+              class="form-error"
+            >This e-mail was already registered</span>
           </template>
         </div>
 
-        <div class="form-group col-12 col-md-6">
+        <div class="form-group col-12 col-md-5">
           <input
             v-model="form.password"
             id="password"
             type="password"
             class="form-control"
-            placeholder="Contraseña"
+            placeholder="Password"
             @blur="$v.form.password.$touch()"
           />
           <template v-if="$v.form.password.$error">
-            <span v-if="!$v.form.password.required" class="form-error"
-              >Password is required!</span
-            >
-            <span v-if="!$v.form.password.minLength" class="form-error"
-              >You need a 6 characters minimum passsword</span
-            >
+            <span v-if="!$v.form.password.required" class="form-error">Password is required!</span>
+            <span
+              v-if="!$v.form.password.minLength"
+              class="form-error"
+            >You need a 6 characters minimum passsword</span>
           </template>
         </div>
 
-        <div class="form-group col-12">
+        <div class="form-group col-12 col-md-10">
           <input
             v-model.lazy="form.avatar"
             id="avatar"
             type="text"
             class="form-control"
-            placeholder="Foto de perfil"
+            placeholder="Profile picture"
             @blur="$v.form.avatar.$touch()"
           />
           <template v-if="$v.form.avatar.$error">
-            <span v-if="!$v.form.avatar.url" class="form-error"
-              >Please enter a valid url</span
-            >
-            <span v-if="!$v.form.avatar.supportedImageFile" class="form-error"
-              >Please enter a valid image format</span
-            >
-            <span v-if="$v.form.avatar.responseOk" class="form-error"
-              >This URL not bringing a valid image</span
-            >
+            <span v-if="!$v.form.avatar.url" class="form-error">Please enter a valid url</span>
+            <span
+              v-if="!$v.form.avatar.supportedImageFile"
+              class="form-error"
+            >Please enter a valid image format</span>
+            <span
+              v-if="$v.form.avatar.responseOk"
+              class="form-error"
+            >This URL not bringing a valid image</span>
           </template>
         </div>
 
-        <div class="form-register col-12 col-md-6">
+        <div class="form-register col-12 col-md-5">
           <button type="submit" class="btn-blue btn-block">Sign up</button>
         </div>
         <div class="cta-log-gin text-center w-100 mt-2">
-          <router-link class="cta-register" to="/login"
-            >Already have an account?</router-link
-          >
+          <router-link class="cta-register" to="/login">Already have an account?</router-link>
         </div>
       </form>
     </div>
@@ -276,6 +267,9 @@ h1 {
     font-family: $title;
     border: none;
     padding: 2% 20%;
+    @media screen and (min-width: 800px) {
+      padding: 1% 1%;
+    }
     border-radius: 4px;
     width: 100%;
   }

@@ -22,7 +22,7 @@
             type="email"
             @blur="$v.form.email.$touch()"
             class="form-control"
-            placeholder="Correo electrónico"
+            placeholder="E-mail"
           />
           <template v-if="$v.form.email.$error">
             <span v-if="!$v.form.email.required" class="form-error">E-mail is required</span>
@@ -36,7 +36,7 @@
             id="password"
             type="password"
             class="form-control"
-            placeholder="Contraseña"
+            placeholder="Password"
             @blur="$v.form.password.$touch()"
           />
           <template v-if="$v.form.password.$error">
@@ -61,8 +61,8 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import { mapActions } from "vuex";
+import firebase from 'firebase';
+import { mapActions } from 'vuex';
 import {
   required,
   minLength,
@@ -70,10 +70,10 @@ import {
   email,
   url,
   helpers as vuelidateHelpers,
-} from "vuelidate/lib/validators";
+} from 'vuelidate/lib/validators';
 
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       form: {
@@ -112,19 +112,19 @@ export default {
 
   methods: {
     ...mapActions({
-      registerUserEmailPassword: "auth/registerUserEmailPassword",
+      registerUserEmailPassword: 'auth/registerUserEmailPassword',
 
-      registerUserFacebook: "auth/registerUserFacebook",
+      registerUserFacebook: 'auth/registerUserFacebook',
     }),
 
     async register() {
       await this.registerUserEmailPassword(this.form);
-      this.$router.push("/");
+      this.$router.push('/');
     },
 
     async registerFacebook() {
       await this.registerUserFacebook();
-      this.$router.push("/");
+      this.$router.push('/');
     },
   },
 };
@@ -137,7 +137,7 @@ export default {
 }
 
 .form-error::before {
-  content: " ❌ ";
+  content: ' ❌ ';
 }
 
 .form-error {
