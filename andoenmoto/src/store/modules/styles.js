@@ -20,8 +20,8 @@ export default {
       Object.values(state.items).find((style) => style.title === styleName),
 
     stylesByArray: (state) => (idArray) =>
-      state.items.filter((style) => {
-        return idArray.includes(style);
+      Object.values(state.items).filter((style) => {
+        return idArray.includes(style.id);
       }),
   },
 

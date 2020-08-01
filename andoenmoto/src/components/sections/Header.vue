@@ -14,7 +14,7 @@
         <h3>Reviews and pictures for biker products</h3>
       </section>
 
-      <div v-if="notAuth" class="col-lg-6 col-md-5 col-6 text-right text-lg-right">
+      <div v-if="notAuth" class="col-lg-6 col-md-5 col-12 text-center text-lg-right">
         <basic-button
           data-toggle="modal"
           :content="'Upload review'"
@@ -25,22 +25,22 @@
       </div>
 
       <div
-        class="col-lg-6 col-md-5 col-6"
+        class="col-lg-6 col-md-5 col-12"
         :class="{
           'text-lg-left': notAuth,
-          'text-lg-right text-right': !notAuth,
+          'text-lg-right text-center': !notAuth,
         }"
         @click="scrollToCategories"
       >
         <basic-button
           data-toggle="modal"
           :content="'Reviews'"
-          :secondary="notAuth"
+          :secondary="notAuth ? true : false"
           :main="!notAuth"
         />
       </div>
 
-      <div v-if="!notAuth" class="col-lg-6 col-md-5 col-6 text-md-left text-left">
+      <div v-if="!notAuth" class="col-lg-6 col-md-5 col-12 text-md-left text-center">
         <router-link to="/login">
           <basic-button :content="'Log In'" :secondary="true" @click="goToLogin" />
         </router-link>

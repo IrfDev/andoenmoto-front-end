@@ -7,7 +7,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
       <div class="modal-content pt-3" v-if="notAuth">
         <lightie-row>
           <avatar :widthPx="100" class="avatar-form-post" />
@@ -18,21 +18,10 @@
         <div class="modal-body alpha">
           <form>
             <div class="form-group alpha" :class="{ super: newPost.title }">
-              <label for="recipient-name" class="alpha col-form-label"
-                >Título:</label
-              >
-              <input
-                v-model="newPost.title"
-                type="text"
-                class="form-control"
-                id="title-name"
-              />
+              <label for="recipient-name" class="alpha col-form-label">Título:</label>
+              <input v-model="newPost.title" type="text" class="form-control" id="title-name" />
             </div>
-            <div
-              class="form-group mb-3"
-              :class="{ super: newPost.category }"
-              v-if="newPost.title"
-            >
+            <div class="form-group mb-3" :class="{ super: newPost.category }" v-if="newPost.title">
               <label class="input-text" for="category-name">Categoría</label>
               <select
                 v-model="newPost.category"
@@ -43,63 +32,25 @@
                   v-for="category in categories"
                   :key="category.id"
                   :value="category.id"
-                  >{{ category.name }}</option
-                >
+                >{{ category.name }}</option>
               </select>
             </div>
-            <div
-              class="form-group mb-3"
-              :class="{ super: newPost.brand }"
-              v-if="newPost.category"
-            >
+            <div class="form-group mb-3" :class="{ super: newPost.brand }" v-if="newPost.category">
               <label class="input-text" for="brand-name">Marca:</label>
-              <select
-                v-model="newPost.brand"
-                class="custom-select"
-                id="brand-name"
-              >
-                <option
-                  v-for="brand in brands"
-                  :key="brand.id"
-                  :value="brand.id"
-                  >{{ brand.name }}</option
-                >
+              <select v-model="newPost.brand" class="custom-select" id="brand-name">
+                <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{ brand.name }}</option>
               </select>
             </div>
 
-            <div
-              class="form-group mb-3"
-              :class="{ super: newPost.style }"
-              v-if="newPost.brand"
-            >
+            <div class="form-group mb-3" :class="{ super: newPost.style }" v-if="newPost.brand">
               <label class="input-text" for="style-name">Estílo:</label>
-              <select
-                v-model="newPost.style"
-                class="custom-select"
-                id="style-name"
-              >
-                <option
-                  v-for="style in styles"
-                  :key="style.id"
-                  :value="style.id"
-                  >{{ style.title }}</option
-                >
+              <select v-model="newPost.style" class="custom-select" id="style-name">
+                <option v-for="style in styles" :key="style.id" :value="style.id">{{ style.title }}</option>
               </select>
             </div>
-            <div
-              class="form-group alpha"
-              :class="{ super: newPost.model }"
-              v-if="newPost.style"
-            >
-              <label for="recipient-name" class="alpha col-form-label"
-                >Modelo:</label
-              >
-              <input
-                v-model="newPost.model"
-                type="text"
-                class="form-control"
-                id="model-name"
-              />
+            <div class="form-group alpha" :class="{ super: newPost.model }" v-if="newPost.style">
+              <label for="recipient-name" class="alpha col-form-label">Modelo:</label>
+              <input v-model="newPost.model" type="text" class="form-control" id="model-name" />
             </div>
 
             <media-input
@@ -117,41 +68,29 @@
             />
 
             <div class="form-group" v-if="newReview !== ''">
-              <label for="message-text" class="alpha col-form-label"
-                >Comments:</label
-              >
-              <textarea
-                v-model="newPost.content"
-                class="form-control"
-                id="message-text"
-              ></textarea>
+              <label for="message-text" class="alpha col-form-label">Comments:</label>
+              <textarea v-model="newPost.content" class="form-control" id="message-text"></textarea>
             </div>
           </form>
         </div>
 
         <div class="modal-footer d-flex justify-content-around">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button
             @click="submitPost"
             data-dismiss="modal"
             type="button"
             class="btn btn-primary"
-          >
-            Send Review
-          </button>
+          >Send Review</button>
         </div>
       </div>
 
-      <div v-else class="modal-content not-auth pt-3 pb-3 ">
+      <div v-else class="modal-content not-auth pt-3 pb-3">
         <div class="m-3 text-center">
           <h4>Login to upload your review</h4>
           <div class="cta mt-4">
             <router-link class="go-to-login" to="/login">Log In</router-link>
-            <router-link class="go-to-login" to="/register"
-              >Register</router-link
-            >
+            <router-link class="go-to-login" to="/register">Register</router-link>
           </div>
         </div>
       </div>
@@ -253,13 +192,33 @@ export default {
 
       categories: (state) => state.categories.items,
 
-      styles: (state) => state.styles.items,
+      styless: (state) => state.styles.items,
     }),
 
     brands() {
       return Object.values(this.$store.state.brands.items).filter(
         (brand) => brand.categories[this.newPost.category]
       );
+    },
+
+    styles() {
+      console.log(
+        this.$store.state.categories.items[this.newPost.category].styles
+      );
+
+      const categoryStyles = Object.keys(
+        this.$store.state.brands.items[this.newPost.brand].styles
+      );
+      const brandStyles = Object.keys(
+        this.$store.state.categories.items[this.newPost.category].styles
+      );
+      const idArray = categoryStyles.filter((style) => {
+        return brandStyles.includes(style);
+      });
+
+      console.log(idArray);
+
+      return this.$store.getters['styles/stylesByArray'](idArray);
     },
 
     notAuth() {
