@@ -13,11 +13,16 @@ export default {
   getters: {
     getStylesFromActiveBrand: (state, rootState) =>
       Object.keys(rootState.brands.activeItem.styles).map(
-        (style) => state.items === style,
+        (style) => state.items === style
       ),
 
     activeStyle: (state) => (styleName) =>
       Object.values(state.items).find((style) => style.title === styleName),
+
+    stylesByArray: (state) => (idArray) =>
+      state.items.filter((style) => {
+        return idArray.includes(style);
+      }),
   },
 
   mutations: {
@@ -82,7 +87,7 @@ export default {
               commit(
                 'SET_ITEM',
                 { resource: 'styles', id: categoryId, item: category },
-                { root: true },
+                { root: true }
               );
             });
             resolve(Object.values(state.styles));

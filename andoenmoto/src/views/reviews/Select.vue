@@ -7,9 +7,9 @@
     <div class="row m-0">
       <div class="col-12">
         <wings-row>
-          <h1 class="typo-font-size title wingie">
-            {{ !selected ? activeStyle.title : activeBrand.name }}
-          </h1>
+          <h1
+            class="typo-font-size title wingie"
+          >{{ !selected ? activeStyle.title : activeBrand.name }}</h1>
         </wings-row>
         <h2 class="mt-1">{{ activeCategory.name }}</h2>
       </div>
@@ -19,11 +19,7 @@
   </div>
   <div v-else class="container-fluid style">
     <wings-row>
-      <div
-        class="spinner-border text-light"
-        style="width: 3rem; height: 3rem;"
-        role="status"
-      >
+      <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only"></span>
       </div>
     </wings-row>
@@ -31,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import asyncDataStatus from '@/mixins/asyncDataStatus';
 
 export default {
@@ -60,43 +56,54 @@ export default {
     if (this.$route.params.brand) {
       await this.findAndActiveBrand(this.$route.params.brand);
 
-      await this.fetchStyles(
-        Object.keys(this.$store.state.brands.activeItem.styles),
+      const brandStyles = Object.keys(
+        this.$store.state.brands.activeItem.styles
       );
 
-      this.activeBrand = this.$store.state.brands.activeItem;
+      const categoryStyles = Object.keys(
+        this.$store.state.categories.activeItem.styles
+      );
+
+      const stylesTofetch = categoryStyles.filter((style) =>
+        brandStyles.includes(style)
+      );
+
+      await this.fetchStyles(stylesTofetch);
     } else {
       await this.findAndActiveStyle(this.$route.params.style);
       /* This dispatch only works for this view. 
       Because use the activeItem state from Categories and Styles */
       await this.fetchCategoryStyleBrands();
-
-      this.activeStyle = this.$store.state.styles.activeItem;
     }
 
     this.asyncDataStatus_fetched();
   },
 
-  data() {
-    return {
-      activeStyle: {},
-      activeBrand: {},
-    };
-  },
-
   computed: {
-    brands() {
-      return this.$store.state.brands.filterItems;
-    },
-    activeCategory() {
-      return this.$store.state.categories.activeItem;
-    },
+    ...mapState({
+      activeBrand: (state) => state.brands.activeItem,
+
+      activeStyle: (state) => state.styles.activeItem,
+
+      brands: (state) => state.brands.filterItems,
+
+      activeCategory: (state) => state.categories.activeItem,
+
+      styles: (state) => state.styles.items,
+    }),
+
+    // brands() {
+    //   return this.$store.state.brands.filterItems;
+    // },
+    // activeCategory() {
+    //   return this.$store.state.categories.activeItem;
+    // },
     selected() {
       return this.$route.params.brand;
     },
-    styles() {
-      return this.$store.state.styles.items;
-    },
+    // styles() {
+    //   return this.$store.state.styles.items;
+    // },
   },
 };
 </script>

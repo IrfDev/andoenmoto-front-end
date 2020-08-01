@@ -1,18 +1,9 @@
 <template>
-  <div
-    class="container-fluid pt-3"
-    :class="{ style: categoryStyle, category: !categoryStyle }"
-  >
+  <div class="container-fluid pt-3" :class="{ style: categoryStyle, category: !categoryStyle }">
     <div v-if="asyncDataStatus_ready" class="category-content pb-5">
       <div class="row justify-content-center text-center">
-        <div
-          class="col-12 justify-content-center align-items-center d-flex flex-column"
-        >
-          <img
-            src="/identity/stars.png"
-            class="img-fluid m-0"
-            alt="AndoEnMoto-stars"
-          />
+        <div class="col-12 justify-content-center align-items-center d-flex flex-column">
+          <img src="/identity/stars.png" class="img-fluid m-0" alt="AndoEnMoto-stars" />
           <category-badge
             :colWidth="category.colWidth"
             :image="category.image"
@@ -37,13 +28,15 @@
       <styles v-if="!categoryStyle" :styles="styless" />
       <brands v-else :brands="brands" />
     </div>
-    <div
-      v-else
-      class="spinner-border color-light"
-      style="width: 3rem; height: 3rem;"
-      role="status"
-    >
-      <span class="sr-only"></span>
+    <div v-else class="container-fluid text-center loader">
+      <div>
+        <img src="/identity/stars.png" class="img-fluid m-0" alt="AndoEnMoto-stars" />
+      </div>
+      <h2>{{this.$route.params.category}}</h2>
+
+      <div class="spinner-border color-light" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only"></span>
+      </div>
     </div>
   </div>
 </template>
@@ -111,7 +104,15 @@ export default {
   background: $main-gradient;
   transition: 1s ease-in;
 }
+.loader {
+  font-family: $typo;
+  color: $alpha-white;
+}
 .container-fluid {
   min-height: 100vh !important;
+  .color-light {
+    align-self: center;
+    color: #eee;
+  }
 }
 </style>

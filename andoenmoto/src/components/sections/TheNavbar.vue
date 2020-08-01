@@ -7,30 +7,18 @@
           :width="[notAuth ? 50 : 35]"
           :height="[notAuth ? 50 : 35]"
           class="d-inline-block align-top"
-          alt=""
+          alt
           id="logo-nav"
         />
       </router-link>
     </a>
     <div class="navbar-text overflow-auto">
-      <router-link
-        v-if="notAuth"
-        to="/profile/me"
-        class="d-flex justify-content-flex-end"
-      >
-        <avatar
-          :displayName="true"
-          :verticalAlignment="true"
-          :widthPx="50"
-          class="nav-avatar"
-        >
-        </avatar>
+      <router-link v-if="notAuth" to="/profile/me" class="d-flex justify-content-flex-end">
+        <avatar :displayName="true" :verticalAlignment="true" :widthPx="50" class="nav-avatar"></avatar>
       </router-link>
 
       <router-link to="/login" id="login-navbar" v-else>
-        <span>
-          Iniciar sesión
-        </span>
+        <span>Log in</span>
       </router-link>
     </div>
   </nav>
