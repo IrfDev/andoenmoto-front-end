@@ -13,15 +13,28 @@
           <avatar :widthPx="100" class="avatar-form-post" />
         </lightie-row>
         <div class="modal-header align-self-center">
-          <h5 class="modal-title alpha" id="exampleModalLabel">Subir reseña</h5>
+          <h5 class="modal-title alpha" id="exampleModalLabel">
+            Upload your review
+          </h5>
         </div>
         <div class="modal-body alpha">
           <form>
             <div class="form-group alpha" :class="{ super: newPost.title }">
-              <label for="recipient-name" class="alpha col-form-label">Title:</label>
-              <input v-model="newPost.title" type="text" class="form-control" id="title-name" />
+              <label for="recipient-name" class="alpha col-form-label"
+                >Title:</label
+              >
+              <input
+                v-model="newPost.title"
+                type="text"
+                class="form-control"
+                id="title-name"
+              />
             </div>
-            <div class="form-group mb-3" :class="{ super: newPost.category }" v-if="newPost.title">
+            <div
+              class="form-group mb-3"
+              :class="{ super: newPost.category }"
+              v-if="newPost.title"
+            >
               <label class="input-text" for="category-name">Category:</label>
               <select
                 v-model="newPost.category"
@@ -32,25 +45,63 @@
                   v-for="category in categories"
                   :key="category.id"
                   :value="category.id"
-                >{{ category.name }}</option>
+                  >{{ category.name }}</option
+                >
               </select>
             </div>
-            <div class="form-group mb-3" :class="{ super: newPost.brand }" v-if="newPost.category">
+            <div
+              class="form-group mb-3"
+              :class="{ super: newPost.brand }"
+              v-if="newPost.category"
+            >
               <label class="input-text" for="brand-name">Brand:</label>
-              <select v-model="newPost.brand" class="custom-select" id="brand-name">
-                <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{ brand.name }}</option>
+              <select
+                v-model="newPost.brand"
+                class="custom-select"
+                id="brand-name"
+              >
+                <option
+                  v-for="brand in brands"
+                  :key="brand.id"
+                  :value="brand.id"
+                  >{{ brand.name }}</option
+                >
               </select>
             </div>
 
-            <div class="form-group mb-3" :class="{ super: newPost.style }" v-if="newPost.brand">
+            <div
+              class="form-group mb-3"
+              :class="{ super: newPost.style }"
+              v-if="newPost.brand"
+            >
               <label class="input-text" for="style-name">Style:</label>
-              <select v-model="newPost.style" class="custom-select" id="style-name">
-                <option v-for="style in styles" :key="style.id" :value="style.id">{{ style.title }}</option>
+              <select
+                v-model="newPost.style"
+                class="custom-select"
+                id="style-name"
+              >
+                <option
+                  v-for="style in styles"
+                  :key="style.id"
+                  :value="style.id"
+                  >{{ style.title }}</option
+                >
               </select>
             </div>
-            <div class="form-group alpha" :class="{ super: newPost.model }" v-if="newPost.style">
-              <label for="recipient-name" class="alpha col-form-label">Model:</label>
-              <input v-model="newPost.model" type="text" class="form-control" id="model-name" />
+            <div
+              class="form-group alpha"
+              :class="{ super: newPost.model }"
+              v-if="newPost.style"
+            >
+              <label for="recipient-name" class="alpha col-form-label"
+                >Model:</label
+              >
+              <input
+                v-model="newPost.model"
+                type="text"
+                class="form-control"
+                id="model-name"
+              />
             </div>
 
             <media-input
@@ -68,20 +119,30 @@
             />
 
             <div class="form-group" v-if="newReview !== ''">
-              <label for="message-text" class="alpha col-form-label">Comments:</label>
-              <textarea v-model="newPost.content" class="form-control" id="message-text"></textarea>
+              <label for="message-text" class="alpha col-form-label"
+                >Comments:</label
+              >
+              <textarea
+                v-model="newPost.content"
+                class="form-control"
+                id="message-text"
+              ></textarea>
             </div>
           </form>
         </div>
 
         <div class="modal-footer d-flex justify-content-around">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
           <button
             @click="submitPost"
             data-dismiss="modal"
             type="button"
             class="btn btn-primary"
-          >Send Review</button>
+          >
+            Send Review
+          </button>
         </div>
       </div>
 
@@ -90,7 +151,9 @@
           <h4>Login to upload your review</h4>
           <div class="cta mt-4">
             <router-link class="go-to-login" to="/login">Log In</router-link>
-            <router-link class="go-to-login" to="/register">Register</router-link>
+            <router-link class="go-to-login" to="/register"
+              >Register</router-link
+            >
           </div>
         </div>
       </div>
@@ -306,5 +369,11 @@ h2 {
   background: #592323;
   border: none;
   font-family: $title;
+}
+
+.modal-footer {
+  button {
+    font-size: 1.5em;
+  }
 }
 </style>

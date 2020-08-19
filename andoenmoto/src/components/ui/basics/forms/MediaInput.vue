@@ -1,6 +1,6 @@
 <template>
   <div class="custom-file form-group">
-    <h4>{{ uploaded ? 'Tus archivos' : 'Sube tus archivos' }}</h4>
+    <h4>{{ uploaded ? 'Your files' : 'Upload your files' }}</h4>
     <div class="text-center" v-if="loading">
       <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
@@ -35,10 +35,10 @@
     </div>
     <div v-if="!addingMedia && !uploaded" class="cta d-flex justify-content-around">
       <div class="cta-image" @click.prevent="addMedia('image')">
-        <basic-button :content="'Añadir Imagen'" :main="true" />
+        <basic-button :content="'Upload Image'" :main="true" :isModal="true" />
       </div>
       <div class="cta-video" v-if="videoId === ''" @click.prevent="addMedia('video')">
-        <basic-button :content="'Añadir video'" :secondary="true" />
+        <basic-button :content="'Upload video'" :secondary="true" :isModal="true" />
       </div>
     </div>
     <div class="media-input" v-if="addingMedia">
@@ -109,7 +109,6 @@ export default {
     },
 
     addMedia(fileType) {
-      console.log(fileType);
       this.addingMedia = true;
       this.media = fileType;
     },
@@ -155,6 +154,7 @@ export default {
     color: white !important;
     padding: 2% 8%;
     border-radius: 8px;
+    font-size: 1em;
     border: none !important;
   }
 }

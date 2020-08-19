@@ -30,7 +30,7 @@ html {
   font-style: normal;
 }
 main {
-  padding-top: 5%;
+  // padding-top: 3%;
 }
 
 #nav {

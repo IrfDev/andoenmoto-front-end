@@ -30,7 +30,7 @@ export default new Vuex.Store({
             commit(
               `${resource}/SET_ITEM`,
               { resource, id: snapshot.key, item },
-              { root: true },
+              { root: true }
             );
             resolve(state[resource].items[id]);
           });
@@ -38,9 +38,8 @@ export default new Vuex.Store({
     },
 
     fetchItems({ dispatch }, { ids, resource }) {
-      console.log('[Fetching item]:', ids);
       return Promise.all(
-        ids.map((id) => dispatch('fetchItem', { id, resource })),
+        ids.map((id) => dispatch('fetchItem', { id, resource }))
       );
     },
   },

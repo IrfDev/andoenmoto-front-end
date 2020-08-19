@@ -59,7 +59,6 @@ export default {
   actions: {
     async fetchAuthUser({ commit, getters, dispatch }, userAuthObject) {
       const userInDB = await getters.findUser(userAuthObject.id);
-      console.log('[GetUser]', userAuthObject.id);
       if (userInDB) {
         firebase
           .database()
@@ -84,7 +83,7 @@ export default {
         const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
           if (user) {
             dispatch('fetchAuthUser', { user, id: user.uid }).then((dbUser) =>
-              resolve(dbUser),
+              resolve(dbUser)
             );
           } else {
             resolve(null);
@@ -118,7 +117,7 @@ export default {
 
     registerUser(
       { commit, state },
-      { email, name, username, avatar, gender = 'male', id },
+      { email, name, username, avatar, gender = 'male', id }
     ) {
       return new Promise((res) => {
         const registeredAt = Math.floor(Date.now() / 1000);

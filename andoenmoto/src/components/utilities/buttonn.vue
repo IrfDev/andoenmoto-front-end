@@ -1,5 +1,8 @@
 <template>
-  <button :class="{ secondary: secondary, main: main }" class="mt-3">
+  <button
+    :class="{ secondary: secondary, main: main, isModal: isModal }"
+    class="mt-3"
+  >
     {{ content }}
   </button>
 </template>
@@ -14,6 +17,7 @@ export default {
     },
     secondary: Boolean,
     main: Boolean,
+    isModal: Boolean,
   },
 };
 </script>
@@ -34,5 +38,12 @@ button {
   background: #fcac00;
   border-radius: 4px;
   color: $alpha;
+}
+
+.isModal {
+  font-size: 1em;
+  @media screen and(min-width:800px) {
+    font-size: 1.5em;
+  }
 }
 </style>

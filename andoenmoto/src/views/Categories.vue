@@ -1,9 +1,18 @@
 <template>
-  <div class="container-fluid pt-3" :class="{ style: categoryStyle, category: !categoryStyle }">
+  <div
+    class="container-fluid categories-view"
+    :class="{ style: categoryStyle, category: !categoryStyle }"
+  >
     <div v-if="asyncDataStatus_ready" class="category-content pb-5">
       <div class="row justify-content-center text-center">
-        <div class="col-12 justify-content-center align-items-center d-flex flex-column">
-          <img src="/identity/stars.png" class="img-fluid m-0" alt="AndoEnMoto-stars" />
+        <div
+          class="col-12 justify-content-center align-items-center d-flex flex-column"
+        >
+          <img
+            src="/identity/stars.png"
+            class="img-fluid m-0"
+            alt="AndoEnMoto-stars"
+          />
           <category-badge
             :colWidth="category.colWidth"
             :image="category.image"
@@ -30,11 +39,19 @@
     </div>
     <div v-else class="container-fluid text-center loader">
       <div>
-        <img src="/identity/stars.png" class="img-fluid m-0" alt="AndoEnMoto-stars" />
+        <img
+          src="/identity/stars.png"
+          class="img-fluid m-0"
+          alt="AndoEnMoto-stars"
+        />
       </div>
-      <h2>{{this.$route.params.category}}</h2>
+      <h2>{{ this.$route.params.category }}</h2>
 
-      <div class="spinner-border color-light" style="width: 3rem; height: 3rem;" role="status">
+      <div
+        class="spinner-border color-light"
+        style="width: 3rem; height: 3rem;"
+        role="status"
+      >
         <span class="sr-only"></span>
       </div>
     </div>
@@ -75,6 +92,27 @@ export default {
 
     this.asyncDataStatus_fetched();
   },
+
+  metaInfo() {
+    return {
+      title: `${this.category.name} category | AndoEnMoto 🏍`,
+      meta: [
+        {
+          name: 'description',
+          content:
+            'AndoEnMoto is the webapp for upload your reviews for Motorcycle products. Helmets, Jackets, Bikes, etc.',
+        },
+        {
+          property: 'og:title',
+          content: 'AndoEnMoto',
+        },
+        { property: 'og:site_name', content: 'AndoEnMoto' },
+        { property: 'og:type', content: 'website' },
+        { name: 'robots', content: 'index,follow' },
+      ],
+    };
+  },
+
   computed: {
     ...mapState({
       category: (state) => state.categories.activeItem,
@@ -93,16 +131,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.categories-view {
+  padding-top: 18%;
+  @media screen and (min-width: 800px) {
+    padding-top: 5%;
+  }
+}
+
 .category {
-  background: white;
-  transition: 1s ease-in;
+  background-color: white;
+  transition: all 2s ease-in;
   .category-badge {
+    transition: all 0.6s ease-in;
     filter: invert(100%);
   }
 }
 .style {
   background: $main-gradient;
-  transition: 1s ease-in;
+  transition: all 2s ease-in;
+  .category-badge {
+    transition: all 0.6s ease-in;
+  }
 }
 .loader {
   font-family: $typo;

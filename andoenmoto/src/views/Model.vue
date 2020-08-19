@@ -1,5 +1,5 @@
 <template>
-  <div v-if="asyncDataStatus_ready" class="models pb-3 pt-2 text-center">
+  <div v-if="asyncDataStatus_ready" class="models pb-3  text-center model-view">
     <thundie-row>
       <h1>{{ activeModel.name }}</h1>
     </thundie-row>
@@ -8,7 +8,7 @@
     <horizontal-fotos :fotos="fotos" class="d-md-none" />
     <galery-photos :fotos="fotos" class="d-md-flex d-none" />
 
-    <h3 class="typo-font-size title mt-5 mb-5">Posts</h3>
+    <h3 class="typo-font-size title mt-3 mb-3">Posts</h3>
 
     <horizontal-posts :posts="posts" />
     <fixed-ctas />
@@ -72,6 +72,26 @@ export default {
 
   mixins: [asyncDataStatus],
 
+  metaInfo() {
+    return {
+      title: `${this.activeModel.name} ${this.activeBrand.name} | AndoEnMoto 🏍`,
+      meta: [
+        {
+          name: 'description',
+          content:
+            'AndoEnMoto is the webapp for upload your reviews for Motorcycle products. Helmets, Jackets, Bikes, etc.',
+        },
+        {
+          property: 'og:title',
+          content: 'AndoEnMoto',
+        },
+        { property: 'og:site_name', content: 'AndoEnMoto' },
+        { property: 'og:type', content: 'website' },
+        { name: 'robots', content: 'index,follow' },
+      ],
+    };
+  },
+
   computed: {
     ...mapState({
       activeModel: (state) => state.models.activeItem,
@@ -108,6 +128,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.model-view {
+  padding-top: 15%;
+  @media screen and (min-width: 800px) {
+    padding-top: 5%;
+  }
+}
+
 h1 {
   font-family: $title;
   font-weight: normal;

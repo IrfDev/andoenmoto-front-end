@@ -1,6 +1,6 @@
 <template>
   <div v-if="asyncDataStatus_ready" class="models">
-    <div class="row m-0 justify-content-center text-center flex-column">
+    <div class="row m-0 models-view justify-content-center text-center flex-column">
       <wings-row>
         <h1>{{ activeStyle.title }}</h1>
       </wings-row>
@@ -19,11 +19,7 @@
   </div>
   <div class="models" v-else>
     <wings-row>
-      <div
-        class="spinner-grow text-light"
-        style="width: 3rem; height: 3rem;"
-        role="status"
-      >
+      <div class="spinner-grow text-light" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only"></span>
       </div>
     </wings-row>
@@ -64,6 +60,26 @@ export default {
     }),
   },
 
+  metaInfo() {
+    return {
+      title: `${this.activeBrand.name} ${this.activeStyle.title}  | AndoEnMoto 🏍`,
+      meta: [
+        {
+          name: 'description',
+          content:
+            'AndoEnMoto is the webapp for upload your reviews for Motorcycle products. Helmets, Jackets, Bikes, etc.',
+        },
+        {
+          property: 'og:title',
+          content: 'AndoEnMoto',
+        },
+        { property: 'og:site_name', content: 'AndoEnMoto' },
+        { property: 'og:type', content: 'website' },
+        { name: 'robots', content: 'index,follow' },
+      ],
+    };
+  },
+
   methods: {
     ...mapActions({
       fetchAllModels: 'models/fetchAllModels',
@@ -73,7 +89,6 @@ export default {
     }),
 
     goToModel(model) {
-      console.log(model);
       this.$store.commit('models/SET_ACTIVE_MODEL', model);
       this.$router.push({
         name: 'categories-style-models-model',
@@ -90,6 +105,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.models-view {
+  padding-top: 15%;
+  @media screen and (min-width: 800px) {
+    padding-top: 5%;
+  }
+}
+
 h1 {
   font-family: $typo;
   color: $alpha-white;

@@ -1,13 +1,8 @@
 <template>
-  <div class="container-fluid pt-3 home">
+  <div class="container-fluid home justify-content-center align-items-center">
     <Header class="pb-3" @clickReviews="scrollToCategories" />
     <categories v-if="asyncDataStatus_ready" />
-    <div
-      v-else
-      class="spinner-grow"
-      style="width: 3rem; height: 3rem;"
-      role="status"
-    >
+    <div v-else class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
       <span class="sr-only"></span>
     </div>
   </div>
@@ -32,7 +27,7 @@ export default {
   methods: {
     scrollToCategories() {
       let el = this.$el.getElementsByClassName('categories-home')[0];
-      console.log(el);
+
       el.scrollIntoView({ behavior: 'smooth' });
     },
 
@@ -49,12 +44,36 @@ export default {
     await this.fetchAllCategories();
     this.asyncDataStatus_fetched();
   },
+
+  metaInfo() {
+    return {
+      title: 'Home | AndoEnMoto 🏍',
+      meta: [
+        {
+          name: 'description',
+          content:
+            'AndoEnMoto is the webapp for upload your reviews for Motorcycle products. Helmets, Jackets, Bikes, etc.',
+        },
+        {
+          property: 'og:title',
+          content: 'AndoEnMoto',
+        },
+        { property: 'og:site_name', content: 'AndoEnMoto' },
+        { property: 'og:type', content: 'website' },
+        { name: 'robots', content: 'index,follow' },
+      ],
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .home {
   min-height: 100vh;
+  padding-top: 15%;
+  @media screen and (min-width: 800px) {
+    padding-top: 05%;
+  }
 }
 * {
   background: $alpha;

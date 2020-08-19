@@ -11,6 +11,8 @@ import LightieRow from '@/components/utilities/LightieRow.vue';
 import firebase from 'firebase';
 import vuelidate from 'vuelidate';
 
+import VueMeta from 'vue-meta';
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -40,7 +42,6 @@ Vue.component('LightieRow', LightieRow);
 Vue.component('ThundieRow', ThundieRow);
 
 router.beforeEach((to, from, next) => {
-  console.log('Router');
   // store.dispatch('auth/initAuthentication');
   if (to.matched.some((route) => route.meta.requiresAuth)) {
     if (store.state.auth.authId) {
@@ -64,6 +65,8 @@ Vue.use(vuelidate);
 Vue.prototype.$analytics = firebase.analytics();
 
 Vue.config.productionTip = false;
+
+Vue.use(VueMeta);
 
 new Vue({
   router,

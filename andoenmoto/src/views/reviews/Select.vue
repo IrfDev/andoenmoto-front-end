@@ -1,15 +1,15 @@
 <template>
   <div
     v-if="asyncDataStatus_ready"
-    class="container-fluid text-center"
+    class="container-fluid text-center select-view"
     :class="{ style: !selected, brands: selected }"
   >
     <div class="row m-0">
       <div class="col-12">
         <wings-row>
-          <h1
-            class="typo-font-size title wingie"
-          >{{ !selected ? activeStyle.title : activeBrand.name }}</h1>
+          <h1 class="typo-font-size title wingie">
+            {{ !selected ? activeStyle.title : activeBrand.name }}
+          </h1>
         </wings-row>
         <h2 class="mt-1">{{ activeCategory.name }}</h2>
       </div>
@@ -19,7 +19,11 @@
   </div>
   <div v-else class="container-fluid style">
     <wings-row>
-      <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
+      <div
+        class="spinner-border text-light"
+        style="width: 3rem; height: 3rem;"
+        role="status"
+      >
         <span class="sr-only"></span>
       </div>
     </wings-row>
@@ -79,6 +83,26 @@ export default {
     this.asyncDataStatus_fetched();
   },
 
+  metaInfo() {
+    return {
+      title: `${this.activeCategory.name} category | AndoEnMoto 🏍`,
+      meta: [
+        {
+          name: 'description',
+          content:
+            'AndoEnMoto is the webapp for upload your reviews for Motorcycle products. Helmets, Jackets, Bikes, etc.',
+        },
+        {
+          property: 'og:title',
+          content: 'AndoEnMoto',
+        },
+        { property: 'og:site_name', content: 'AndoEnMoto' },
+        { property: 'og:type', content: 'website' },
+        { name: 'robots', content: 'index,follow' },
+      ],
+    };
+  },
+
   computed: {
     ...mapState({
       activeBrand: (state) => state.brands.activeItem,
@@ -109,6 +133,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.select-view {
+  padding-top: 15%;
+  @media screen and (min-width: 800px) {
+    padding-top: 5%;
+  }
+}
+
 .container-fluid {
   min-height: 100vh;
 }

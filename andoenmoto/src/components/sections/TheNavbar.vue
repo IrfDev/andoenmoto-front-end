@@ -10,8 +10,8 @@
       <router-link to="/">
         <img
           src="/identity/logo.png"
-          :width="[notAuth ? 50 : 35]"
-          :height="[notAuth ? 50 : 35]"
+          :width="[notAuth ? 30 : 35]"
+          :height="[notAuth ? 30 : 35]"
           class="d-inline-block align-top"
           alt
           id="logo-nav"
@@ -48,7 +48,7 @@ export default {
 }
 .navbar {
   background: #fcac00;
-  padding: 0.1rem 1rem;
+  padding: 0rem 1rem;
   position: fixed;
   width: 100%;
   z-index: 100;
@@ -56,7 +56,7 @@ export default {
 
 @media (min-width: 1200px) {
   .navbar {
-    padding: 0.4rem 1rem;
+    padding: 0rem 1rem;
   }
 }
 

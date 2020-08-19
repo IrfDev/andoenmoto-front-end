@@ -11,7 +11,6 @@ export default {
   getters: {
     activeCategory: (state) => (categoryName) =>
       Object.values(state.items).find((category) => {
-        console.log(category);
         return category.name === categoryName;
       }),
   },
@@ -72,7 +71,7 @@ export default {
               commit(
                 'SET_ITEM',
                 { resource: 'categories', id: categoryId, item: category },
-                { root: true },
+                { root: true }
               );
             });
             resolve(Object.values(state.items));

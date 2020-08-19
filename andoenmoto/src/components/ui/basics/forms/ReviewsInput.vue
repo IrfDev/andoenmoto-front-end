@@ -1,8 +1,6 @@
 <template>
   <div class="alpha mt-5">
-    <h4>
-      {{ uploaded ? 'Tus calificaciones' : 'Califica sus características' }}
-    </h4>
+    <h4>{{ uploaded ? 'Tus calificaciones' : 'Califica sus características' }}</h4>
     <div class="review-preview d-flex">
       <div
         class="individual-review m-4"
@@ -11,11 +9,7 @@
         )"
         :key="completeReviewIndex"
       >
-        <i
-          class="fa fa-check-circle"
-          style=" color:green;"
-          aria-hidden="true"
-        ></i>
+        <i class="fa fa-check-circle" style=" color:green;" aria-hidden="true"></i>
         <p>{{ completeReview }}</p>
       </div>
     </div>
@@ -35,37 +29,23 @@
     </div>
     <div class="select-feature" v-if="addingFeature && !uploaded">
       <div class="input-feature" v-if="selectedFeature === ''">
-        <label for="recipient-name" class="alpha col-form-label"
-          >¿Qué característica?</label
-        >
+        <label for="recipient-name" class="alpha col-form-label">¿Qué característica?</label>
         <select v-model="selectedFeature" class="custom-select" id="brand-name">
           <option
             v-for="(feature, featureIndex) in features"
             class="input-feature"
             :key="featureIndex"
             :value="feature"
-            >{{ feature }}</option
-          >
+          >{{ feature }}</option>
         </select>
       </div>
       <div class="review-feature" v-if="selectedFeature !== ''">
         <label for="customRange1">{{ selectedFeature }}</label>
-        <input
-          v-model="featureReview"
-          type="range"
-          class="custom-range"
-          id="customRange1"
-        />
-        <a class="cta-add-review-q" @click="pushReviewToGlobalReviews"
-          >Añadir calaficación</a
-        >
+        <input v-model="featureReview" type="range" class="custom-range" id="customRange1" />
+        <a class="cta-add-review-q" @click="pushReviewToGlobalReviews">Añadir calaficación</a>
       </div>
     </div>
-    <div
-      class="cta-upload-review mt-4"
-      v-if="ready && !uploaded"
-      @click="uploadReview"
-    >
+    <div class="cta-upload-review mt-4" v-if="ready && !uploaded" @click="uploadReview">
       <button :main="true">
         <i class="fa fa-check" aria-hidden="true"></i>
         Subir calificaciones
@@ -106,7 +86,6 @@ export default {
 
     deleteReview(completeReview) {
       delete this.featureReviews[completeReview];
-      console.log('deleted');
     },
   },
 

@@ -15,7 +15,7 @@ export default {
         (model) =>
           model.brand === rootState.brands.activeItem.id &&
           model.category === rootState.categories.activeItem.id &&
-          model.style === rootState.styles.activeItem.id,
+          model.style === rootState.styles.activeItem.id
       );
     },
 
@@ -69,11 +69,11 @@ export default {
           .equalTo(modelName)
           .on('value', (snapshot) => {
             const modelKeyObject = snapshot.val();
-            console.log(modelKeyObject);
+
             const modelId = Object.keys(modelKeyObject);
-            console.log(modelId[0]);
+
             const modelObject = modelKeyObject[modelId[0]];
-            console.log(modelObject);
+
             commit('SET_ACTIVE_MODEL', {
               ...modelObject,
               id: modelId[0],
@@ -96,7 +96,7 @@ export default {
               commit(
                 'SET_ITEM',
                 { resource: 'models', id: categoryId, item: category },
-                { root: true },
+                { root: true }
               );
             });
             resolve(Object.values(state.items));

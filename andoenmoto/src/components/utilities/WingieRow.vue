@@ -4,7 +4,7 @@
     <div>
       <slot />
     </div>
-    <img src="/images/util/right-wing.png" alt="wing-row" />
+    <img src="/images/util/right-wing.png" alt="wing-row" class="img-fluid" />
   </div>
 </template>
 
@@ -15,17 +15,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media (min-width: 768px) {
-  img {
-    margin: 0px 10px;
-    width: 12%;
-  }
-}
 img {
   margin: 0px 5px;
+  width: 27%;
 }
 h1 {
   font-family: $typo;
   color: white;
+}
+@media (min-width: 800px) {
+  img {
+    margin: 0px 10px;
+    width: 12%;
+  }
 }
 </style>
