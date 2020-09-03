@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid home justify-content-center align-items-center">
     <Header class="pb-3" @clickReviews="scrollToCategories" />
-    <div class="row m-0 justify-content-around badges-row m-auto">
+    <div class="row m-0 justify-content-around badges-row m-auto" id="badges-features">
       <div class="col-12">
         <h2 class="title-section">Start now</h2>
       </div>
-      <div class="col-lg-3 col-4">
+      <div class="col-lg-3 col-4 in-edge">
         <img src="/home/easy.png" alt="Easy" class="img-fluid" />
         <p>Easy to use</p>
       </div>
@@ -13,7 +13,7 @@
         <img src="/home/smart.png" alt="Smart" class="img-fluid" />
         <p>Find reviews</p>
       </div>
-      <div class="col-lg-3 col-4">
+      <div class="col-lg-3 col-4 in-edge">
         <img src="/home/help.png" alt="Help" class="img-fluid" />
         <p>Smart shopping</p>
       </div>
@@ -33,6 +33,10 @@ import { mapActions } from 'vuex';
 
 import asyncDataStatus from '@/mixins/asyncDataStatus';
 
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Home',
 
@@ -42,6 +46,27 @@ export default {
   },
 
   methods: {
+    startAnimation() {
+      const badgesTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#badges-features',
+          start: 'top 90%',
+          end: 'bottom center',
+          scrub: true,
+        },
+      });
+
+      badgesTl.addLabel('Badges').fromTo(
+        '#badges-features .in-edge',
+        {
+          transform: 'translateY(5em)',
+        },
+        {
+          transform: 'translateY(0)',
+        }
+      );
+    },
+
     scrollToCategories() {
       let el = this.$el.getElementsByClassName('categories-home')[0];
 
@@ -56,6 +81,10 @@ export default {
   },
 
   mixins: [asyncDataStatus],
+
+  mounted() {
+    this.startAnimation();
+  },
 
   async created() {
     await this.fetchAllCategories();

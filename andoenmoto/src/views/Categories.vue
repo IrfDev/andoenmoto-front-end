@@ -1,12 +1,13 @@
 <template>
   <div
     class="container-fluid categories-view"
+    id="categories-view"
     :class="{ style: categoryStyle, category: !categoryStyle }"
   >
     <div v-if="asyncDataStatus_ready" class="category-content pb-5">
       <div class="row justify-content-center text-center">
         <div class="col-12 justify-content-center align-items-center d-flex flex-column">
-          <img src="/identity/stars.png" class="img-fluid m-0" alt="AndoEnMoto-stars" />
+          <img src="/identity/stars.png" class="img-fluid stars-img m-0" alt="AndoEnMoto-stars" />
           <category-badge
             :colWidth="category.colWidth"
             :image="category.image"
@@ -52,6 +53,10 @@ import Brands from '@/components/sections/selection/Brands.vue';
 import { mapActions, mapState } from 'vuex';
 import asyncDataStatus from '@/mixins/asyncDataStatus';
 
+import { gsap, TweenMax } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Categoriess',
   components: {
@@ -59,14 +64,35 @@ export default {
     Brands,
     Styles,
   },
+
   mixins: [asyncDataStatus],
+
   methods: {
+    startAnimation() {
+      () => {
+        TweenMax.from('#categories-view', {
+          duration: 0.5,
+          opacity: 0,
+          scale: 0.1,
+          filter: 'blur(7px)',
+          y: 100,
+          ease: 'power1',
+          stagger: {
+            each: 0.1,
+            from: 'top',
+          },
+        });
+      };
+      a();
+    },
+
     ...mapActions({
       findCategory: 'categories/findCategory',
       fetchBrands: 'brands/fetchBrands',
       fetchStyles: 'styles/fetchStyles',
     }),
   },
+
   async beforeMount() {
     await this.findCategory(this.$route.params.category);
     await this.fetchBrands(

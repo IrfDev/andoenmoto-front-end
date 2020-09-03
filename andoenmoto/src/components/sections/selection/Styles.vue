@@ -6,7 +6,7 @@
       :key="styleIndex"
       @click="styleSelected(style)"
     >
-      <style-card v-bind="style" />
+      <style-card v-bind="style" class="item-animate" />
     </div>
   </div>
 </template>

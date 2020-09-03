@@ -151,3 +151,10 @@ $bolder: 800;
 .TopCase-background {
   background: $main-gradient;
 }
+
+.stars-img {
+  max-height: 1.5em;
+  @media screen and (min-width: 800px) {
+    max-height: 2.5em;
+  }
+}
