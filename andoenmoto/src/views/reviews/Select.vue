@@ -78,7 +78,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.activeCategory.name} category | AndoEnMoto 🏍`,
+      title: `${this.activeCategory.name || 'Loading'} category | AndoEnMoto 🏍`,
       meta: [
         {
           name: 'description',

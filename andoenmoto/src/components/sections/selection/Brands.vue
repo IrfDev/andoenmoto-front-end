@@ -1,7 +1,7 @@
 <template>
-  <div class="row m-0 pl-5 pr-5 justify-content-center">
+  <div class="row m-0 pl-lg-5 pr-lg-5 justify-content-center">
     <div
-      class="col-md-4 mt-4 col-10 brand-wrapper align-content-center brand-column"
+      class="col-md-4 mt-4 col-6 brand-wrapper align-content-center brand-column item-animate"
       v-for="(brand, brandIndex) in brands"
       :key="brandIndex"
       @click="brandSelected(brand)"

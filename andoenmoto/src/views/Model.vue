@@ -7,9 +7,7 @@
     <h3 class="typo-font-siz title mt-3">Gallery</h3>
     <horizontal-fotos :fotos="fotos" class="d-md-none" />
     <galery-photos :fotos="fotos" class="d-md-flex d-none" />
-
     <h3 class="typo-font-siz title mt-3 mb-3">Posts</h3>
-
     <horizontal-posts :posts="posts" />
     <fixed-ctas />
     <post-form class="fade" />

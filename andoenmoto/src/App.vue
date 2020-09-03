@@ -57,4 +57,17 @@ html {
     }
   }
 }
+
+@keyframes yourAnimation {
+  0% {
+    opacity: 0;
+  }
+  98% {
+    opacity: 1;
+  }
+}
+
+.item-animate {
+  animation: yourAnimation 1s forwards 0s linear;
+}
 </style>
