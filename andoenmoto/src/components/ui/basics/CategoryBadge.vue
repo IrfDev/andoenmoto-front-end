@@ -18,8 +18,8 @@
     </div>
 
     <div class="badge-title m-0">
-      <h2 v-if="reverse">{{ name }}</h2>
-      <h3 v-else>{{ name }}</h3>
+      <h2 v-if="reverse">{{ name | translateName }}</h2>
+      <h3 v-else>{{ name | translateName }}</h3>
     </div>
   </div>
 </template>
@@ -27,6 +27,7 @@
 <script>
 export default {
   name: 'CategoryBadge',
+
   methods: {
     async activateCategoryy(category) {
       if (this.$route.name !== 'categories-style') {
@@ -38,6 +39,23 @@ export default {
       }
     },
   },
+
+  filters: {
+    translateName: (name) => {
+      switch (name) {
+        case 'Motocicletas':
+          return 'Motorcycles';
+        case 'Accesorios':
+          return 'Accesories';
+        case 'Refacciones':
+          return 'Parts';
+
+        default:
+          return name;
+      }
+    },
+  },
+
   props: {
     name: {
       type: String,
@@ -63,6 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 .category-home {
+  cursor: pointer;
   transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   img,
   h2,

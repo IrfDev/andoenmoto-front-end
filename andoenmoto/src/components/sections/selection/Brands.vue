@@ -1,5 +1,5 @@
 <template>
-  <div class="row m-0 justify-content-center">
+  <div class="row m-0 pl-5 pr-5 justify-content-center">
     <div
       class="col-md-4 mt-4 col-10 brand-wrapper align-content-center brand-column"
       v-for="(brand, brandIndex) in brands"

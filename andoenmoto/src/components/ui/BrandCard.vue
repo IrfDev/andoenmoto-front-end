@@ -1,11 +1,12 @@
 <template>
   <div class="card">
-    <div class="card-body d-flex align-items-center flex-row">
-      <img
-        :src="`/images/brands/${brand}.png`"
-        :alt="brand"
-        class="img-fluid"
-      />
+    <div
+      class="card-body d-flex align-items-center flex-row"
+      data-toggle="tooltip"
+      data-placement="top"
+      :title="brand"
+    >
+      <img :src="`/images/brands/${brand}.png`" :alt="brand" class="img-fluid" />
     </div>
   </div>
 </template>
@@ -29,11 +30,19 @@ export default {
 
 <style lang="scss" scoped>
 .card {
+  cursor: pointer;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
-  height: 100%;
+  height: 7em;
   img {
+    transition: all 0.3s ease-out;
     margin: 0 auto;
     max-height: 5em;
+  }
+  &:hover {
+    img {
+      transition: all 0.2s ease-in;
+      max-height: 5.5em;
+    }
   }
 }
 </style>

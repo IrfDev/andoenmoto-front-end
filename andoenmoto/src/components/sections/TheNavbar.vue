@@ -10,7 +10,6 @@
       <router-link to="/">
         <img
           src="/identity/logo.png"
-          :width="[notAuth ? 30 : 35]"
           :height="[notAuth ? 30 : 35]"
           class="d-inline-block align-top"
           alt
@@ -62,6 +61,9 @@ export default {
 
 .navbar-text {
   justify-self: end;
+}
+a {
+  cursor: pointer;
 }
 #logo-nav {
   filter: invert(100);

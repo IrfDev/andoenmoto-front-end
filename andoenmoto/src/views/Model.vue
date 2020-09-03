@@ -1,14 +1,14 @@
 <template>
-  <div v-if="asyncDataStatus_ready" class="models pb-3  text-center model-view">
+  <div v-if="asyncDataStatus_ready" class="models pb-5 text-center model-view">
     <thundie-row>
       <h1>{{ activeModel.name }}</h1>
     </thundie-row>
-    <h2>By {{ activeBrand.name }}</h2>
-    <h2 class="typo-font-size title mt-5 mb-5">Galery</h2>
+    <h5>By {{ activeBrand.name }}</h5>
+    <h3 class="typo-font-siz title mt-3">Gallery</h3>
     <horizontal-fotos :fotos="fotos" class="d-md-none" />
     <galery-photos :fotos="fotos" class="d-md-flex d-none" />
 
-    <h3 class="typo-font-size title mt-3 mb-3">Posts</h3>
+    <h3 class="typo-font-siz title mt-3 mb-3">Posts</h3>
 
     <horizontal-posts :posts="posts" />
     <fixed-ctas />
@@ -16,11 +16,7 @@
   </div>
   <div class="models" v-else>
     <thundie-row>
-      <div
-        class="spinner-border text-light"
-        style="width: 3rem; height: 3rem;"
-        role="status"
-      >
+      <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only"></span>
       </div>
     </thundie-row>
@@ -74,7 +70,9 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.activeModel.name} ${this.activeBrand.name} | AndoEnMoto 🏍`,
+      title: `${this.activeModel.name || 'Cargando'} ${
+        this.activeBrand.name || 'Andoenmoto'
+      } | AndoEnMoto 🏍`,
       meta: [
         {
           name: 'description',
@@ -136,14 +134,15 @@ export default {
 }
 
 h1 {
-  font-family: $title;
+  font-family: $typo;
   font-weight: normal;
   color: $alpha-white;
 }
 
 h2,
-h3 {
-  font-family: $typo;
+h3,
+h5 {
+  font-family: $title;
   color: $alpha-white;
 }
 

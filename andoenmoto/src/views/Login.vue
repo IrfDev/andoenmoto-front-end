@@ -1,6 +1,6 @@
 <template>
   <div class="column-fluid login align-items-center">
-    <div class="row m-0 justify-content-center">
+    <div class="row m-0 p-lg-5 justify-content-center">
       <div class="align-items-center col-12 mt-4 mt-md-5">
         <thundie-row>
           <h1>SignIn</h1>
@@ -9,7 +9,7 @@
 
       <div class="text-center cta-facebook col-10 mt-3 order-md-2 justify-content-center">
         <button @click="registerFacebook" class="btn-red btn-xsmall">
-          Sign In
+          Login
           <i class="fa fa-facebook fa-btn" />
         </button>
       </div>

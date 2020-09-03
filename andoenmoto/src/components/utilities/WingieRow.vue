@@ -15,6 +15,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wingie {
+  z-index: 5;
+}
 img {
   margin: 0px 5px;
   width: 27%;

@@ -2,9 +2,12 @@
   <div v-if="asyncDataStatus_ready" class="models">
     <div class="row m-0 models-view justify-content-center text-center flex-column">
       <wings-row>
-        <h1>{{ activeStyle.title }}</h1>
+        <h1>{{ activeCategory.name | translateName}}</h1>
       </wings-row>
-      <h2>{{ activeBrand.name }}</h2>
+
+      <h3>~{{ activeBrand.name }}</h3>
+
+      <h4>{{ activeStyle.title }}</h4>
     </div>
     <div class="row m-0 justify-content-center align-items-stretch">
       <div
@@ -57,12 +60,15 @@ export default {
     ...mapState({
       activeBrand: (state) => state.brands.activeItem,
       activeStyle: (state) => state.styles.activeItem,
+      activeCategory: (state) => state.categories.activeItem,
     }),
   },
 
   metaInfo() {
     return {
-      title: `${this.activeBrand.name} ${this.activeStyle.title}  | AndoEnMoto 🏍`,
+      title: `${this.activeBrand.name || 'Cargando'} ${
+        this.activeStyle.title || 'AndoEnMoto'
+      }  | AndoEnMoto 🏍`,
       meta: [
         {
           name: 'description',
@@ -83,8 +89,11 @@ export default {
   methods: {
     ...mapActions({
       fetchAllModels: 'models/fetchAllModels',
+
       findCategory: 'categories/findCategory',
+
       findAndActiveBrand: 'brands/findAndActiveBrand',
+
       findAndActiveStyle: 'styles/findAndActiveStyle',
     }),
 
@@ -116,7 +125,8 @@ h1 {
   font-family: $typo;
   color: $alpha-white;
 }
-h2 {
+h3,
+h4 {
   font-family: $title;
   color: $alpha-white;
 }

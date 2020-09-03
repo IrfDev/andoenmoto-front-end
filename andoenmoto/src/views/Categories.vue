@@ -5,14 +5,8 @@
   >
     <div v-if="asyncDataStatus_ready" class="category-content pb-5">
       <div class="row justify-content-center text-center">
-        <div
-          class="col-12 justify-content-center align-items-center d-flex flex-column"
-        >
-          <img
-            src="/identity/stars.png"
-            class="img-fluid m-0"
-            alt="AndoEnMoto-stars"
-          />
+        <div class="col-12 justify-content-center align-items-center d-flex flex-column">
+          <img src="/identity/stars.png" class="img-fluid m-0" alt="AndoEnMoto-stars" />
           <category-badge
             :colWidth="category.colWidth"
             :image="category.image"
@@ -39,19 +33,11 @@
     </div>
     <div v-else class="container-fluid text-center loader">
       <div>
-        <img
-          src="/identity/stars.png"
-          class="img-fluid m-0"
-          alt="AndoEnMoto-stars"
-        />
+        <img src="/identity/stars.png" class="img-fluid m-0" alt="AndoEnMoto-stars" />
       </div>
       <h2>{{ this.$route.params.category }}</h2>
 
-      <div
-        class="spinner-border color-light"
-        style="width: 3rem; height: 3rem;"
-        role="status"
-      >
+      <div class="spinner-border color-light" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only"></span>
       </div>
     </div>

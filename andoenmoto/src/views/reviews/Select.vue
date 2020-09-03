@@ -5,13 +5,11 @@
     :class="{ style: !selected, brands: selected }"
   >
     <div class="row m-0">
-      <div class="col-12">
+      <div class="col-12 mt-4">
         <wings-row>
-          <h1 class="typo-font-size title wingie">
-            {{ !selected ? activeStyle.title : activeBrand.name }}
-          </h1>
+          <h2 class="typo-font-siz title wingie">{{ activeCategory.name | translateName }}</h2>
         </wings-row>
-        <h2 class="mt-1">{{ activeCategory.name }}</h2>
+        <h3>{{ !selected ? activeStyle.title : activeBrand.name }}</h3>
       </div>
     </div>
     <brands :brands="brands" v-if="!selected" />
@@ -19,11 +17,7 @@
   </div>
   <div v-else class="container-fluid style">
     <wings-row>
-      <div
-        class="spinner-border text-light"
-        style="width: 3rem; height: 3rem;"
-        role="status"
-      >
+      <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only"></span>
       </div>
     </wings-row>
@@ -75,8 +69,7 @@ export default {
       await this.fetchStyles(stylesTofetch);
     } else {
       await this.findAndActiveStyle(this.$route.params.style);
-      /* This dispatch only works for this view. 
-      Because use the activeItem state from Categories and Styles */
+
       await this.fetchCategoryStyleBrands();
     }
 
@@ -104,6 +97,16 @@ export default {
   },
 
   computed: {
+    // brands() {
+    //   return this.$store.state.brands.filterItems;
+    // },
+    // activeCategory() {
+    //   return this.$store.state.categories.activeItem;
+    // },
+    selected() {
+      return this.$route.params.brand;
+    },
+
     ...mapState({
       activeBrand: (state) => state.brands.activeItem,
 
@@ -115,19 +118,6 @@ export default {
 
       styles: (state) => state.styles.items,
     }),
-
-    // brands() {
-    //   return this.$store.state.brands.filterItems;
-    // },
-    // activeCategory() {
-    //   return this.$store.state.categories.activeItem;
-    // },
-    selected() {
-      return this.$route.params.brand;
-    },
-    // styles() {
-    //   return this.$store.state.styles.items;
-    // },
   },
 };
 </script>
@@ -136,7 +126,7 @@ export default {
 .select-view {
   padding-top: 15%;
   @media screen and (min-width: 800px) {
-    padding-top: 5%;
+    padding-top: 1.5%;
   }
 }
 
@@ -144,11 +134,11 @@ export default {
   min-height: 100vh;
 }
 
-h1 {
+h2 {
   font-family: $typo;
 }
 
-h2 {
+h3 {
   font-family: $title;
 }
 
@@ -158,10 +148,10 @@ h2 {
   .category-badge {
     filter: invert(100%);
   }
-  h1 {
+  h2 {
     color: $alpha;
   }
-  h2 {
+  h3 {
     color: $alpha;
   }
 }
@@ -169,10 +159,10 @@ h2 {
 .style {
   background: $main-gradient;
   transition: 1s ease-in;
-  h1 {
+  h2 {
     color: white;
   }
-  h2 {
+  h3 {
     color: white;
   }
 }

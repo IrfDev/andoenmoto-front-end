@@ -8,7 +8,7 @@
           class="carousel-item"
           :class="{active: urlIndex === activeStep}"
         >
-          <img :src="url" class="d-block img-fluid" alt="/bgs/sporter.png" />
+          <img :src="url" class="d-block img-fluid w-100" alt="/bgs/sporter.png" />
         </div>
       </div>
       <a

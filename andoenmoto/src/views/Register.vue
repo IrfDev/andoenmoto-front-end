@@ -1,6 +1,6 @@
 <template>
   <div class="column-fluid register">
-    <div class="row m-0 justify-content-center">
+    <div class="row m-0 pt-lg-5 justify-content-center">
       <div class="col-12">
         <wings-row>
           <h1 class="text-center">Sign up</h1>

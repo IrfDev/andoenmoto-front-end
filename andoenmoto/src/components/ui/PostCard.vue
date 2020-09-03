@@ -1,22 +1,24 @@
 <template>
   <div class="card post-card" :style="`background: ${bgColor}`">
     <div class="card-header">
-      <h4>{{ post.title }}</h4>
+      <h5>{{ post.title }}</h5>
     </div>
     <div class="card-body d-flex flex-column align-content-start">
       <p>{{ post.content }}</p>
     </div>
-    <div class="card-footer d-flex">
-      <router-link :to="{ name: 'profile-page-nam', params: { profileId: post.user } }">
-        <avatar
-          :widthPer="80"
-          :userId="post.user"
-          :auth="false"
-          :displayName="true"
-          :reverse="true"
-          class="avatar-post"
-        />
-      </router-link>
+    <div class="card-footer d-flex justify-content-start">
+      <div>
+        <router-link :to="{ name: 'profile-page-nam', params: { profileId: post.user } }">
+          <avatar
+            :widthPer="40"
+            :userId="post.user"
+            :auth="false"
+            :displayName="true"
+            :reverse="true"
+            class="avatar-post"
+          />
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +62,7 @@ export default {
 }
 .post-card {
   color: white;
+  border-color: rgba(255, 255, 255, 0.151);
 
   .card-header {
     font-family: $title;
@@ -71,7 +74,7 @@ export default {
     font-family: $paragraph;
   }
   p {
-    font-size: 2vw;
+    font-size: 1em;
   }
   i {
     font-size: 0.5em;

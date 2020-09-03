@@ -1,10 +1,10 @@
 <template>
   <div class="Profile container-fluid m-0 text-center">
     <input v-if="itsMe" v-model="me.name" class="auth-name" />
-    <h2 class="text-center m-0" v-else>{{ auth.name }}</h2>
+    <h1 class="text-center pt-5 m-0 auth-name" v-else>{{ auth.name }}</h1>
 
     <wings-row>
-      <img v-if="!itsMe" :src="auth.profile" alt class="img-fluid rounded-circle w-100" />
+      <img v-if="!itsMe" :src="auth.profile" alt class="img-fluid rounded-circle w-25 mt-5" />
       <img v-else :src="me.profile" alt class="img-fluid rounded-circle w-100" />
     </wings-row>
 
@@ -102,7 +102,6 @@ export default {
 }
 
 .auth-name {
-  max-width: 80vw;
   font-size: var(--h2);
 }
 

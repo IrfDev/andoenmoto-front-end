@@ -6,12 +6,13 @@
         <img
           src="/bgs/HomeIntro.png"
           alt="intro-andoenmoto"
-          class="img-fluid d-none d-md-block m-0"
+          class="img-fluid d-none d-md-block m-0 intro-andoenmoto"
         />
       </div>
       <section class="col-12">
         <h1>Ando en moto</h1>
-        <h3>Reviews and pictures for biker products</h3>
+
+        <h3>Upload and see reviews for motorcycle products</h3>
       </section>
 
       <div v-if="notAuth" class="col-lg-6 col-md-5 col-12 text-center text-lg-right">
@@ -97,5 +98,18 @@ h3 {
 
 * {
   color: $alpha-white;
+}
+
+.intro-andoenmoto {
+  animation: createAnimations 0.7s forwards 0s ease-out;
+}
+
+@keyframes createAnimations {
+  0% {
+    transform: rotate(0) scale(0.5) translateX(20em);
+  }
+  100% {
+    transform: rotate(0) scale(1);
+  }
 }
 </style>
